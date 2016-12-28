@@ -720,7 +720,7 @@ class InputFashej(InputModel):
         if errors:
             self.status = self.formErrorsMessage
             return        
-        funcations = getUtility(IJieshoujLocator)        
+        funcations = getUtility(IFashejLocator)        
         try:
             funcations.add(data)
         except InputError, e:
