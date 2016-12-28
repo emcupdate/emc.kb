@@ -631,7 +631,7 @@ class UpdateModel(form.Form):
         confirm = _(u"Input cancelled.")
         IStatusMessage(self.request).add(confirm, type='info')        
         self.request.response.redirect(self.context.absolute_url() + '/model_listings')
-
+##发射机数据库操作
 class DeleteFashej(DeleteModel):
     "delete the specify fashej recorder"
 
@@ -691,8 +691,172 @@ class DeleteFashej(DeleteModel):
         self.request.response.redirect(self.context.absolute_url() + '/fashej_listings')       
 
 
+class InputFashej(InputModel):
+    """input db fashej table data
+    """
+
+    grok.name('input_fashej')
+   
+    label = _(u"Input fa she ji data")
+    fields = field.Fields(IFashej).omit('fashejId')
+    
+    def update(self):        
+        self.request.set('disable_border', True)
+        
+        # Get the model table query funcations
+#         locator = getUtility(IModelLocator)
+        # to do 
+        # fetch first record as sample data
+#         self.screening = locator.screeningById(self.screeningId)
+      
+        # Let z3c.form do its magic
+        super(InputFashej, self).update()
+            
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit model recorder
+        """        
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return        
+        funcations = getUtility(IJieshoujLocator)        
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
+        
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
+    
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')        
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
+
+
+class UpdateFashej(UpdateModel):
+    """update model table row data
+    """   
+    grok.name('update_fashej')    
+    label = _(u"update fa she ji data")
+    fields = field.Fields(IFashej).omit('fashejId')
+   
+    sbdm = None
+    #receive url parameters
+    def publishTraverse(self, request, name):
+        if self.sbdm is None:
+            self.sbdm = name
+            return self
+        else:
+            raise NotFound()
+    
+    def getContent(self):
+        # Get the model table query funcations
+        locator = getUtility(IFashejLocator)
+        # to do 
+        # fetch first record as sample data
+        return locator.getByCode(self.sbdm)    
+    
+    def update(self):        
+        self.request.set('disable_border', True)     
+        # Let z3c.form do its magic
+        super(UpdateFashej, self).update()
+    
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return        
+        funcations = getUtility(IFashejLocator)
+        
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')        
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
+    
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')        
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
+
+##end发射机 数据库操作
 
 ##接收机 数据库操作
+class DeleteJieshouj(DeleteModel):
+    "delete the specify jieshouj recorder"
+
+    grok.name('delete_jieshouj')    
+    label = _(u"delete jie shou ji data")
+    fields = field.Fields(IJieshouj).omit('jieshoujId')
+
+    
+    sbdm = None
+    #receive url parameters
+    def publishTraverse(self, request, name):
+        if self.sbdm is None:
+            self.sbdm = name
+            return self
+        else:
+            raise NotFound()
+    
+    def getContent(self):
+        # Get the model table query funcations
+        locator = getUtility(IJieshoujLocator)
+        # to do 
+        # fetch first record as sample data
+        return locator.getByCode(self.sbdm)
+   
+    def update(self):        
+        self.request.set('disable_border', True)        
+      
+        #Let z3c.form do its magic
+        super(DeleteJieshouj, self).update()
+
+    
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete model recorder
+        """
+        
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return        
+        funcations = getUtility(IJieshoujLocator)        
+        try:
+            funcations.DeleteByCode(self.sbdm)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings')        
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings')
+    
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')        
+        self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings') 
+
 class InputJieshouj(InputModel):
     """input db jieshouj table data
     """
