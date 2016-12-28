@@ -21,7 +21,7 @@ from emc.kb.interfaces import InputError
 from emc.kb.interfaces import IModelLocator,IFashejLocator
 from emc.kb.mapping_db import IModel,Model
 from emc.kb.mapping_db import Fashej,IFashej
-from emc.kb.mapping_db import Jieshouj
+from emc.kb.mapping_db import Jieshouj,IJieshouj
 from emc.kb.mapping_db import IFashetx,Fashetx
 from emc.kb.mapping_db import IJieshoutx,Jieshoutx
 from emc.kb.mapping_db import ILvboq,Lvboq
