@@ -40,7 +40,9 @@
         name="fashetx_listings"
         template="templates/fashetx_listings.pt"
         class=".ajax_listing.FashetxView"/>
-    <!-- <browser:page
+
+    <!--
+    <browser:page
         name="jieshoutx_listings"
         template="templates/jieshoutx_listings.pt"
         class=".ajax_listing.JieshoutxView"/>
@@ -83,7 +85,7 @@
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/delete_model.pt"
         class=".ajax_listing.DeleteModel"/>
-
+<!-- fashej -->
     <browser:page
         name="input_fashej"
         permission="emc.kb.input_db"
@@ -103,4 +105,23 @@
         template="templates/delete_model.pt"
         class=".ajax_listing.DeleteModel"/>
 
+<!-- fashetx -->
+    <browser:page
+        name="input_fashetx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/input_model.pt"
+        class=".ajax_listing.InputModel"/>
+    <browser:page
+        name="update_fashetx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/update_model.pt"
+        class=".ajax_listing.UpdateModel"/>
+    <browser:page
+        name="delete_fashetx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/delete_model.pt"
+        class=".ajax_listing.DeleteModel"/>
 </configure>
