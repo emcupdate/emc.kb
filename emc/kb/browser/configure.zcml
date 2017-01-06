@@ -39,6 +39,8 @@
     <browser:page
         name="fashetx_listings"
         template="templates/fashetx_listings.pt"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        permission="emc.kb.input_db"
         class=".ajax_listing.FashetxView"/>
 
     <!--
