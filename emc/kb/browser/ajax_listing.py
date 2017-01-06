@@ -449,6 +449,62 @@ class Jieshoujajaxsearch(ajaxsearch):
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
+class Fashetxajaxsearch(Fashejajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+
+    grok.name('fashetx_ajaxsearch')
+
+    def searchview(self,viewname="fashetx_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(cssbdm)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(cssbmc)s</a></td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(gain)s</td>
+                                <td class="col-md-1">%(polarization)s</td>
+                                <td class="col-md-1">%(fwbskd)s</td>
+                                <td class="col-md-1">%(fybskd)s</td>
+                                <td class="col-md-1">%(txzxj)s</td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            cssbdm=i[0],
+                                            cssbmc= i[1],
+                                            pcdm= i[2],
+                                            location= i[3],
+                                            gain= i[4],
+                                            polarization= i[5],
+                                            fwbskd= i[6],
+                                            fybskd= i[7],
+                                            txzxj= i[8],
+                                            edit_url="%s/@@update_fashetx/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_fashetx/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
 
 class DeleteModel(form.Form):
     "delete the specify model recorder"
