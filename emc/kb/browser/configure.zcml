@@ -93,19 +93,19 @@
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/input_model.pt"
-        class=".ajax_listing.InputModel"/>
+        class=".ajax_listing.InputFashej"/>
     <browser:page
         name="update_fashej"
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/update_model.pt"
-        class=".ajax_listing.UpdateModel"/>
+        class=".ajax_listing.UpdateFashej"/>
     <browser:page
         name="delete_fashej"
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/delete_model.pt"
-        class=".ajax_listing.DeleteModel"/>
+        class=".ajax_listing.DeleteFashej"/>
 
 <!-- fashetx -->
     <browser:page
@@ -113,17 +113,17 @@
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/input_model.pt"
-        class=".ajax_listing.InputModel"/>
+        class=".ajax_listing.InputFashetx"/>
     <browser:page
         name="update_fashetx"
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/update_model.pt"
-        class=".ajax_listing.UpdateModel"/>
+        class=".ajax_listing.UpdateFashetx"/>
     <browser:page
         name="delete_fashetx"
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/delete_model.pt"
-        class=".ajax_listing.DeleteModel"/>
+        class=".ajax_listing.DeleteFashetx"/>
 </configure>
