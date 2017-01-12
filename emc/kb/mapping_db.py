@@ -938,7 +938,7 @@ class Ceshibg(ORMBase):
 # 测试报告end
 
 # 测试项目start
-class ICeshibg(Interface):
+class ICeshixm(Interface):
     """测试报告
     """
     ceshixmId = schema.Int(
