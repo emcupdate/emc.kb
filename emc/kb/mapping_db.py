@@ -548,11 +548,11 @@ class ITianxianzk(Interface):
 
 
 class Tianxianzk(ORMBase):
-    """Database-backed implementation of IFashej
+    """Database-backed implementation of ITianxianzk
     """
-    implements(IDianxingtxzyzk)
+    implements(ITianxianzk)
 
-    __tablename__ = 'tianxianzyzk'
+    __tablename__ = 'tianxianzk'
 
     tianxianzkId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
             primary_key=True,

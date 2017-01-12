@@ -23,7 +23,7 @@ from emc.kb import  _
 
 class ModelLocator(grok.GlobalUtility):
     implements(IModelLocator)
-    
+
     def addModel(self,**kwargs):
         """parameters db model table"""
         model = Model()
@@ -32,29 +32,29 @@ class ModelLocator(grok.GlobalUtility):
         model.xhmc = kwargs['xhmc']
 # # registry db sources
 
-# 
+#
 #         saconnect = ISQLAlchemyConnectionStrings(getSite())
 # # Register z3c.saconfig utilities for mysql parameters db
 #         dbURI = saconnect['mysql']
 # # Register z3c.saconfig utilities for pas.plugins.sqlarchemy
 #         engine = EngineFactory(dbURI, echo=False, convert_unicode=False)
-#         provideUtility(engine, name=u"mysql.parameters")        
+#         provideUtility(engine, name=u"mysql.parameters")
 #         session = GloballyScopedSession(engine=u"mysql.parameters", twophase=False)
-#         provideUtility(session,name=u"mysql.parameters") 
+#         provideUtility(session,name=u"mysql.parameters")
         kb_session.add(model)
         try:
             kb_session.commit()
         except:
             kb_session.rollback()
             pass
-        
+
     def queryModel(self,**kwargs):
         """以分页方式提取model 记录，参数：start 游标起始位置；size:每次返回的记录条数;
         fields:field list
         if size = 0,then不分页，返回所有记录集
         order_by(text("id"))
-        """    
-                            
+        """
+
         start = int(kwargs['start'])
         size = int(kwargs['size'])
 #         fields = kwargs['fields']
@@ -62,21 +62,21 @@ class ModelLocator(grok.GlobalUtility):
             models = kb_session.query("xhdm", "xhmc").\
             from_statement(
             text("select * from model  order by modelId desc limit :start,:size").\
-            params(start=start,size=size)).all()            
+            params(start=start,size=size)).all()
         else:
 #             import pdb
 #             pdb.set_trace()
             nums = kb_session.query(func.count(Model.modelId)).scalar()
 #             nums = kb_session.query("xhdm", "xhmc").from_statement(text("select * from model")).count()
-            return int(nums) 
+            return int(nums)
         try:
 
-            kb_session.commit()            
-            return models  
+            kb_session.commit()
+            return models
         except:
             kb_session.rollback()
             pass
-    
+
     def DeleteByCode(self,xhdm):
         "delete the specify xhdm model recorder"
 
@@ -86,17 +86,17 @@ class ModelLocator(grok.GlobalUtility):
                 model = kb_session.query(Model).\
                 from_statement(text("SELECT * FROM model where xhdm=:xhdm")).\
                 params(xhdm=xhdm).one()
-                kb_session.delete(model)                                                  
-                kb_session.commit()           
+                kb_session.delete(model)
+                kb_session.commit()
             except:
                 kb_session.rollback()
                 pass
         else:
             return None
-    
+
     def updateByCode(self,**kwargs):
         "update the speicy xhdm model recorder"
-        
+
         """
         session.query(User).from_statement(text("SELECT * FROM users where name=:name")).\
 params(name='ed').all()
@@ -116,9 +116,9 @@ text("SELECT * FROM users where name=:name")).params(name='ed').all()
 #                 pdb.set_trace()
                 updatedattrs = [kw for kw in kwargs.keys() if kw != 'xhdm']
                 for kw in updatedattrs:
-                    setattr(model,kw,kwargs[kw])                                                     
+                    setattr(model,kw,kwargs[kw])
 #                 model.xhmc = kwargs['xhmc']
-                kb_session.commit()           
+                kb_session.commit()
             except:
                 kb_session.rollback()
                 pass
@@ -133,10 +133,9 @@ text("SELECT * FROM users where name=:name")).params(name='ed').all()
                 model = kb_session.query(Model).\
                 from_statement(text("SELECT * FROM model where xhdm=:xhdm")).\
                 params(xhdm=xhdm).one()
-                return model          
+                return model
             except:
                 kb_session.rollback()
                 None
         else:
             return None
-                                

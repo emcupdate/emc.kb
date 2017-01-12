@@ -14,7 +14,7 @@ from emc.kb.mapping_db import Fashetx,IFashetx
 from emc.kb.mapping_db import Jieshoutx,IJieshoutx
 from emc.kb.mapping_db import Lvboq,ILvboq
 from emc.kb.mapping_db import Dianxingtxzyzk,IDianxingtxzyzk
-from emc.kb.mapping_db import ITianxianzyzk,Tianxianzyzk
+from emc.kb.mapping_db import ITianxianzk,Tianxianzk
 from emc.kb.mapping_db import IJieshoujzk,Jieshoujzk
 from emc.kb.mapping_db import IFashejzk,Fashejzk
 from emc.kb.interfaces import IFashejLocator
@@ -23,7 +23,7 @@ from emc.kb import  _
 
 class FashejLocator(grok.GlobalUtility):
     implements(IFashejLocator)
-    
+
     def add(self,kwargs):
         """parameters db fashej table"""
         recorder = Fashej()
@@ -35,14 +35,14 @@ class FashejLocator(grok.GlobalUtility):
         except:
             kb_session.rollback()
             pass
-        
+
     def query(self,**kwargs):
         """以分页方式提取model 记录，参数：start 游标起始位置；size:每次返回的记录条数;
         fields:field list
         if size = 0,then不分页，返回所有记录集
         order_by(text("id"))
-        """    
-                            
+        """
+
         start = int(kwargs['start'])
         size = int(kwargs['size'])
 #         fields = kwargs['fields']
@@ -53,17 +53,17 @@ class FashejLocator(grok.GlobalUtility):
                                       "tzlx","bzf","mid_freq","comment1").\
             from_statement(
             text("select * from fashej  order by fashejId desc limit :start,:size").\
-            params(start=start,size=size)).all()            
+            params(start=start,size=size)).all()
         else:
             nums = kb_session.query(func.count(Fashej.fashejId)).scalar()
-            return int(nums) 
+            return int(nums)
         try:
-            kb_session.commit()            
-            return recorders  
+            kb_session.commit()
+            return recorders
         except:
             kb_session.rollback()
             pass
-    
+
     def DeleteByCode(self,sbdm):
         "delete the specify sbdm fashej recorder"
 
@@ -73,17 +73,17 @@ class FashejLocator(grok.GlobalUtility):
                 recorder = kb_session.query(Fashej).\
                 from_statement(text("SELECT * FROM fashej WHERE sbdm=:sbdm")).\
                 params(sbdm=sbdm).one()
-                kb_session.delete(recorder)                                                  
-                kb_session.commit()           
+                kb_session.delete(recorder)
+                kb_session.commit()
             except:
                 kb_session.rollback()
                 pass
         else:
             return None
-    
+
     def updateByCode(self,kwargs):
         "update the speicy sbdm fashej recorder"
-        
+
         """
         session.query(User).from_statement(text("SELECT * FROM users WHERE name=:name")).\
 params(name='ed').all()
@@ -99,8 +99,8 @@ text("SELECT * FROM users WHERE name=:name")).params(name='ed').all()
                 params(sbdm=sbdm).one()
                 updatedattrs = [kw for kw in kwargs.keys() if kw != 'sbdm']
                 for kw in updatedattrs:
-                    setattr(recorder,kw,kwargs[kw])                                                  
-                kb_session.commit()           
+                    setattr(recorder,kw,kwargs[kw])
+                kb_session.commit()
             except:
                 kb_session.rollback()
                 pass
@@ -113,10 +113,9 @@ text("SELECT * FROM users WHERE name=:name")).params(name='ed').all()
                 recorder = kb_session.query(Fashej).\
                 from_statement(text("SELECT * FROM fashej WHERE sbdm=:sbdm")).\
                 params(sbdm=sbdm).one()
-                return recorder          
+                return recorder
             except:
                 kb_session.rollback()
                 None
         else:
             return None
-                                

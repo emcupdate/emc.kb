@@ -176,7 +176,7 @@ class DianxingtxzyzkView(ModelView):
         return recorders
 
 
-class TianxianzyzkView(ModelView):
+class TianxianzkView(ModelView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
