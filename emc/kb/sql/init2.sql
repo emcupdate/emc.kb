@@ -114,7 +114,7 @@ create table if not exists tianxianzk (
 
 -- jieshoujzk 接收机子库(子库代码，子库名)
 create table if not exists jieshoujzk (
-    dianxingtxzyzkId integer unsigned not null auto_increment primary key,
+    jieshoujzkId integer unsigned not null auto_increment primary key,
     lib_code char(16) not null unique key,
     lib_name varchar(32) not null,
     index jieshoujzk_lib_code(lib_code)
@@ -138,7 +138,7 @@ create table if not exists ceshishysh (
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 -- ceshiry测试人员(姓名，性别，年龄，学历，职称，证书编号，单位)
 create table if not exists ceshiry (
-    ceshishyshId integer unsigned not null auto_increment primary key,
+    ceshiryId integer unsigned not null auto_increment primary key,
     name char(16) not null,
     sex char(2) not null,
     age integer not null,
