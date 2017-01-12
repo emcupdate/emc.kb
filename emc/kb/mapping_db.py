@@ -176,7 +176,7 @@ class Fashej(ORMBase):
 class IJieshouj(Interface):
     """接收机
     """
-    jishoujId = schema.Int(
+    jieshoujId = schema.Int(
             title=_(u"table primary key"),
         )
     sbdm = schema.TextLine(
