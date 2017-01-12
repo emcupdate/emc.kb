@@ -397,7 +397,7 @@ class Jieshoujajaxsearch(ajaxsearch):
 
     grok.name('jieshouj_ajaxsearch')
 
-    def searchview(self,viewname="fashej_listings"):
+    def searchview(self,viewname="jieshouj_listings"):
         searchview = getMultiAdapter((self.context, self.request),name=viewname)
         return searchview
 
