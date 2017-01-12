@@ -45,32 +45,8 @@ class IFashejLocator (Interface):
 class IFashetxLocator (IFashejLocator):
     """fashetx table add row"""
 
-    def add(**kwargs):
-        "add a row data"
-
-    def query(code):
-        "query  by search condition"
-
-    def deleteByCode(code):
-        "query  by search condition"
-
-    def updateByCode(code):
-        "query  by search condition"
-
 class IJieshoujLocator (IFashejLocator):
     """jieshouj table add row"""
-
-    def add(**kwargs):
-        "add a row data"
-
-    def query(code):
-        "query  by search condition"
-
-    def deleteByCode(code):
-        "query  by search condition"
-
-    def updateByCode(code):
-        "query  by search condition"
 
 class IJieshoutxLocator (IFashejLocator):
     """jieshouj table add row"""

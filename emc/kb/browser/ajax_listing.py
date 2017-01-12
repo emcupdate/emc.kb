@@ -965,7 +965,7 @@ class UpdateJieshouj(UpdateModel):
     """update model table row data
     """
     grok.name('update_jieshouj')
-    label = _(u"update fa she ji data")
+    label = _(u"update jieshouj data")
     fields = field.Fields(IJieshouj).omit('jieshoujId')
 
     sbdm = None
