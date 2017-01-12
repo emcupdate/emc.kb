@@ -72,7 +72,7 @@ class IJieshoujLocator (IFashejLocator):
 class IDianxingtxzyzkLocator (IFashejLocator):
     """jieshouj table add row"""
 
-class ITianxianzyzkLocator (IFashejLocator):
+class ITianxianzkLocator (IFashejLocator):
     """jieshouj table add row"""
 
 class IJieshoujzkLocator (IFashejLocator):

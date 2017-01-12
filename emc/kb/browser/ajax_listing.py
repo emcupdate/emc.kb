@@ -26,7 +26,7 @@ from emc.kb.mapping_db import IFashetx,Fashetx
 from emc.kb.mapping_db import IJieshoutx,Jieshoutx
 from emc.kb.mapping_db import ILvboq,Lvboq
 from emc.kb.mapping_db import IDianxingtxzyzk,Dianxingtxzyzk
-from emc.kb.mapping_db import ITianxianzyzk,Tianxianzyzk
+from emc.kb.mapping_db import ITianxianzk,Tianxianzk
 from emc.kb.mapping_db import IJieshoujzk,Jieshoujzk
 from emc.kb.mapping_db import IFashejzk,Fashejzk
 from emc.kb.contents.ormfolder import Iormfolder
@@ -186,9 +186,9 @@ class TianxianzyzkView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.interfaces import ITianxianzyzkLocator
+        from emc.kb.interfaces import ITianxianzkLocator
         from zope.component import getUtility
-        locator = getUtility(ITianxianzyzkLocator)
+        locator = getUtility(ITianxianzkLocator)
         recorders = locator.query(start=query['start'],size=query['size'])
         return recorders
 
