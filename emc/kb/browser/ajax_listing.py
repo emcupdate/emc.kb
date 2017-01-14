@@ -1311,7 +1311,7 @@ class InputJieshoutx(InputModel):
 
     grok.name('input_jieshoutx')
 
-    label = _(u"Input fa she tian xian data")
+    label = _(u"Input jie shou tian xian data")
     fields = field.Fields(IJieshoutx).omit('jieshoutxId')
 
     def update(self):
@@ -1357,7 +1357,7 @@ class UpdateJieshoutx(UpdateModel):
     """update model table row data
     """
     grok.name('update_jieshoutx')
-    label = _(u"update fa she tian xian data")
+    label = _(u"update jie shou tian xian data")
     fields = field.Fields(IJieshoutx).omit('jieshoutxId')
 
     cssbdm = None
