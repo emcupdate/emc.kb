@@ -136,7 +136,7 @@
         permission="emc.kb.input_db"
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/input_model.pt"
-        class=".ajax_listing.InputJieshou"/>
+        class=".ajax_listing.InputJieshoutx"/>
     <browser:page
         name="update_jieshoutx"
         permission="emc.kb.input_db"
