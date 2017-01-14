@@ -43,11 +43,11 @@
         permission="emc.kb.input_db"
         class=".ajax_listing.FashetxView"/>
 
-    <!--
     <browser:page
         name="jieshoutx_listings"
         template="templates/jieshoutx_listings.pt"
         class=".ajax_listing.JieshoutxView"/>
+    <!--
     <browser:page
         name="lvboq_listings"
         template="templates/lvboq_listings.pt"
@@ -126,4 +126,25 @@
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/delete_model.pt"
         class=".ajax_listing.DeleteFashetx"/>
+</configure>
+
+<!-- jieshoutx -->
+    <browser:page
+        name="input_jieshoutx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/input_model.pt"
+        class=".ajax_listing.InputJieshou"/>
+    <browser:page
+        name="update_jieshoutx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/update_model.pt"
+        class=".ajax_listing.UpdateJieshoutx"/>
+    <browser:page
+        name="delete_jieshoutx"
+        permission="emc.kb.input_db"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        template="templates/delete_model.pt"
+        class=".ajax_listing.DeleteJieshoutx"/>
 </configure>

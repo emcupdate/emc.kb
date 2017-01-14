@@ -18,7 +18,7 @@ from plone.directives import form
 from z3c.form import field, button
 from Products.statusmessages.interfaces import IStatusMessage
 from emc.kb.interfaces import InputError
-from emc.kb.interfaces import IModelLocator,IFashejLocator,IJieshoujLocator,IFashetxLocator
+from emc.kb.interfaces import IModelLocator,IFashejLocator,IJieshoujLocator,IFashetxLocator,IJieshoutxLocator
 from emc.kb.mapping_db import IModel,Model
 from emc.kb.mapping_db import Fashej,IFashej
 from emc.kb.mapping_db import Jieshouj,IJieshouj
@@ -225,6 +225,11 @@ class FashejzkView(ModelView):
         locator = getUtility(IFashejzkLocator)
         recorders = locator.query(start=query['start'],size=query['size'])
         return recorders
+
+
+
+
+
  # ajax multi-condition search relation db
 class ajaxsearch(grok.View):
     """AJAX action for search DB.
@@ -506,6 +511,66 @@ class Fashetxajaxsearch(Fashejajaxsearch):
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
+class Jieshoutxajaxsearch(Fashejajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+
+    grok.name('jieshoutx_ajaxsearch')
+
+    def searchview(self,viewname="jieshoutx_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(cssbdm)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(cssbmc)s</a></td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(gain)s</td>
+                                <td class="col-md-1">%(polarization)s</td>
+                                <td class="col-md-1">%(fwbskd)s</td>
+                                <td class="col-md-1">%(fybskd)s</td>
+                                <td class="col-md-1">%(txzxj)s</td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            cssbdm=i[0],
+                                            cssbmc= i[1],
+                                            pcdm= i[2],
+                                            location= i[3],
+                                            gain= i[4],
+                                            polarization= i[5],
+                                            fwbskd= i[6],
+                                            fybskd= i[7],
+                                            txzxj= i[8],
+                                            edit_url="%s/@@update_jieshoutx/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_jieshoutx/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+
+
+
+# Delete Update Input block
 class DeleteModel(form.Form):
     "delete the specify model recorder"
     implements(IPublishTraverse)
@@ -1181,3 +1246,166 @@ class UpdateFashetx(UpdateModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@fashetx_listings')
 # end 发射天线 数据库操作
+## 接收天线 数据库操作
+class DeleteJieshoutx(DeleteModel):
+    "delete the specify Jieshoutx recorder"
+
+    grok.name('delete_jieshoutx')
+    label = _(u"delete jie shou tian xian data")
+    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
+
+
+    cssbdm = None
+    #receive url parameters
+    def publishTraverse(self, request, name):
+        if self.cssbdm is None:
+            self.cssbdm = name
+            return self
+        else:
+            raise NotFound()
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = getUtility(IJieshoutxLocator)
+        # to do
+        # fetch first record as sample data
+        return locator.getByCode(self.cssbdm)
+
+    def update(self):
+        self.request.set('disable_border', True)
+
+        #Let z3c.form do its magic
+        super(DeleteJieshoutx, self).update()
+
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete jieshoutx recorder
+        """
+
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = getUtility(IJieshoutxLocator)
+        try:
+            funcations.DeleteByCode(self.cssbdm)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+
+class InputJieshoutx(InputModel):
+    """input db jieshoutx table data
+    """
+
+    grok.name('input_jieshoutx')
+
+    label = _(u"Input fa she tian xian data")
+    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
+
+    def update(self):
+        self.request.set('disable_border', True)
+
+        # Get the model table query funcations
+#         locator = getUtility(IModelLocator)
+        # to do
+        # fetch first record as sample data
+#         self.screening = locator.screeningById(self.screeningId)
+
+        # Let z3c.form do its magic
+        super(InputJieshoutx, self).update()
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit jieshoutianxian recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = getUtility(IJieshoutxLocator)
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+
+class UpdateJieshoutx(UpdateModel):
+    """update model table row data
+    """
+    grok.name('update_jieshoutx')
+    label = _(u"update fa she tian xian data")
+    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
+
+    cssbdm = None
+    #receive url parameters
+    def publishTraverse(self, request, name):
+        if self.cssbdm is None:
+            self.cssbdm = name
+            return self
+        else:
+            raise NotFound()
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = getUtility(IJieshoutxLocator)
+        # to do
+        # fetch first record as sample data
+        return locator.getByCode(self.cssbdm)
+
+    def update(self):
+        self.request.set('disable_border', True)
+        # Let z3c.form do its magic
+        super(UpdateJieshoutx, self).update()
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = getUtility(IJieshoutxLocator)
+
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
+# end 接收天线 数据库操作
