@@ -128,7 +128,6 @@
         for="emc.kb.contents.ormfolder.Iormfolder"
         template="templates/delete_model.pt"
         class=".ajax_listing.DeleteFashetx"/>
-</configure>
 
 <!-- jieshoutx -->
     <browser:page
