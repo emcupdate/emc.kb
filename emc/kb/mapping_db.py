@@ -830,7 +830,7 @@ class ICeshibg(Interface):
     manufacturor = schema.TextLine(
             title=_(u"zhi zao shang")
         )
-    t_date = schema.DateTime(
+    t_date = schema.Date(
             title=_(u"ce shi ri qi")
         )
     t_address = schema.TextLine(
@@ -899,7 +899,7 @@ class Ceshibg(ORMBase):
     manufacturor = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
         )
-    t_date = sqlalchemy.schema.Column(sqlalchemy.types.DateTime(),
+    t_date = sqlalchemy.schema.Column(sqlalchemy.types.Date(),
             nullable=False,
         )
     t_address = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
