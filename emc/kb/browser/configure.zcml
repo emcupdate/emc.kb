@@ -46,6 +46,8 @@
     <browser:page
         name="jieshoutx_listings"
         template="templates/jieshoutx_listings.pt"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        permission="emc.kb.input_db"
         class=".ajax_listing.JieshoutxView"/>
     <!--
     <browser:page
