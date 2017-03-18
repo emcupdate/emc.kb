@@ -142,4 +142,4 @@ class FileFunctionalTest(unittest.TestCase):
         file_ctl.add_file(open(file_path), 'application/msword', 'file.doc')
         self.browser.getControl('Save').click()
         self.assertTrue(self.browser.url.endswith('file.doc/view'))
-        self.assertTrue('http://image4024.wicp.net:8080/' in self.browser.contents)
+        self.assertTrue('http://www.testurl02.com/' in self.browser.contents)
