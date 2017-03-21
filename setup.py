@@ -22,7 +22,7 @@ setup(name='emc.kb',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['emc'],
       include_package_data=True,
-      zip_safe=False,     
+      zip_safe=False,
       install_requires=[
           'setuptools',
           'MySQL-python',
@@ -34,12 +34,13 @@ setup(name='emc.kb',
           'plone.app.z3cform',
           'plone.app.relationfield',
           'z3c.caching',
-          'zope.annotation',                              
+          'zope.annotation',
+          'z3c.saconfig',
           # -*- Extra requirements: -*-
       ],
        extras_require={
           'test': ['plone.app.testing',]
-      },         
+      },
       entry_points="""
       # -*- Entry points: -*-
 
