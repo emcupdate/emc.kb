@@ -10,7 +10,7 @@ create table if not exists danwei (
   index danwei_mc(danweimc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
--- 测试人员（测试人员姓名，性别，年龄，学历，职称，证书编号）
+-- 测试人员（测试人员姓名，性别，年龄，学历，职称，证书编号，单位）
 create table if not exists t_ry(
   t_ryId integer unsigned not null auto_increment primary key,
   t_ryname varchar(64) not null,
@@ -19,6 +19,7 @@ create table if not exists t_ry(
   t_rydegree char(32) not null,
   t_rytitle char(32) not null,
   t_rynumber char(32),
+  t_ry_f_dwmc varchar(64) not null,
   index t_ry_id(t_ryname)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
@@ -30,7 +31,7 @@ create table if not exists t_hj(
   t_hjwd float(16) not null,
   t_hjsd float(16) not null,
   index t_hj_id(t_hjdd)
-) engine=InnoDB DEFAULT CHARSET=utf8
+) engine=InnoDB DEFAULT CHARSET=utf8;
 
 -- 测试实验室（测试实验室名称，等级，简介，单位名称，）
 create table if not exists t_lab(
@@ -66,6 +67,6 @@ create table if not exists t_method(
   t_ffdiagrams char(64),
   t_ffstep char(32) not null,
   t_ffmemo char(32),
-  t_ff_f_yqmcchar(16) not null,
-  index t_method_ffmc(t_ffmc),
+  t_ff_f_yqmc char(16) not null,
+  index t_method_ffmc(t_ffmc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;

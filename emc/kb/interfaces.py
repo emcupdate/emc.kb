@@ -68,3 +68,9 @@ class IJieshoujzkLocator (IFashejLocator):
 
 class IFashejzkLocator (IFashejLocator):
     """jieshouj table add row"""
+
+# add db interfaces for database which called emc_test
+
+# 暂时继承IFashejLocator,
+class IDanweiLocator(IFashejLocator):
+    """temp Interface for test"""
