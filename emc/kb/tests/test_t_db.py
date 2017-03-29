@@ -29,10 +29,42 @@ class TestEmc_test(unittest.TestCase):
         pdb.set_trace()
         self.assertTrue(dw.danweiId is not None)
         print dw.danweimc
+        print nums
+
+    def test_t_db_mapping_t_ry(self):
+        from emc.kb.mapping_t_db import T_ry
+        from emc.kb.mapping_t_db import Danwei
+        from emc.kb import t_session as Session
+
+        import pdb
+        pdb.set_trace()
+
+        t_ry = T_ry()
+        dw = Danwei()
+
+        flag = Session.query(func.count(dw.danweiId)).scalar()
+        t_ry.t_ryname = u"张三"
+        t_ry.t_rygender = u"男"
+        t_ry.t_ryage = u"22"
+        t_ry.t_rydegree = u"硕士"
+        t_ry.t_rytitle = u"研究员"
+        t_ry.t_rynumber = u"123x456abc"
+        t_ry.t_danweimc = [dw(danweimc=u"人员单位1")]
+        Session.add(t_ry)
+        nums = Session.query(func.count(dw.danweiId)).scalar()
+        print flag
+        print nums
+
+        import pdb
+        pdb.set_trace()
+#       a = t_ry(t_ryname = u"张三",t_rygender = u"男",t_ryage = u"22",t_rydegree = u"硕士",t_rytitle = u"研究员",t_rynumber = u"123x456abc")
+        # Session.add(t_ry)
+        # nums = Session.query(func.count(t_ry.t_ryId)).scalar()
+
 
     def test_t_db_danwei_locator(self):
         from emc.kb.mapping_t_db import Danwei
-        from emc.kb.interfaces import IDaneiLocator
+        from emc.kb.interfaces import IDanweiLocator
         from zope.component import getUtility
         from emc.kb import t_session as Session
 

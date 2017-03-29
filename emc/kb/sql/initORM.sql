@@ -3,24 +3,24 @@ use emc_test;
 
 -- 测试单位
 create table if not exists danwei (
-  danweiId integer unsigned not null auto_increment primary key,
-  danweimc varchar(64) not null,
-  danweidz char(64) not null,
-  danweilxfs char(64) not null,
+  danweiId integer unsigned auto_increment primary key,
+  danweimc varchar(64),
+  danweidz char(64),
+  danweilxfs char(64),
   index danwei_mc(danweimc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
 -- 测试人员（测试人员姓名，性别，年龄，学历，职称，证书编号，单位）
 create table if not exists t_ry(
-  t_ryId integer unsigned not null auto_increment primary key,
-  t_ryname varchar(64) not null,
-  t_rygender varchar(8) not null,
-  t_ryage varchar(8) not null,
-  t_rydegree char(32) not null,
-  t_rytitle char(32) not null,
+  t_ryId integer unsigned auto_increment primary key,
+  t_ryname varchar(64),
+  t_rygender varchar(8),
+  t_ryage varchar(8),
+  t_rydegree char(32),
+  t_rytitle char(32),
   t_rynumber char(32),
-  t_ry_f_dwmc varchar(64) not null,
-  index t_ry_id(t_ryname)
+  t_ry_f_dwId varchar(64),
+  index t_ry_name(t_ryname)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
 -- 测试环境（测试时间，地点、温度、湿度）
@@ -39,10 +39,8 @@ create table if not exists t_lab(
   t_labmc varchar(16) not null,
   t_lablv varchar(16) not null,
   t_labintro char(64) not null,
-  t_lab_f_dwmc varchar(64) not null,
-  t_lab_f_dwdz char(64) not null,
-  t_lab_f_lxfs char(64) not null,
-  index t_lab_id(t_labId)
+  t_lab_f_dwId varchar(64) not null,
+  index t_lab_name(t_labmc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
 -- 测试仪器表（仪器编号，型号，名称，制造国家，厂名，购买时间，主要技术指标，目前状态，所属单位）
@@ -55,7 +53,7 @@ create table if not exists t_yq(
   t_yqgmsj date not null,
   t_yqintro char(64) not null,
   t_yqzt char(16) not null,
-  t_yq_f_dwmc varchar(64) not null,
+  t_yq_f_dwId varchar(64) not null,
   index t_yq_mc(t_yqmc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;
 
@@ -67,6 +65,6 @@ create table if not exists t_method(
   t_ffdiagrams char(64),
   t_ffstep char(32) not null,
   t_ffmemo char(32),
-  t_ff_f_yqmc char(16) not null,
+  t_ff_f_yqId char(16) not null,
   index t_method_ffmc(t_ffmc)
 ) engine=InnoDB DEFAULT CHARSET=utf8;

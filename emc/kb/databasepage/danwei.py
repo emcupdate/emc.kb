@@ -10,6 +10,7 @@ from sqlalchemy import func
 from emc.kb import t_session
 
 from emc.kb.mapping_t_db import Danwei,IDanwei
+from emc.kb.interfaces import IDanweiLocator
 
 from emc.kb import _
 
