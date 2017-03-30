@@ -100,7 +100,7 @@ class T_ry(ORMBase):
 
         )
     t_ry_f_dwId = sqlalchemy.schema.Column(
-            ForeignKey(danwei.danweiId)
+            ForeignKey('danwei.danweiId')
         )
 
-    f_danweimc = relationship("Danwei",backref="danwei",order_by="Danwei.danweiId")
+    danwei = relationship("Danwei",backref="users",order_by="Danwei.danweiId")

@@ -35,7 +35,7 @@ setup(name='emc.kb',
           'plone.app.relationfield',
           'z3c.caching',
           'zope.annotation',
-          'z3c.saconfig',
+#           'z3c.saconfig',
           # -*- Extra requirements: -*-
       ],
        extras_require={
