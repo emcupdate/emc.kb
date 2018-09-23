@@ -42,6 +42,11 @@ class IFashejLocator (Interface):
     def updateByCode(code):
         "query  by search condition"
 
+
+class IAdminLogLocator(IFashejLocator):
+    """admin_logs table's database api"""
+    
+    
 class IFashetxLocator (IFashejLocator):
     """fashetx table add row"""
 

@@ -15,7 +15,12 @@
         for="*"
         permission="zope2.View"
         class=".macros.Macros"/>
-
+    <browser:page
+        name="admin_log_listings"
+        template="templates/admin_logs_listings.pt"
+        for="emc.kb.contents.ormfolder.Iormfolder"
+        permission="emc.kb.input_db"
+        class=".ajax_listing.AdminLogView"/>
     <browser:page
         name="model_listings"
         template="templates/model_listings.pt"
