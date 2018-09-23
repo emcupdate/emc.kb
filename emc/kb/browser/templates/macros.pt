@@ -23,8 +23,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown active">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容型号参数库<span class="caret"></span></a>
-          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容型号参数库<span class="caret"></span></a>          
           <ul class="dropdown-menu" role="menu">
             <li>
                  <a tal:attributes="href string:${kb/absolute_url}/@@fashej_listings">
@@ -48,11 +47,10 @@
                   </li>
           </ul>
         </li>
-<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容公用数据库<span class="caret"></span></a>
-          
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容公用数据库<span class="caret"></span></a>          
           <ul class="dropdown-menu" role="menu">
-<li>
+          	<li>
                  <a tal:attributes="href string:${kb/absolute_url}/@@fashej_listings">
                      典型天线增益子库
                   </a>
@@ -74,6 +72,16 @@
                   </li>
           </ul>
         </li>        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统日志<span class="caret"></span></a>          
+          <ul class="dropdown-menu" role="menu">
+          	<li>
+          		<a tal:attributes="href string:${kb/absolute_url}/@@admin_logs_listings">
+                     管理日志
+                </a>
+             </li>
+          </ul>
+        </li>      
       </ul>      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

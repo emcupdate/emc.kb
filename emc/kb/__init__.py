@@ -20,7 +20,7 @@ emc_engine = create_engine('mysql://kbdba:K0mdba$!9@127.0.0.1:3306/emc_test?char
 log_engine = create_engine('mysql://kbdba:K0mdba$!9@127.0.0.1:3306/emclog?charset=utf8', pool_recycle=3600)
 Session = sessionmaker(bind=some_engine)
 Session_emc = sessionmaker(bind=emc_engine)
-Session_log = sessionmaker(bind=emc_engine)
+Session_log = sessionmaker(bind=log_engine)
 kb_session = Session()
 t_session = Session_emc()
 log_session = Session_log()

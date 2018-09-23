@@ -449,7 +449,7 @@ class AdminLogajaxsearch(ajaxsearch):
                                             datetime = i[2],
                                             ip = i[3],
                                             type = kind[i[4]],
-                                            level = log_level[[5]],
+                                            level = log_level[i[5]],
                                             description = i[6],
                                             result = log_result[i[7]])
             outhtml = "%s%s" %(outhtml ,out)
