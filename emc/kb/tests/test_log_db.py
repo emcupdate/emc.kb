@@ -39,7 +39,7 @@ class TestLogDatabase(unittest.TestCase):
         from emc.kb.mapping_db import  AdminLog
         from emc.kb.interfaces import IAdminLogLocator
         from zope.component import getUtility
-        from emc.kb import log_session as Session
+#         from emc.kb import log_session as Session
 
         locator = getUtility(IAdminLogLocator)
         #getModel
