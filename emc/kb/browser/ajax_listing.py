@@ -419,7 +419,7 @@ class AdminLogajaxsearch(ajaxsearch):
     """
     grok.name('admin_logs_ajaxsearch')
 
-    def searchview(self,viewname="admin_logs_listings"):
+    def searchview(self,viewname="admin_logs"):
         searchview = getMultiAdapter((self.context, self.request),name=viewname)
         return searchview
 
