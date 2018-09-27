@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <rolemap>
-	
+  <roles>              
+    <role name="SysAdmin" />
+    <role name="SecStaff" /> 
+    <role name="SecAuditor" />   
+  </roles>	
   <permissions>
     <!-- Map the "add" permissions for the various content types. Note that
          we let the "Contributor" role (in a folder) be allowed to add content
@@ -15,9 +19,9 @@
     <role name="Editor"/>
     <role name="Reader"/>
     <role name="Reviewer"/>
-		<role name="Manager"/>
-		<role name="Member"/>		
-		<role name="Site Administrator"/>	
+	<role name="Manager"/>
+	<role name="Member"/>		
+	<role name="Site Administrator"/>	
 	
     </permission>
     
@@ -25,6 +29,9 @@
 		<role name="Manager"/>	
 		<role name="Site Administrator"/>	
     </permission>
-
+	<permission name="emc.kb:View log" acquire="True">
+		<role name="Manager"/>	
+		<role name="SecAuditor"/>			
+    </permission>
   </permissions>		
 </rolemap>

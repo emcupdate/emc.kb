@@ -15,7 +15,10 @@
       id="emc.kb.search_db"
       title="emc.kb:Search db"
       />        
-
+  <permission
+      id="emc.kb.view_log"
+      title="emc.kb:View log"
+      />
 
   <include package=".browser" />
 
