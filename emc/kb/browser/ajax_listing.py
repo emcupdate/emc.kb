@@ -120,7 +120,7 @@ class AdminLogView(FashejView):
         from emc.kb.interfaces import IAdminLogLocator
         from zope.component import getUtility
         locator = getUtility(IAdminLogLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        recorders = locator.query(query)
         return recorders
 
 # fashetx table
@@ -301,6 +301,8 @@ class ajaxsearch(grok.View):
  #模糊搜索
         if keyword != "":
             origquery['SearchableText'] = '%'+keyword+'%'
+        else:
+            origquery['SearchableText'] = ""
 #origquery provide  batch search
         origquery['size'] = size
         origquery['start'] = start

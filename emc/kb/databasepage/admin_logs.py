@@ -42,7 +42,7 @@ class AdminLogLocator(grok.GlobalUtility):
             session.rollback()
             pass
 
-    def query(self,**kwargs):
+    def query(self,kwargs):
         """以分页方式提取记录，参数：start 游标起始位置；size:每次返回的记录条数;
         fields:field list
         if size = 0,then不分页，返回所有记录集
@@ -51,13 +51,31 @@ class AdminLogLocator(grok.GlobalUtility):
 
         start = int(kwargs['start'])
         size = int(kwargs['size'])
+        keyword = kwargs['SearchableText']
+        direction = kwargs['sort_order'].strip()
+        
+        
 
         if size != 0:
-            recorders = session.query("adminid","userid","datetime",
+            if keyword == "":
+                recorders = session.query("adminid","userid","datetime",
                                       "ip","type","level","description","result").\
-            from_statement(
-            text("select * from admin_logs  order by id desc limit :start,:size").\
-            params(start=start,size=size)).all()
+                            from_statement(
+                            text("select * from admin_logs  order by id desc limit :start,:size").\
+                            params(start=start,size=size)).all()
+            else:
+                recorders = session.query("adminid","userid","datetime",
+                                      "ip","type","level","description","result").\
+                from_statement(
+                            text("select * from admin_logs where"
+                                 " description LIKE :x "
+                                  " OR userid LIKE :x"
+                                  " OR adminid LIKE :x"
+                                  " OR ip LIKE :x"
+                                  " order by id desc limit :start,:size").\
+                            params(x=keyword,start=start,size=size)
+                            ).all()  
+                
         else:
             nums = session.query(func.count(AdminLog.id)).scalar()
             return int(nums)
