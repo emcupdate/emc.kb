@@ -52,29 +52,39 @@ class AdminLogLocator(grok.GlobalUtility):
         start = int(kwargs['start'])
         size = int(kwargs['size'])
         keyword = kwargs['SearchableText']
-        direction = kwargs['sort_order'].strip()
-        
-        
+        direction = kwargs['sort_order'].strip()        
 
         if size != 0:
             if keyword == "":
+                if direction == "reverse":
+                    selectcon = text("select * from admin_logs  order by id desc limit :start,:size")
+                else:
+                    selectcon = text("select * from admin_logs  order by id asc limit :start,:size")
                 recorders = session.query("adminid","userid","datetime",
                                       "ip","type","level","description","result").\
-                            from_statement(
-                            text("select * from admin_logs  order by id desc limit :start,:size").\
-                            params(start=start,size=size)).all()
+                            from_statement(selectcon.params(start=start,size=size)).all()
             else:
-                recorders = session.query("adminid","userid","datetime",
-                                      "ip","type","level","description","result").\
-                from_statement(
-                            text("select * from admin_logs where"
+                if direction == "reverse":
+                    selectcon = text("select * from admin_logs where"
                                  " description LIKE :x "
                                   " OR userid LIKE :x"
                                   " OR adminid LIKE :x"
+                                  " OR level LIKE :x"
+                                  " OR result LIKE :x"
                                   " OR ip LIKE :x"
-                                  " order by id desc limit :start,:size").\
-                            params(x=keyword,start=start,size=size)
-                            ).all()  
+                                  " order by id DESC limit :start,:size")
+                else:
+                    selectcon = text("select * from admin_logs where"
+                                 " description LIKE :x "
+                                  " OR userid LIKE :x"
+                                  " OR adminid LIKE :x"
+                                  " OR level LIKE :x"
+                                  " OR result LIKE :x"
+                                  " OR ip LIKE :x"
+                                  " order by id ASC limit :start,:size")
+                recorders = session.query("adminid","userid","datetime",
+                                      "ip","type","level","description","result").\
+                                      from_statement(selectcon.params(x=keyword,start=start,size=size)).all()  
                 
         else:
             nums = session.query(func.count(AdminLog.id)).scalar()

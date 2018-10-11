@@ -39,7 +39,7 @@
 			<input type="hidden" value="0" id="dateSearch">
 			<!-- search fashej table ,so index name define as "sbdm" -->
 			<input type="hidden" value="id" id="solrSortColumn">
-			<input type="hidden" value="desc" id="solrSortDirection">
+			<input type="hidden" value="reverse" id="solrSortDirection">
 
             <!--搜索选择结果排序-->
             <!-- db table index name as li item -->

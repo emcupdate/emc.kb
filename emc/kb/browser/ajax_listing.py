@@ -295,6 +295,7 @@ class ajaxsearch(grok.View):
         keyword = (datadic['searchabletext']).strip()
 #         origquery = searchview.getPathQuery()
         origquery = {}
+        # default reverse,as is desc
         origquery['sort_on'] = sortcolumn
         # sql db sortt_order:asc,desc
         origquery['sort_order'] = sortdirection
