@@ -33,7 +33,7 @@ data_VALUES = [
                u"结果".encode('utf-8')
                ]
 
-model = u'湖南省湘潭高新技术产业开发区地方税务局'.encode('utf-8')
+
 class DataOut (grok.View):
     """Data import and export as CSV files.
     """
@@ -100,7 +100,7 @@ class DataOut (grok.View):
        
     
     def _getDataInfos(self,recorders):
-        """Generator filled with the nashuiren data."""
+        """Generator filled with the recorders."""
         
         from emc.kb.utils import kind
         from emc.kb.utils import level as log_level
