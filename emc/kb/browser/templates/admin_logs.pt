@@ -16,7 +16,8 @@
 	<div metal:fill-slot="main">
 		<metal:block   use-macro="context/@@emc-kb-macros/macros/log_navbar"/>
 		<div id="ajaxsearch" style="display: none" 
-			tal:attributes="data-ajax-target python:context.absolute_url() + '/@@admin_logs_ajaxsearch'"></div>
+			tal:attributes="data-ajax-target python:context.absolute_url() + '/@@admin_logs_ajaxsearch';
+			data-ajax-export python:context.absolute_url() + '/@@export_csv'"></div>
 		<div class="container-fluid">
 			<div class="row ajaxsearch">
 				<div class="form-group col-xs-9 col-sm-6 col-sm-offset-3">
@@ -32,9 +33,17 @@
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</div>
+				
 			</div>
 			<div class="row">
-                <h1 class="documentFirstHeading">日志数据库-审计日志</h1>				
+				<div class="col-sm-9 col-xs-9">
+                <h1 class="documentFirstHeading">审计日志</h1>
+                </div>
+                <div id="export" class="col-sm-3 col-xs-3">
+					<button value="导出" class="btn btn-default " type="submit">
+						<span class="glyphicon glyphicon-download-alt"></span>
+					</button>
+				</div>				
 			</div>			
 			<input type="hidden" value="0" id="dateSearch">
 			<!-- search fashej table ,so index name define as "sbdm" -->

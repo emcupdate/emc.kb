@@ -59,6 +59,44 @@ var searchEvent = function(jumpPage, rows, initKeyword) {
             'json');             
 
 };
+//export function start
+var exportEvent = function(jumpPage, rows, initKeyword) { 
+    var keyword;
+    if (initKeyword !== undefined && initKeyword !== "") {
+        keyword = initKeyword;
+    } else {
+        keyword = $("#searchKeyword").val();
+    }	  
+    var sortColumn = $("#solrSortColumn").val();    
+    var sortDirection = $("#solrSortDirection").val();        
+    var data = {};
+    if (keyword === undefined || keyword === null || keyword === "") {
+           data['searchabletext'] = "";
+    } else {
+           data['searchabletext'] = keyword;
+    }    
+    data['sortcolumn'] = sortColumn;
+    data['sortdirection'] = sortDirection;      
+
+    if (jumpPage !== undefined && jumpPage !== "") 
+    {   var start = jumpPage > 0 ? (jumpPage - 1) * rows : 0;
+        data['start'] = start;
+        data['size'] = rows;
+    } else {
+        data['start'] = 0;
+        data['size'] =10;
+    }        
+    var action = $("#ajaxsearch").attr('data-ajax-export');
+	var form = $('<form method="POST" action="' + action + '">');
+            $.each(data, function(k, v) {
+                form.append($('<input type="hidden" name="' + k +
+                        '" value="' + v + '">'));
+            });
+            $('body').append(form);
+            form.submit();                    
+
+};
+//export function end
 var totalCountSearchEvent = 0;
 var showSearchEventResult = function(D, u, C) {
 //function showSearchEventResult(D, u, C) {
@@ -175,6 +213,7 @@ $(document).ready(function(){
                searchEvent();
     }
    $("#search").on("click","button",function(){ searchEvent();});
+   $("#export").on("click","button",function(){ exportEvent();});
    
    $("#eventListSort").on("click","a",function() {             
                 $("#solrSortColumn").attr("value", $(this).attr("data-name"));
