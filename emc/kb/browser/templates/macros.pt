@@ -27,7 +27,7 @@
           <ul class="dropdown-menu" role="menu">
           	<li>
           		<a tal:attributes="href string:${kb/absolute_url}/@@admin_logs">
-                     管理日志
+                     审计日志
                 </a>
              </li>
           </ul>
