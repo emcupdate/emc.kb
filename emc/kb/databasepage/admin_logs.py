@@ -87,8 +87,28 @@ class AdminLogLocator(grok.GlobalUtility):
                                       from_statement(selectcon.params(x=keyword,start=start,size=size)).all()  
                 
         else:
-            nums = session.query(func.count(AdminLog.id)).scalar()
-            return int(nums)
+            if keyword == "":
+                selectcon = text("select * from admin_logs  order by id desc ")
+                recorders = session.query("adminid","userid","datetime",
+                                      "ip","type","level","description","result").\
+                            from_statement(selectcon).all()
+            else:
+                selectcon = text("select * from admin_logs where"
+                                 " description LIKE :x "
+                                  " OR userid LIKE :x"
+                                  " OR adminid LIKE :x"
+                                  " OR level LIKE :x"
+                                  " OR result LIKE :x"
+                                  " OR ip LIKE :x"
+                                  " order by id DESC ")
+
+                recorders = session.query("adminid","userid","datetime",
+                                      "ip","type","level","description","result").\
+                                      from_statement(selectcon.params(x=keyword)).all()  
+            
+            
+            nums = len(recorders)
+            return nums
         try:
             session.commit()
             return recorders

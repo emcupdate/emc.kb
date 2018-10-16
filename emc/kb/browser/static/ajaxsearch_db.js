@@ -160,7 +160,9 @@ var generatePageLink = function(c, n, a) {
         		"<span aria-hidden='true'>&laquo;</span></a></li>";
     }
     e += "<li><span>" + l + "/" + k + "</span></li>";
+    // start number
     var b = 1;
+    // end number
     var h = 3;
     if (l == 1) {
         b = 1;
