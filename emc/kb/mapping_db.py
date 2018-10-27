@@ -3,6 +3,7 @@ import sqlalchemy.types
 import sqlalchemy.schema
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Sequence
 from five import grok
 from zope import schema
 from zope.interface import Interface,implements
@@ -50,7 +51,7 @@ class AdminLog(ORMBase):
 
     __tablename__ = 'admin_logs'
 
-    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('user_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
