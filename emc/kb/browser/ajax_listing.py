@@ -116,7 +116,7 @@ class AdminLogView(FashejView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  AdminLog
+        from emc.kb.mapping_log_db import AdminLog
         from emc.kb.interfaces import IAdminLogLocator
         from zope.component import getUtility
         locator = getUtility(IAdminLogLocator)
@@ -436,6 +436,7 @@ class AdminLogajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
+
         for i in resultDicLists:
             out = """<tr class="text-left">                                
                                 <td class="col-md-1 text-left">%(adminid)s</td>

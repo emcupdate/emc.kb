@@ -18,7 +18,7 @@ data_PROPERTIES = [
     'datetime',
     'ip',
     'type',
-    'level',
+    'operlevel',
     'description',        
     'result'
     ] 
