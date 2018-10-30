@@ -25,7 +25,8 @@ class TestLogDatabase(unittest.TestCase):
         import pdb
         pdb.set_trace()
 #         Base.metadata.create_all(engine)
-        adminlog = AdminLog()
+# AdminLog.metadata.create_all(engine)
+        adminlog = AdminLog()        
 #         AdminLog.id = 9
         adminlog.adminid = u"admin4"
         adminlog.userid = u" "
