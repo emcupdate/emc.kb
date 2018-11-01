@@ -59,7 +59,7 @@ class AdminLog(ORMBase):
             nullable=False,
         )
     userid = sqlalchemy.schema.Column(sqlalchemy.types.String(128),
-            nullable=False,
+            nullable=True,
         )
     datetime = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
