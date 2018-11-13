@@ -22,6 +22,13 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         permission="emc.kb.view_log"
         class=".ajax_listing.AdminLogView"/>
+ 
+     <browser:page
+        name="user_logs"
+        template="templates/user_logs.pt"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="emc.controlpanel.modifyuser"
+        class=".ajax_listing.UserLogView"/>
             
     <browser:page
         name="admin_logs_listings"

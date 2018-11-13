@@ -19,7 +19,7 @@
       id="emc.kb.view_log"
       title="emc.kb:View log"
       />
-
+  <include package="emc.policy.browser" />
   <include package=".browser" />
 
  

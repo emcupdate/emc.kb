@@ -11,17 +11,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from emc.kb import _
 
-# field names will be imported
-data_PROPERTIES = [
-    'admnid',
-    'userid',
-    'datetime',
-    'ip',
-    'type',
-    'operlevel',
-    'description',        
-    'result'
-    ] 
+
 # need byte string
 data_VALUES = [
                u"主体".encode('utf-8'),
@@ -32,10 +22,17 @@ data_VALUES = [
                u"描述".encode('utf-8'),
                u"结果".encode('utf-8')
                ]
+userlog_header = [
+               u"用户".encode('utf-8'),
+               u"时间".encode('utf-8'),
+               u"ip".encode('utf-8'),
+               u"级别".encode('utf-8'),
+               u"描述".encode('utf-8'),
+               u"结果".encode('utf-8')
+               ]
 
-
-class DataOut (grok.View):
-    """Data import and export as CSV files.
+class AdminLogDataOut (grok.View):
+    """AdminLog Data export as CSV files.
     """
     grok.context(Interface)
     grok.name('export_csv')
@@ -96,7 +93,7 @@ class DataOut (grok.View):
         """Export Data within CSV file."""
 
         datafile = self._createCSV(self._getDataInfos(recorders))
-        return self._createRequest(datafile.getvalue(), "sheet_log_export.csv")
+        return self._createRequest(datafile.getvalue(), "admin_log_export.csv")
        
     
     def _getDataInfos(self,recorders):
@@ -134,4 +131,41 @@ class DataOut (grok.View):
         self.request.response.addHeader('Cache-Control', "must-revalidate, post-check=0, pre-check=0, public")
         self.request.response.addHeader('Expires', "0")
         return data   
+
+class UserLogDataOut (AdminLogDataOut):
+    """UserLog Data export as CSV files.
+    """
+#     grok.context(Interface)
+    grok.name('userlog_export_csv')
+#     grok.require('zope2.View')
     
+    def searchview(self,viewname="user_logs"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+    
+    def _createCSV(self, lines):
+        """Write header and lines within the CSV file."""
+        datafile = StringIO()
+        writor = csv.writer(datafile)
+        writor.writerow(userlog_header)
+        map(writor.writerow, lines)
+        return datafile
+
+    def exportData(self,recorders):
+        """Export Data within CSV file."""
+
+        datafile = self._createCSV(self._getDataInfos(recorders))
+        return self._createRequest(datafile.getvalue(), "user_log_export.csv")
+    
+    def _getDataInfos(self,recorders):
+        """Generator filled with the recorders."""
+        
+        from emc.kb.utils import kind
+        from emc.kb.utils import level as log_level
+        from emc.kb.utils import result as log_result       
+        for i in recorders:
+            i = list(i)                             
+            i[3] = kind[i[3]]
+            i[4] = log_level[i[4]]
+            i[6] = log_result[i[6]]                   
+            yield i            

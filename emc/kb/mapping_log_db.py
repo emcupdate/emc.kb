@@ -80,3 +80,64 @@ class AdminLog(ORMBase):
             nullable=False,
         )                         
 
+class IUserLog(Interface):
+    """管理员操作日志
+    """
+    id = schema.Int(
+            title=_(u"the table's primary key"),
+        )
+    #客体
+    userid = schema.TextLine(
+            title=_(u"the user id of user which had been processed by administrator"),
+        )
+    #操作时间
+    datetime = schema.TextLine(
+            title=_(u"operation time"),
+        )
+    ip = schema.TextLine(
+            title=_(u"the client's ip address"),
+        )
+    type = schema.Int(
+            title=_(u"type of the operation"),
+        )
+    operlevel = schema.Int(
+            title=_(u"level of the operation"),
+        )
+    description = schema.Text(
+            title=_(u"the operation's detail description"),
+        )    
+    result = schema.Int(
+            title=_(u"result of the operation"),
+        )        
+class UserLog(ORMBase):
+    """Database-backed implementation of IModel
+    """
+    implements(IUserLog)
+
+    __tablename__ = 'user_logs'
+
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('userlog_id_seq'),
+            primary_key=True,
+            autoincrement=True,
+        )
+    userid = sqlalchemy.schema.Column(sqlalchemy.types.String(128),
+            nullable=True,
+        )
+    datetime = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    ip = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    type = sqlalchemy.schema.Column(sqlalchemy.types.SmallInteger,
+            nullable=False,
+        )
+    operlevel = sqlalchemy.schema.Column(sqlalchemy.types.SmallInteger,
+            nullable=False,
+        )
+    description = sqlalchemy.schema.Column(sqlalchemy.types.String(128),
+            nullable=False,
+        )     
+    result = sqlalchemy.schema.Column(sqlalchemy.types.SmallInteger,
+            nullable=False,
+        ) 

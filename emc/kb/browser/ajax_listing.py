@@ -111,7 +111,7 @@ class AdminLogView(FashejView):
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
     该参数，查询数据库，并返回结果。
-    view name:admin_log_listing
+    view name:admin_logs
     """
 
     def search_multicondition(self,query):
@@ -123,6 +123,26 @@ class AdminLogView(FashejView):
         recorders = locator.query(query)
         return recorders
 
+
+#user_logs table
+class UserLogView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:user_logs
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        from emc.kb.mapping_log_db import UserLog
+        from emc.kb.interfaces import IUserLogLocator
+        from zope.component import getUtility
+        locator = getUtility(IUserLogLocator)
+        recorders = locator.query(query)
+        return recorders
+    
+    
 # fashetx table
 class FashetxView(ModelView):
     """
@@ -456,6 +476,50 @@ class AdminLogajaxsearch(ajaxsearch):
                                             level = log_level[i[5]],
                                             description = i[6],
                                             result = log_result[i[7]])
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+
+
+class UserLogajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('user_logs_ajaxsearch')
+
+    def searchview(self,viewname="user_logs"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        
+        from emc.kb.utils import kind
+        from emc.kb.utils import level as log_level
+        from emc.kb.utils import result as log_result 
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+
+        for i in resultDicLists:
+            out = """<tr class="text-left">                                                               
+                                <td class="col-md-1">%(userid)s</td>
+                                <td class="col-md-2">%(datetime)s</td>
+                                <td class="col-md-2">%(ip)s</td>
+                                <td class="col-md-1">%(type)s</td>
+                                <td class="col-md-1">%(level)s</td>
+                                <td class="col-md-3">%(description)s</td>
+                                <td class="col-md-1">%(result)s</td>
+                                </tr> """% dict(
+                                            userid = i[0],
+                                            datetime = i[1],
+                                            ip = i[2],
+                                            type = kind[i[3]],
+                                            level = log_level[i[4]],
+                                            description = i[5],
+                                            result = log_result[i[6]])
             outhtml = "%s%s" %(outhtml ,out)
             k = k + 1
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}

@@ -46,6 +46,8 @@ class IFashejLocator (Interface):
 class IAdminLogLocator(IFashejLocator):
     """admin_logs table's database api"""
     
+class IUserLogLocator(IFashejLocator):
+    """user_logs table's database api"""
     
 class IFashetxLocator (IFashejLocator):
     """fashetx table add row"""
