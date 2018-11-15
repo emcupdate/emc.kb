@@ -26,8 +26,8 @@ class TestLogDatabase(unittest.TestCase):
         Base = declarative_base()
         import pdb
         pdb.set_trace()
-#         Base.metadata.create_all(engine)
-# AdminLog.metadata.create_all(engine)
+
+# AdminLog.create(engine)
         adminlog = AdminLog()        
 #         AdminLog.id = 9
         adminlog.adminid = u"admin4"
@@ -80,11 +80,11 @@ class TestLogDatabase(unittest.TestCase):
         from emc.kb import ora_engine as engine
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'
-        Base = declarative_base()
+
         import pdb
         pdb.set_trace()
-#         Base.metadata.create_all(engine)
-# UserLog.metadata.create_all(engine)
+
+        UserLog.create(engine)
         userlog = UserLog()       
         userlog.userid = u"user1"
         userlog.datetime = datetime.datetime.now().strftime(fmt)
