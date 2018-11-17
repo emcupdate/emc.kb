@@ -16,6 +16,13 @@
         permission="zope2.View"
         class=".macros.Macros"/>
     
+    <!-- Control panel form -->
+    <browser:page 
+        name="log-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.LogSettingsControlPanel"
+        permission="emc.kb.view_log"
+        />    
     <browser:page
         name="admin_logs"
         template="templates/admin_logs.pt"

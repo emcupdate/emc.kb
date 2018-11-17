@@ -4,6 +4,32 @@ from zope import schema
 
 from emc.kb import _
 
+
+class ILogSettings(Interface):
+    """A utility used to set log system 's  timeout and max limit.
+    """
+    
+    timeout = schema.Int(
+            title=_(u"timeout"),
+            description=_(u"how many days that log at least will be reserved"),
+            default=180,
+            required=False,
+        )
+    max = schema.Int(
+            title=_(u"max recorders"),
+            description=_(u"How many recorders that log at least will be reserved"
+                          " before the log dumped."),
+            default=10000,
+            required=False,
+        )
+    bsize = schema.Int(
+            title=_(u"batch size"),
+            description=_(u"How many log recorders will be deleted when every log dumped"),
+            default=2000,
+            required=False,
+        )    
+         
+
 class InputError(Exception):
     """Exception raised if there is an error making a data input
     """
