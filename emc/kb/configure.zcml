@@ -22,7 +22,16 @@
   <include package="emc.policy.browser" />
   <include package=".browser" />
 
- 
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.admin_logs.adminlog"
+	name="adminlog"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.admin_logs.userlog"
+	name="userlog"
+	/> 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  

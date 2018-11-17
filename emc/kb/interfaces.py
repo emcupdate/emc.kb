@@ -35,6 +35,15 @@ class InputError(Exception):
     """
 
 # db insterface
+class IDbapi (Interface):
+    """Db api """
+
+    def get_rownumber():
+        "fetch table's rownumber"
+
+    def bulk_delete():
+        "bulk delete"
+
 class IModelLocator (Interface):
     """medel table add row"""
 

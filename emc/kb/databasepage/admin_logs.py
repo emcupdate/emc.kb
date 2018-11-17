@@ -11,17 +11,56 @@ from emc.kb import log_session as session
 
 from emc.kb.mapping_log_db import AdminLog,IAdminLog
 from emc.kb.interfaces import IAdminLogLocator
+from emc.kb.interfaces import IDbapi
 
 from emc.kb import _
 
-class dbLocator(object):
-    """db locator base class"""
+class Dbapi(object):
+    """db API base class"""
+    implements(IDbapi)
     
-    def __init__(self,package,table,factorycls):
+    def __init__(self,session,package,table,factorycls):
+        """
+        parameters:
+        session db mapper session,
+        package the package where table class in here. for example:'emc.kb.mapping_log_db'
+        table the table name that will be query, 'admin_logs'
+        factorycls the class name that will be create table object instance,'AdminLog'
+        """
+        
+        self.session = session
         self.package = package
         self.table = table
         self.factorycls = factorycls
         
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'        
+    
+    def get_rownumber(self):
+        "fetch table's rownumber"
+        query = "SELECT COUNT(*) FROM %(table)s;" % dict(table=self.table)
+        try:
+            num = s.query(query)
+            return num
+        except:
+            return 0            
+    
+    def bulk_delete(self):
+        "delete from(select * from <table_name>) where rownum<=1000;"
+        s = self.session
+        query = "DELETE %(table)s WHERE "
+        "id IN ("
+        " SELECT id FROM ("
+        " SELECT * FROM %(table)s ORDER BY id ASC) WHERE rownum <= 1000);" % dict(table=self.table)
+        try:
+            s.query(query)
+            s.commit()
+        except:
+            s.rollback()
+        
+adminlog = Dbapi(session,'emc.kb.mapping_log_db','admin_logs','AdminLog')
+userlog =  Dbapi(session,'emc.kb.mapping_log_db','user_logs','UserLog')
+      
 class AdminLogLocator(grok.GlobalUtility):
     """docstring for AdminLogLocator."""
     implements(IAdminLogLocator)
