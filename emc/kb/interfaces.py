@@ -44,6 +44,10 @@ class IDbapi (Interface):
     def bulk_delete():
         "bulk delete"
 
+    def fetch_oldest():
+        "fetch the oldest recorder from db"
+        
+        
 class IModelLocator (Interface):
     """medel table add row"""
 

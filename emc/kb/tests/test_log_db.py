@@ -17,6 +17,28 @@ class TestLogDatabase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
+    def test_dbapi_fetch_rownum(self):
+        from emc.kb.mapping_log_db import  AdminLog
+        from emc.kb.databasepage.admin_logs import adminlog
+        num = adminlog.get_rownumber()
+        self.assertTrue(num is not None)
+        
+    def test_dbapi_fetch_oldest(self):        
+        from emc.kb.mapping_log_db import  AdminLog
+        from emc.kb.databasepage.admin_logs import adminlog
+        num = adminlog.fetch_oldest()
+        self.assertTrue(num is not None)        
+
+    def test_dbapi_bulk_del(self):
+
+        from emc.kb.databasepage.admin_logs import adminlog
+        num = adminlog.get_rownumber()
+        import pdb
+        pdb.set_trace()
+        adminlog.bulk_delete(2)
+        num2 = adminlog.get_rownumber()
+        self.assertEqual(num2 +2,num)
+
     def test_db_mapping_adminlog(self):
         from emc.kb.mapping_log_db import  AdminLog
         from emc.kb import log_session as Session

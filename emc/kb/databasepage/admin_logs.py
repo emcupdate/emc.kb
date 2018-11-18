@@ -12,7 +12,8 @@ from emc.kb import log_session as session
 from emc.kb.mapping_log_db import AdminLog,IAdminLog
 from emc.kb.interfaces import IAdminLogLocator
 from emc.kb.interfaces import IDbapi
-
+import datetime
+from emc.policy import fmt
 from emc.kb import _
 
 class Dbapi(object):
@@ -38,22 +39,52 @@ class Dbapi(object):
     
     def get_rownumber(self):
         "fetch table's rownumber"
-        query = "SELECT COUNT(*) FROM %(table)s;" % dict(table=self.table)
+#         query = "SELECT COUNT(*) FROM %(table)s;" % dict(table=self.table)
+        import_str = "from %(p)s import %(t)s as tablecls" % dict(p=self.package,t=self.factorycls) 
+        exec import_str
         try:
-            num = s.query(query)
+            num = self.session.query(func.count(tablecls.id)).scalar()         
             return num
         except:
             return 0            
-    
-    def bulk_delete(self):
+
+    def fetch_oldest(self):
         "delete from(select * from <table_name>) where rownum<=1000;"
+        
         s = self.session
-        query = "DELETE %(table)s WHERE "
-        "id IN ("
-        " SELECT id FROM ("
-        " SELECT * FROM %(table)s ORDER BY id ASC) WHERE rownum <= 1000);" % dict(table=self.table)
+        sql2 = """ 
+        select datetime from (
+          select * from %(tbl)s order by id asc
+         )
+          where rownum<= 1
+        """ % dict(tbl=self.table)
+        query2 = text(sql2)                                                                                                
         try:
-            s.query(query)
+            rownum = s.execute(query2).fetchone()
+            if len(rownum):
+                return datetime.strptime(rownum[0],fmt) 
+            else:
+                return datetime.datetime.now()
+#             s.commit()
+        except:
+            return datetime.datetime.now()
+    
+    def bulk_delete(self,size):
+        "delete from(select * from <table_name>) where rownum<=1000;"
+        
+        s = self.session
+        sql2 = """
+        delete %(tbl)s
+         where  id in (
+        select id from (
+          select * from %(tbl)s order by id asc
+         )
+          where rownum<= :max
+        )
+        """ % dict(tbl=self.table)
+        query2 = text(sql2).params(max=size)                                                                                                 
+        try:
+            rownum = s.execute(query2)
             s.commit()
         except:
             s.rollback()
@@ -123,7 +154,7 @@ class AdminLogLocator(grok.GlobalUtility):
                     
 #                     selectcon = text("select * from admin_logs  ORDER BY id DESC")
                 else:
-                    selectcon = text("select * from"
+                    selectcon = text("select * from "
                                      "(select a.*,rownum rn from "
                                      "(select * from admin_logs ORDER BY id ASC) a "
                                      "where rownum < :max) where rn > :start")                    
