@@ -21,7 +21,7 @@
         name="log-settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".controlpanel.LogSettingsControlPanel"
-        permission="emc.kb.view_log"
+        permission="emc.kb.set_log"
         />    
     <browser:page
         name="admin_logs"

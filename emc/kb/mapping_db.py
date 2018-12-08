@@ -18,7 +18,41 @@ from emc.kb import _
 4. 所有表主键名称为id,为整型,自增长
 
 """
+class IModel(Interface):
+    """编号number 记录表
+    """
+    modelId = schema.Int(
+            title=_(u"model table primary key"),
+        )   
+    # 型号代码
+    xhdm = schema.TextLine(
+            title=_(u"model code"),
+        )    
+    #型号名称
+    xhmc = schema.TextLine(
+            title=_(u"model name"),
+        )
 
+class Model(ORMBase):
+    """Database-backed implementation of IModel
+    """
+    implements(IModel)
+    
+    __tablename__ = 'model'
+    
+    modelId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            primary_key=True,
+            autoincrement=True,
+        )
+        
+    xhdm = sqlalchemy.schema.Column(sqlalchemy.types.String(8),
+            nullable=False,
+        )
+    xhmc = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    
+    
 class IFashej(Interface):
     """发射机
     """

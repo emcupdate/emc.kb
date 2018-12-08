@@ -1,7 +1,7 @@
 from plone.app.registry.browser import controlpanel
 
 from emc.kb.interfaces import ILogSettings
-from emc.kb import MessageFactory as _
+from emc.kb import _
 
 try:
     # only in z3c.form 2.0
