@@ -36,6 +36,57 @@ class Dbapi(object):
         
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'        
+
+    def add(self,kwargs):
+        
+        import_str = "from %(p)s import %(t)s as tablecls" % dict(p=self.package,t=self.factorycls) 
+        exec import_str
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'
+        recorder = tablecls()
+        for kw in kwargs.keys():
+            setattr(recorder,kw,kwargs[kw])
+        session.add(recorder)
+        try:
+            session.commit()
+        except:
+#             session.rollback()
+            pass
+
+
+    def DeleteByCode(self,id):
+        "delete the specify id recorder"
+        import_str = "from %(p)s import %(t)s as tablecls" % dict(p=self.package,t=self.factorycls) 
+        exec import_str
+        if id != "":
+            sqltext = "SELECT * FROM %(tbl)s WHERE id=:id" % dict(tbl=self.table) 
+            try:
+                recorder = session.query(tablecls).\
+                from_statement(text(sqltext)).\
+                params(id=id).one()
+                session.delete(recorder)
+                session.commit()
+            except:
+                session.rollback()
+                pass
+        else:
+            return None
+
+    def getByCode(self,id):
+        import_str = "from %(p)s import %(t)s as tablecls" % dict(p=self.package,t=self.factorycls) 
+        exec import_str        
+        if id != "":
+            sqltext = "SELECT * FROM %(tbl)s WHERE id=:id" % dict(tbl=self.table)            
+            try:
+                recorder = session.query(tablecls).\
+                from_statement(text(sqltext)).\
+                params(id=id).one()
+                return recorder
+            except:
+                session.rollback()
+                return None
+        else:
+            return None
     
     def get_rownumber(self):
         "fetch table's rownumber"
@@ -97,21 +148,13 @@ class AdminLogLocator(grok.GlobalUtility):
     implements(IAdminLogLocator)
 
     def add(self,kwargs):
-#         try:
-#             tablename = kwargs['table']
-#             exec("from %s import %s as tablecls"%(self.package,self.table))
-#         except:
-#             pass
+
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'
         recorder = AdminLog()
         for kw in kwargs.keys():
             setattr(recorder,kw,kwargs[kw])
-#         if recorder.id == None:recorder.id = 1
-#         import pdb
-#         pdb.set_trace()
         session.add(recorder)
-#         Session.flush()
         try:
             session.commit()
         except:
@@ -136,8 +179,6 @@ class AdminLogLocator(grok.GlobalUtility):
 
         start = int(kwargs['start']) 
         size = int(kwargs['size'])
-#         import pdb
-#         pdb.set_trace()
         max = size + start + 1 
         keyword = kwargs['SearchableText']
         import os
@@ -228,7 +269,6 @@ class AdminLogLocator(grok.GlobalUtility):
     def DeleteByCode(self,id):
         "delete the specify id recorder"
 
-#         xhdm = kwargs['xhdm']
         if id != "":
             try:
                 recorder = session.query(AdminLog).\
@@ -254,5 +294,3 @@ class AdminLogLocator(grok.GlobalUtility):
                 None
         else:
             return None
-
-
