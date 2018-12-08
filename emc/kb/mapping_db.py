@@ -10,57 +10,19 @@ from zope.interface import Interface,implements
 from emc.kb import ORMBase
 from emc.kb import _
 
-                           
-class IModel(Interface):
-    """编号number 记录表
-    """
-    modelId = schema.Int(
-            title=_(u"model table primary key"),
-        )
-    # 型号代码
-    xhdm = schema.TextLine(
-            title=_(u"model code"),
-        )
-    #型号名称
-    xhmc = schema.TextLine(
-            title=_(u"model name"),
-        )
+"""
+约定:
+1. 所有table名称,以汉语拼音命名,但只有前两个汉字用全拼音,其他只取声母,所有字母小写;
+2. 所有表对应的python mapper 类的名称规则是:字母组成同表名,但首字母大写;
+3. 所有表对应的python mapper的接口类名称规则:python mapper 类名称前加大写I
+4. 所有表主键名称为id,为整型,自增长
 
-class Model(ORMBase):
-    """Database-backed implementation of IModel
-    """
-    implements(IModel)
-
-    __tablename__ = 'model'
-
-    modelId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
-            primary_key=True,
-            autoincrement=True,
-        )
-
-    xhdm = sqlalchemy.schema.Column(sqlalchemy.types.String(8),
-            nullable=False,
-        )
-    xhmc = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
-            nullable=False,
-        )
-
-class Modeltest(ORMBase):
-    """Database-backed implementation of IModel
-    """
-#     implements(IModel)
-
-    __tablename__ = 'modeltest2'
-
-    ID = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
-                                       primary_key=True,)
-    XHDM = sqlalchemy.schema.Column(sqlalchemy.types.String(8))
-    XHMC = sqlalchemy.schema.Column(sqlalchemy.types.String(32))
+"""
 
 class IFashej(Interface):
     """发射机
     """
-    fashejId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     sbdm = schema.TextLine(
@@ -121,7 +83,7 @@ class Fashej(ORMBase):
 
     __tablename__ = 'fashej'
 
-    fashejId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashej_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -178,7 +140,7 @@ class Fashej(ORMBase):
 class IJieshouj(Interface):
     """接收机
     """
-    jieshoujId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     sbdm = schema.TextLine(
@@ -231,7 +193,7 @@ class Jieshouj(ORMBase):
 
     __tablename__ = 'jieshouj'
 
-    jieshoujId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshouj_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -281,7 +243,7 @@ class Jieshouj(ORMBase):
 class IFashetx(Interface):
     """发射天线
     """
-    fashetxId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     cssbdm = schema.TextLine(
@@ -320,7 +282,7 @@ class Fashetx(ORMBase):
 
     __tablename__ = 'fashetx'
 
-    fashetxId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashetx_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -355,7 +317,7 @@ class Fashetx(ORMBase):
 class IJieshoutx(Interface):
     """接收天线
     """
-    jieshoutxId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     cssbdm = schema.TextLine(
@@ -394,7 +356,7 @@ class Jieshoutx(ORMBase):
 
     __tablename__ = 'jieshoutx'
 
-    jieshoutxId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshoutx_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -429,7 +391,7 @@ class Jieshoutx(ORMBase):
 class ILvboq(Interface):
     """滤波器
     """
-    lvboqId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     cssbdm = schema.TextLine(
@@ -467,7 +429,7 @@ class Lvboq(ORMBase):
 
     __tablename__ = 'lvboq'
 
-    lvboqId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('lvboq_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -504,7 +466,7 @@ class Lvboq(ORMBase):
 class IDianxingtxzyzk(Interface):
     """典型天线增益子库
     """
-    dianxingtxzyzkId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     type_antennas = schema.TextLine(
@@ -522,7 +484,7 @@ class Dianxingtxzyzk(ORMBase):
 
     __tablename__ = 'dianxingtxzyzk'
 
-    dianxingtxzyzkId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('dianxingtxzyzk_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -538,7 +500,7 @@ class Dianxingtxzyzk(ORMBase):
 class ITianxianzk(Interface):
     """天线子库
     """
-    tianxianzkId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     lib_code = schema.TextLine(
@@ -556,7 +518,7 @@ class Tianxianzk(ORMBase):
 
     __tablename__ = 'tianxianzk'
 
-    tianxianzkId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('tianxianzk_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -571,7 +533,7 @@ class Tianxianzk(ORMBase):
 class IJieshoujzk(Interface):
     """接收机子库
     """
-    jieshoujzkId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     lib_code = schema.TextLine(
@@ -589,7 +551,7 @@ class Jieshoujzk(ORMBase):
 
     __tablename__ = 'jieshoujzk'
 
-    jieshoujzkId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshoujzk_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -604,7 +566,7 @@ class Jieshoujzk(ORMBase):
 class IFashejzk(Interface):
     """发射机子库
     """
-    fashejzkId = schema.Int(
+    id = schema.Int(
             title=_(u"table primary key"),
         )
     lib_code = schema.TextLine(
@@ -622,7 +584,7 @@ class Fashejzk(ORMBase):
 
     __tablename__ = 'fashejzk'
 
-    fashejzkId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashejzk_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -637,7 +599,7 @@ class Fashejzk(ORMBase):
 class ICeshishysh(Interface):
     """测试实验室
     """
-    ceshishyshId = schema.Int(
+    id = schema.Int(
             title=_(u"talbe primary key")
         )
     name = schema.TextLine(
@@ -660,7 +622,7 @@ class Ceshishysh(ORMBase):
 
     __tablename__ = 'ceshishysh'
 
-    ceshishyshId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshishysh_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -682,7 +644,7 @@ class Ceshishysh(ORMBase):
 class ICeshiry(Interface):
     """测试人员
     """
-    ceshiryId = schema.Int(
+    id = schema.Int(
             title=_(u"talbe primary key")
         )
     name = schema.TextLine(
@@ -714,7 +676,7 @@ class Ceshiry(ORMBase):
 
     __tablename__ = 'ceshiry'
 
-    ceshiryId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshiry_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -745,7 +707,7 @@ class Ceshiry(ORMBase):
 class ICeshiff(Interface):
     """测试方法
     """
-    ceshiffId = schema.Int(
+    id = schema.Int(
             title=_(u"talbe primary key")
         )
     m_id = schema.TextLine(
@@ -777,7 +739,7 @@ class Ceshiff(ORMBase):
 
     __tablename__ = 'ceshiff'
 
-    ceshiffId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshiff_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -808,7 +770,7 @@ class Ceshiff(ORMBase):
 class ICeshibg(Interface):
     """测试报告
     """
-    ceshibgId = schema.Int(
+    id = schema.Int(
             title=_(u"talbe primary key")
         )
     t_id = schema.TextLine(
@@ -876,7 +838,7 @@ class Ceshibg(ORMBase):
 
     __tablename__ = 'ceshibg'
 
-    ceshibgId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshibg_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
@@ -941,9 +903,9 @@ class Ceshibg(ORMBase):
 
 # 测试项目start
 class ICeshixm(Interface):
-    """测试报告
+    """测试项目
     """
-    ceshixmId = schema.Int(
+    id = schema.Int(
             title=_(u"talbe primary key")
         )
     project_id = schema.Int(
@@ -978,7 +940,7 @@ class Ceshixm(ORMBase):
 
     __tablename__ = 'ceshixm'
 
-    ceshixmId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshixm_id_seq'),
             primary_key=True,
             autoincrement=True,
         )
