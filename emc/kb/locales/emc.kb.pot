@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-11-17 04:03+0000\n"
+"POT-Creation-Date: 2018-12-07 02:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "EUT xing hao"
 msgstr ""
 
-#: ./interfaces.py:27
+#: ./interfaces.py:33
 msgid "How many log recorders will be deleted when every log dumped"
 msgstr ""
 
@@ -72,13 +72,17 @@ msgstr ""
 msgid "Input model data"
 msgstr ""
 
-#: ./configure.zcml:39
+#: ./configure.zcml:52
 msgid "Installs the emc.kb package"
 msgstr ""
 
 #: ./browser/controlpanel.py:15
 #: ./profiles/default/controlpanel.xml
 msgid "Log settings"
+msgstr ""
+
+#: ./interfaces.py:26
+msgid "Percentage"
 msgstr ""
 
 #: ./browser/controlpanel.py:16
@@ -114,7 +118,7 @@ msgstr ""
 msgid "all_day"
 msgstr ""
 
-#: ./interfaces.py:26
+#: ./interfaces.py:32
 msgid "batch size"
 msgstr ""
 
@@ -289,7 +293,7 @@ msgstr ""
 msgid "description_update_model_record"
 msgstr ""
 
-#: ./configure.zcml:39
+#: ./configure.zcml:52
 msgid "emc.kb"
 msgstr ""
 
@@ -551,6 +555,10 @@ msgstr ""
 
 #: ./mapping_db.py:854
 msgid "wen du"
+msgstr ""
+
+#: ./interfaces.py:27
+msgid "when log numbers reach at some Percentage,send warning message"
 msgstr ""
 
 #: ./mapping_db.py:88

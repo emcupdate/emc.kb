@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eisoo.topic\n"
-"POT-Creation-Date: 2018-11-17 04:03+0000\n"
+"POT-Creation-Date: 2018-12-07 02:08+0000\n"
 "PO-Revision-Date: 2018-11-17 12:07+0800\n"
 "Last-Translator: Adam <yuejun.tang@gmail.com>\n"
 "Language-Team: 315ok.org <LL@li.org>\n"
@@ -19,79 +19,84 @@ msgstr ""
 msgid "All"
 msgstr "全部"
 
-#: browser/ajax_listing.py:760
+#: ./browser/ajax_listing.py:760
 msgid "Cancel"
 msgstr "取消"
 
-#: browser/ajax_listing.py:741
+#: ./browser/ajax_listing.py:741
 msgid "Delete"
 msgstr "删除"
 
-#: browser/ajax_listing.py:764
+#: ./browser/ajax_listing.py:764
 msgid "Delete cancelled."
 msgstr "删除操作已取消"
 
-#: mapping_db.py:827
+#: ./mapping_db.py:827
 msgid "EUT bian hao"
 msgstr ""
 
-#: mapping_db.py:830
+#: ./mapping_db.py:830
 msgid "EUT xing hao"
 msgstr ""
 
-#: interfaces.py:27
+#: ./interfaces.py:33
 msgid "How many log recorders will be deleted when every log dumped"
 msgstr "每次日志覆盖操作时,将允许删除的多少条最老记录?"
 
-#: interfaces.py:20
+#: ./interfaces.py:20
 msgid "How many recorders that log at least will be reserved before the log dumped."
 msgstr "每次执行覆盖操作时,要达到多少条记录才触发覆盖"
 
-#: browser/ajax_listing.py:814
+#: ./browser/ajax_listing.py:814
 msgid "Input cancelled."
 msgstr "录入操作已取消"
 
-#: browser/ajax_listing.py:952
+#: ./browser/ajax_listing.py:952
 msgid "Input fa she ji data"
 msgstr "输入发射机数据"
 
-#: browser/ajax_listing.py:1282
+#: ./browser/ajax_listing.py:1282
 msgid "Input fa she tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:1118
+#: ./browser/ajax_listing.py:1118
 msgid "Input jie shou ji data"
 msgstr ""
 
-#: browser/ajax_listing.py:1445
+#: ./browser/ajax_listing.py:1445
 msgid "Input jie shou tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:775
+#: ./browser/ajax_listing.py:775
 msgid "Input model data"
 msgstr "录入型号表数据"
 
-#: configure.zcml:39
+#: ./configure.zcml:52
 msgid "Installs the emc.kb package"
 msgstr ""
 
-#: browser/controlpanel.py:15 profiles/default/controlpanel.xml
+#: ./browser/controlpanel.py:15
+#: ./profiles/default/controlpanel.xml
 msgid "Log settings"
 msgstr "日志设置"
 
-#: browser/controlpanel.py:16
+#: ./interfaces.py:26
+msgid "Percentage"
+msgstr "百分比(请用小数形式)"
+
+#: ./browser/controlpanel.py:16
 msgid "Please enter details of log"
 msgstr "请输入详细日志设置"
 
-#: browser/ajax_listing.py:791
+#: ./browser/ajax_listing.py:791
 msgid "Submit"
 msgstr "提交"
 
-#: browser/ajax_listing.py:806
+#: ./browser/ajax_listing.py:806
 msgid "Thank you! Your data  will be update in back end DB."
 msgstr "感谢您！你的数据将在后台数据库中更新。"
 
-#: browser/ajax_listing.py:756
+#: ./browser/ajax_listing.py:756
 msgid "Your data  has been deleted."
 msgstr "你的数据已经被删除。"
 
@@ -101,7 +106,7 @@ msgstr "${year} 年 ${month} 月 ${day} 日"
 msgid "a_week_ago_date"
 msgstr "${year} 年 ${month} 月 ${day} 日"
 
-#: mapping_log_db.py:22
+#: ./mapping_log_db.py:22
 msgid "administrator's user id"
 msgstr ""
 
@@ -112,505 +117,509 @@ msgstr "${year}年${month}月${day}日"
 msgid "all_day"
 msgstr "所有"
 
-#: interfaces.py:26
+#: ./interfaces.py:32
 msgid "batch size"
 msgstr ""
 
-#: mapping_db.py:824
+#: ./mapping_db.py:824
 msgid "bei ce jian"
 msgstr ""
 
-#: mapping_db.py:950
+#: ./mapping_db.py:950
 msgid "bei ce xiang mu bian hao"
 msgstr ""
 
-#: mapping_db.py:115
+#: ./mapping_db.py:115
 msgid "bei zhu"
 msgstr "备注"
 
-#: mapping_db.py:109
+#: ./mapping_db.py:109
 msgid "ben zhen pin lv"
 msgstr "本振频率"
 
-#: mapping_db.py:767
+#: ./mapping_db.py:767
 msgid "ce shi bu zhou"
 msgstr ""
 
-#: mapping_db.py:839
+#: ./mapping_db.py:839
 msgid "ce shi di dian"
 msgstr ""
 
-#: mapping_db.py:869
+#: ./mapping_db.py:869
 msgid "ce shi jie guo"
 msgstr ""
 
-#: mapping_db.py:764
+#: ./mapping_db.py:764
 msgid "ce shi kuang tu"
 msgstr ""
 
-#: mapping_db.py:860
+#: ./mapping_db.py:860
 msgid "ce shi ren yuan"
 msgstr ""
 
-#: mapping_t_db.py:69
+#: ./mapping_t_db.py:69
 msgid "ce shi ren yuan dan wei ID"
 msgstr ""
 
-#: mapping_t_db.py:51
+#: ./mapping_t_db.py:51
 msgid "ce shi ren yuan ming cheng"
 msgstr ""
 
-#: mapping_t_db.py:57
+#: ./mapping_t_db.py:57
 msgid "ce shi ren yuan nian ling"
 msgstr ""
 
-#: mapping_t_db.py:48
+#: ./mapping_t_db.py:48
 msgid "ce shi ren yuan talbe primary key"
 msgstr ""
 
-#: mapping_t_db.py:54
+#: ./mapping_t_db.py:54
 msgid "ce shi ren yuan xing bie"
 msgstr ""
 
-#: mapping_t_db.py:60
+#: ./mapping_t_db.py:60
 msgid "ce shi ren yuan xue li"
 msgstr ""
 
-#: mapping_t_db.py:66
+#: ./mapping_t_db.py:66
 msgid "ce shi ren yuan zheng shu bian hao"
 msgstr ""
 
-#: mapping_t_db.py:63
+#: ./mapping_t_db.py:63
 msgid "ce shi ren yuan zhi cheng"
 msgstr ""
 
-#: mapping_db.py:836
+#: ./mapping_db.py:836
 msgid "ce shi ri qi"
 msgstr ""
 
-#: mapping_db.py:842
+#: ./mapping_db.py:842
 msgid "ce shi she bei"
 msgstr ""
 
-#: mapping_db.py:848
+#: ./mapping_db.py:848
 msgid "ce shi she bei bian hao"
 msgstr ""
 
-#: mapping_db.py:845
+#: ./mapping_db.py:845
 msgid "ce shi she bei xing hao"
 msgstr ""
 
-#: mapping_db.py:968
+#: ./mapping_db.py:968
 msgid "ce shi shu ju"
 msgstr ""
 
-#: mapping_db.py:962
+#: ./mapping_db.py:962
 msgid "ce shi shuo ming"
 msgstr ""
 
-#: mapping_db.py:851
+#: ./mapping_db.py:851
 msgid "ce shi yi ju"
 msgstr ""
 
-#: mapping_db.py:965
+#: ./mapping_db.py:965
 msgid "ce shi yi qi"
 msgstr ""
 
-#: mapping_db.py:815
+#: ./mapping_db.py:815
 msgid "ce shi zheng shu bian hao"
 msgstr ""
 
-#: mapping_db.py:288
+#: ./mapping_db.py:288
 msgid "cong shu she bei dai ma"
 msgstr "从属设备代码"
 
-#: mapping_db.py:291
+#: ./mapping_db.py:291
 msgid "cong shu she bei ming cheng"
 msgstr "从属设备名称"
 
-#: mapping_db.py:647
+#: ./mapping_db.py:647
 msgid "dan wei"
 msgstr ""
 
-#: mapping_t_db.py:21
+#: ./mapping_t_db.py:21
 msgid "dan wei di zhi"
 msgstr ""
 
-#: mapping_t_db.py:24
+#: ./mapping_t_db.py:24
 msgid "dan wei lian xi fang shi"
 msgstr ""
 
-#: mapping_t_db.py:18
+#: ./mapping_t_db.py:18
 msgid "dan wei ming cheng"
 msgstr ""
 
-#: mapping_t_db.py:15
+#: ./mapping_t_db.py:15
 msgid "danwei talbe primary key"
 msgstr ""
 
-#: profiles/default/types/emc.kb.ormfolder.xml
+#: ./profiles/default/types/emc.kb.ormfolder.xml
 msgid "db map folder"
 msgstr "数据库映射容器"
 
-#: browser/ajax_listing.py:891
+#: ./browser/ajax_listing.py:891
 msgid "delete fa she ji data"
 msgstr "删除发射机数据"
 
-#: browser/ajax_listing.py:1222
+#: ./browser/ajax_listing.py:1222
 msgid "delete fa she tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:1058
+#: ./browser/ajax_listing.py:1058
 msgid "delete jie shou ji data"
 msgstr ""
 
-#: browser/ajax_listing.py:1385
+#: ./browser/ajax_listing.py:1385
 msgid "delete jie shou tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:712
+#: ./browser/ajax_listing.py:712
 msgid "delete model data"
 msgstr "删除型号数据"
 
 #. Default: "Warning! This operation will remove database record."
-#: browser/templates/delete_model.pt:14
+#: ./browser/templates/delete_model.pt:14
 msgid "description_delete_model_record"
 msgstr "警告！此操作将删除数据库记录。"
 
 #. Default: "Please enter model recorder."
-#: browser/templates/input_model.pt:15
+#: ./browser/templates/input_model.pt:15
 msgid "description_input_model_record"
 msgstr "请录入型号数据"
 
 #. Default: "Please update model recorder."
-#: browser/templates/update_model.pt:16
+#: ./browser/templates/update_model.pt:16
 msgid "description_update_model_record"
 msgstr "请更新型号数据"
 
-#: configure.zcml:39
+#: ./configure.zcml:52
 msgid "emc.kb"
 msgstr ""
 
-#: mapping_db.py:70
+#: ./mapping_db.py:70
 msgid "fa she ji ming cheng"
 msgstr "发射机名称"
 
-#: mapping_db.py:752
+#: ./mapping_db.py:752
 msgid "fang fa bian hao"
 msgstr ""
 
-#: mapping_db.py:755
+#: ./mapping_db.py:755
 msgid "fang fa biao ti"
 msgstr ""
 
-#: mapping_db.py:306
+#: ./mapping_db.py:306
 msgid "fang wei bo su dai kuan"
 msgstr "方位波束带宽"
 
-#: mapping_db.py:100
+#: ./mapping_db.py:100
 msgid "fashe dai kuan"
 msgstr "发射机带宽"
 
-#: mapping_db.py:309
+#: ./mapping_db.py:309
 msgid "fu yang bo su dai kuan"
 msgstr "俯仰波束带宽"
 
-#: mapping_db.py:770
+#: ./mapping_db.py:770
 msgid "fu zhu"
 msgstr ""
 
-#: mapping_db.py:653
+#: ./mapping_db.py:653
 msgid "gai kuang"
 msgstr ""
 
-#: mapping_db.py:448
+#: ./mapping_db.py:448
 msgid "gong zuo pin lv"
 msgstr "工作频率"
 
-#: mapping_db.py:82
+#: ./mapping_db.py:82
 msgid "gongzuo pinlv"
 msgstr "工作频率"
 
-#: interfaces.py:14
+#: ./interfaces.py:14
 msgid "how many days that log at least will be reserved"
 msgstr "日志应当至少保留多少天?"
 
-#: mapping_db.py:650
+#: ./mapping_db.py:650
 msgid "ji bie"
 msgstr ""
 
-#: mapping_db.py:303
+#: ./mapping_db.py:303
 msgid "ji hua"
 msgstr "极化"
 
-#: mapping_db.py:103
+#: ./mapping_db.py:103
 msgid "ji pin gong lv"
 msgstr "基频功率"
 
-#: mapping_db.py:212
+#: ./mapping_db.py:212
 msgid "jie shou ji dai kuan"
 msgstr "接收机带宽"
 
-#: mapping_db.py:215
+#: ./mapping_db.py:215
 msgid "jie shou ji lin ming du"
 msgstr "接收机灵敏度"
 
-#: mapping_db.py:188
+#: ./mapping_db.py:188
 msgid "jie shou ji ming cheng"
 msgstr "接收机名称"
 
-#: mapping_db.py:365
+#: ./mapping_db.py:365
 msgid "jie shou tian xian ming cheng"
 msgstr "接收机天线名称"
 
-#: profiles/default/types/emc.kb.folder.xml
+#: ./profiles/default/types/emc.kb.folder.xml
 msgid "knowledge base root folder"
 msgstr "知识库"
 
-#: profiles/default/types/emc.kb.folder.xml
+#: ./profiles/default/types/emc.kb.folder.xml
 msgid "knowledge folder"
 msgstr "知识库"
 
-#: mapping_log_db.py:39
+#: ./mapping_log_db.py:39
 msgid "level of the operation"
 msgstr ""
 
-#: mapping_db.py:460
+#: ./mapping_db.py:460
 msgid "lv bo qi cha sun"
 msgstr "滤波器参数"
 
-#: mapping_db.py:457
+#: ./mapping_db.py:457
 msgid "lv bo qi ji shu"
 msgstr "滤波器技术"
 
-#: mapping_db.py:439
+#: ./mapping_db.py:439
 msgid "lv bo qi ming cheng"
 msgstr "滤波器名称"
 
-#: interfaces.py:19
+#: ./interfaces.py:19
 msgid "max recorders"
 msgstr ""
 
-#: mapping_db.py:644
+#: ./mapping_db.py:644
 msgid "ming cheng"
 msgstr ""
 
-#: mapping_db.py:22
+#: ./mapping_db.py:22
 msgid "model code"
 msgstr "型号代码"
 
-#: mapping_db.py:26
+#: ./mapping_db.py:26
 msgid "model name"
 msgstr "型号名称"
 
-#: mapping_db.py:18
+#: ./mapping_db.py:18
 msgid "model table primary key"
 msgstr "型号表主键"
 
-#: mapping_db.py:695
+#: ./mapping_db.py:695
 msgid "nian ling"
 msgstr ""
 
-#: mapping_log_db.py:30
+#: ./mapping_log_db.py:30
 msgid "operation time"
 msgstr ""
 
-#: mapping_db.py:197
+#: ./mapping_db.py:197
 msgid "pin duan shang xian"
 msgstr "频段上限"
 
-#: mapping_db.py:200
+#: ./mapping_db.py:200
 msgid "pin duan xia xian"
 msgstr "频段下限"
 
-#: mapping_db.py:91
+#: ./mapping_db.py:91
 msgid "pinlv dian shu"
 msgstr "频率点数"
 
-#: mapping_db.py:94
+#: ./mapping_db.py:94
 msgid "pinlv shang xian"
 msgstr "频率上限"
 
-#: mapping_db.py:97
+#: ./mapping_db.py:97
 msgid "pinlv xia xian"
 msgstr "频率下限"
 
-#: mapping_db.py:863
+#: ./mapping_db.py:863
 msgid "qian fa ren"
 msgstr ""
 
-#: profiles/default/types/emc.kb.kbfolder.xml
+#: ./profiles/default/types/emc.kb.kbfolder.xml
 msgid "resource folder"
 msgstr "资源"
 
-#: mapping_log_db.py:45
+#: ./mapping_log_db.py:45
 msgid "result of the operation"
 msgstr ""
 
-#: mapping_db.py:85
+#: ./mapping_db.py:85
 msgid "shang bian pin"
 msgstr "上边频"
 
-#: mapping_db.py:67
+#: ./mapping_db.py:67
 msgid "she bei dai ma"
 msgstr "设备代码"
 
-#: mapping_db.py:866
+#: ./mapping_db.py:866
 msgid "shen he ren"
 msgstr ""
 
-#: mapping_db.py:857
+#: ./mapping_db.py:857
 msgid "shi du"
 msgstr ""
 
-#: mapping_db.py:959
+#: ./mapping_db.py:959
 msgid "shi yi tu"
 msgstr ""
 
-#: mapping_db.py:758
+#: ./mapping_db.py:758
 msgid "shi yong fan wei"
 msgstr ""
 
-#: mapping_db.py:64
+#: ./mapping_db.py:64
 msgid "table primary key"
 msgstr "数据表主关键字"
 
-#: mapping_db.py:641
+#: ./mapping_db.py:641
 msgid "talbe primary key"
 msgstr ""
 
-#: mapping_log_db.py:33
+#: ./mapping_log_db.py:33
 msgid "the client's ip address"
 msgstr ""
 
-#: mapping_log_db.py:42
+#: ./mapping_log_db.py:42
 msgid "the operation's detail description"
 msgstr ""
 
-#: mapping_log_db.py:18
+#: ./mapping_log_db.py:18
 msgid "the table's primary key"
 msgstr ""
 
-#: mapping_log_db.py:26
+#: ./mapping_log_db.py:26
 msgid "the user id of user which had been processed by administrator"
 msgstr ""
 
-#: mapping_db.py:511
+#: ./mapping_db.py:511
 msgid "tian xian lei xing"
 msgstr "天线类型"
 
-#: mapping_db.py:312
+#: ./mapping_db.py:312
 msgid "tian xian zhi xiang jiao"
 msgstr "天线指向角"
 
-#: mapping_db.py:106
+#: ./mapping_db.py:106
 msgid "tiao zhi lei xing"
 msgstr "调制类型"
 
-#: interfaces.py:13
+#: ./interfaces.py:13
 msgid "timeout"
 msgstr "日志超时覆盖设置"
 
-#: mapping_log_db.py:36
+#: ./mapping_log_db.py:36
 msgid "type of the operation"
 msgstr ""
 
-#: browser/ajax_listing.py:999
+#: ./browser/ajax_listing.py:999
 msgid "update fa she ji data"
 msgstr "更新发射机数据"
 
-#: browser/ajax_listing.py:1328
+#: ./browser/ajax_listing.py:1328
 msgid "update fa she tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:1491
+#: ./browser/ajax_listing.py:1491
 msgid "update jie shou tian xian data"
 msgstr ""
 
-#: browser/ajax_listing.py:1164
+#: ./browser/ajax_listing.py:1164
 msgid "update jieshouj data"
 msgstr ""
 
-#: browser/ajax_listing.py:827
+#: ./browser/ajax_listing.py:827
 msgid "update model data"
 msgstr "更新型号数据"
 
-#: mapping_db.py:818
+#: ./mapping_db.py:818
 msgid "wei tuo fang"
 msgstr ""
 
-#: mapping_db.py:821
+#: ./mapping_db.py:821
 msgid "wei tuo fang di zhi"
 msgstr ""
 
-#: mapping_db.py:78
+#: ./mapping_db.py:78
 msgid "wei zhi"
 msgstr "位置"
 
-#: mapping_db.py:854
+#: ./mapping_db.py:854
 msgid "wen du"
 msgstr ""
 
-#: mapping_db.py:88
+#: ./interfaces.py:27
+msgid "when log numbers reach at some Percentage,send warning message"
+msgstr "当数据库中日志数量达到总容量的该百分比时,发送警告信息给系统管理员"
+
+#: ./mapping_db.py:88
 msgid "xia bian pin"
 msgstr "下边频"
 
-#: mapping_db.py:956
+#: ./mapping_db.py:956
 msgid "xiang mu ming cheng"
 msgstr ""
 
-#: mapping_db.py:692
+#: ./mapping_db.py:692
 msgid "xing bie"
 msgstr ""
 
-#: mapping_db.py:689
+#: ./mapping_db.py:689
 msgid "xing ming"
 msgstr ""
 
-#: mapping_db.py:698
+#: ./mapping_db.py:698
 msgid "xue li"
 msgstr ""
 
-#: mapping_db.py:761
+#: ./mapping_db.py:761
 msgid "yi qi she bei"
 msgstr ""
 
-#: mapping_db.py:300
+#: ./mapping_db.py:300
 msgid "zeng yi"
 msgstr "增益"
 
-#: mapping_db.py:704
+#: ./mapping_db.py:704
 msgid "zheng shu bian hao"
 msgstr ""
 
-#: mapping_db.py:701
+#: ./mapping_db.py:701
 msgid "zhi cheng"
 msgstr ""
 
-#: mapping_db.py:833
+#: ./mapping_db.py:833
 msgid "zhi zao shang"
 msgstr ""
 
-#: mapping_db.py:112
+#: ./mapping_db.py:112
 msgid "zhong pin"
 msgstr "中频"
 
-#: mapping_db.py:218
+#: ./mapping_db.py:218
 msgid "zhong pin fu hao"
 msgstr "中频符号"
 
-#: mapping_db.py:221
+#: ./mapping_db.py:221
 msgid "zhong pin pin lv"
 msgstr "中频频率"
 
-#: mapping_db.py:74
+#: ./mapping_db.py:74
 msgid "zhuang tai pi ci dai ma"
 msgstr "状态批次代码"
 
-#: mapping_db.py:545
+#: ./mapping_db.py:545
 msgid "zi ku dai ma"
 msgstr "子库代码"
 
-#: mapping_db.py:548
+#: ./mapping_db.py:548
 msgid "zi ku ming cheng"
 msgstr "子库名称"
