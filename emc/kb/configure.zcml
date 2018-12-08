@@ -19,6 +19,10 @@
       id="emc.kb.view_log"
       title="emc.kb:View log"
       />
+  <permission
+      id="emc.kb.set_log"
+      title="emc.kb:Set log"
+      />      
   <include package="emc.policy.browser" />
   <include package=".browser" />
 

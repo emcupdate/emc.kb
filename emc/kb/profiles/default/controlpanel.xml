@@ -14,7 +14,7 @@
         url_expr="string:${portal_url}/@@log-settings"
         visible="True"
         i18n:attributes="title">
-            <permission>emc.kb:View log</permission>
+            <permission>emc.kb:Set log</permission>
     </configlet>
 
 </object>

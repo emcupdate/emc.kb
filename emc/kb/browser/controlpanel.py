@@ -19,6 +19,7 @@ class LogSettingsEditForm(controlpanel.RegistryEditForm):
         super(LogSettingsEditForm, self).updateFields()
         self.fields['timeout'].widgetFactory = TextLinesFieldWidget
         self.fields['max'].widgetFactory = TextLinesFieldWidget
+        self.fields['percentage'].widgetFactory = TextLinesFieldWidget        
         self.fields['bsize'].widgetFactory = TextLinesFieldWidget
 
     

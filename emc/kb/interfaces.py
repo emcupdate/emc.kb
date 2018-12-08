@@ -22,6 +22,12 @@ class ILogSettings(Interface):
             default=10000,
             required=False,
         )
+    percentage = schema.Float(
+            title=_(u"Percentage"),
+            description=_(u"when log numbers reach at some Percentage,send warning message"),
+            default=0.9,
+            required=False,
+        )    
     bsize = schema.Int(
             title=_(u"batch size"),
             description=_(u"How many log recorders will be deleted when every log dumped"),

@@ -3,6 +3,7 @@
            condition="installed emc.kb">
     <value key="timeout">180</value>
     <value key="max">10000</value>
+    <value key="percentage">0.9</value>    
     <value key="bsize">2000</value>
   </records>
 </registry>
