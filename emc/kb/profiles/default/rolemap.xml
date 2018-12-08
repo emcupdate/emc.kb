@@ -33,5 +33,9 @@
 		<role name="Manager"/>	
 		<role name="SecAuditor"/>			
     </permission>
+	<permission name="emc.kb:Set log" acquire="True">
+		<role name="Manager"/>	
+		<role name="SysAdmin"/>			
+    </permission>    
   </permissions>		
 </rolemap>
