@@ -10,14 +10,15 @@ from zope.interface import Interface,implements
 from emc.kb import ORMBase
 from emc.kb import _
 
-"""
-约定:
-1. 所有table名称,以汉语拼音命名,但只有前两个汉字用全拼音,其他只取声母,所有字母小写;
-2. 所有表对应的python mapper 类的名称规则是:字母组成同表名,但首字母大写;
-3. 所有表对应的python mapper的接口类名称规则:python mapper 类名称前加大写I
-4. 所有表主键名称为id,为整型,自增长
-
-"""
+########################################
+# """
+# 约定:
+# 1. 所有table名称,以汉语拼音命名,但只有前两个汉字用全拼音,其他只取声母,所有字母小写;
+# 2. 所有表对应的python mapper 类的名称规则是:字母组成同表名,但首字母大写;
+# 3. 所有表对应的python mapper的接口类名称规则:python mapper 类名称前加大写I
+# 4. 所有表主键名称为id,为整型,自增长
+# """
+#############################################
 class IModel(Interface):
     """编号number 记录表
     """
