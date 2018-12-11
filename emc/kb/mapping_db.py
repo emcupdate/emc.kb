@@ -41,7 +41,7 @@ class Model(ORMBase):
     
     __tablename__ = 'model'
     
-    modelId = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('model_id_seq'),
             primary_key=True,
             autoincrement=True,
         )

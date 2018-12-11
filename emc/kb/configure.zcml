@@ -35,7 +35,12 @@
 	provides=".interfaces.IDbapi"
 	component=".databasepage.admin_logs.userlog"
 	name="userlog"
-	/> 
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.admin_logs.model"
+	name="model"
+	/>	 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  
