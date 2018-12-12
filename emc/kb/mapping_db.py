@@ -386,7 +386,7 @@ class IJieshoutx(Interface):
 
 
 class Jieshoutx(ORMBase):
-    """Database-backed implementation of IFashej
+    """Database-backed implementation of IJieshoutx
     """
     implements(IJieshoutx)
 

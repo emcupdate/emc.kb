@@ -262,4 +262,12 @@ jieshouj = Dbapi(session,'emc.kb.mapping_db','para_jieshouj','Jieshouj',columns=
 clmns = ['id','cssbdm','cssbmc','pcdm','location','gain','polarization','fwbskd','fybskd','txzxj']
 search_clmns = ['cssbmc','location']
 fashetx = Dbapi(session,'emc.kb.mapping_db','para_fashetx','Fashetx',columns=clmns,fullsearch_clmns=search_clmns)
-   
+
+clmns = ['id','cssbdm','cssbmc','pcdm','location','gain','polarization','fwbskd','fybskd','txzxj']
+search_clmns = ['cssbmc','location']
+jieshoutx = Dbapi(session,'emc.kb.mapping_db','para_jieshoutx','Jieshoutx',columns=clmns,fullsearch_clmns=search_clmns)
+
+clmns = ['id','cssbdm','cssbmc','pcdm','location','freq','f_upper','f_lower','order1','s21']
+search_clmns = ['cssbmc','location']
+lvboq = Dbapi(session,'emc.kb.mapping_db','para_lvboq','Lvboq',columns=clmns,fullsearch_clmns=search_clmns)
+       
