@@ -50,7 +50,12 @@
 	provides=".interfaces.IDbapi"
 	component=".databasepage.dbapi.jieshouj"
 	name="jieshouj"
-	/>			 
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.fashetx"
+	name="fashetx"
+	/>				 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  

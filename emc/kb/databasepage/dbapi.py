@@ -258,4 +258,8 @@ clmns = ['id','sbdm','sbmc','pcdm','location','fb_upper','fb_lower','freq','f_up
                'bw_receiver','sen_receiver','mf_freq_sign','mf_freq','lo_freq']
 search_clmns = ['sbdm','sbmc']
 jieshouj = Dbapi(session,'emc.kb.mapping_db','para_jieshouj','Jieshouj',columns=clmns,fullsearch_clmns=search_clmns)
-  
+
+clmns = ['id','cssbdm','cssbmc','pcdm','location','gain','polarization','fwbskd','fybskd','txzxj']
+search_clmns = ['cssbmc','location']
+fashetx = Dbapi(session,'emc.kb.mapping_db','para_fashetx','Fashetx',columns=clmns,fullsearch_clmns=search_clmns)
+   

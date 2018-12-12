@@ -107,7 +107,33 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(len(nums),1)
         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
-    
+ 
+    def test_dbapi_fashetx(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+#         self.create_tables(tbls=['Fashetx'])
+#         self.drop_tables(tbls=['Fashetx'])
+#         import pdb
+#         pdb.set_trace()
+        
+# ('sb-1234','接收天线1','pc-1-pass','m',10.2,'Ver',30,20,10)
+        values = dict(cssbdm="sb-1234",cssbmc=u"接收天线1",pcdm="pc-1-pass",location=u"m",
+                      gain=10.2,polarization='Ver',fwbskd=30,fybskd=20,txzxj=10)        
+        dbapi = queryUtility(IDbapi, name='fashetx')
+        dbapi.add(values)
+        import pdb
+        pdb.set_trace()
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+        import pdb
+        pdb.set_trace()
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+        rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+           
     def test_dbapi_add(self):
 
         import os
