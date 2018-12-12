@@ -28,19 +28,24 @@
 
  <utility
 	provides=".interfaces.IDbapi"
-	component=".databasepage.admin_logs.adminlog"
+	component=".databasepage.dbapi.adminlog"
 	name="adminlog"
 	/>
  <utility
 	provides=".interfaces.IDbapi"
-	component=".databasepage.admin_logs.userlog"
+	component=".databasepage.dbapi.userlog"
 	name="userlog"
 	/>
  <utility
 	provides=".interfaces.IDbapi"
-	component=".databasepage.admin_logs.model"
+	component=".databasepage.dbapi.model"
 	name="model"
-	/>	 
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.fashej"
+	name="fashej"
+	/>		 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  

@@ -14,15 +14,16 @@ from emc.kb import _
 # """
 # 约定:
 # 1. 所有table名称,以汉语拼音命名,但只有前两个汉字用全拼音,其他只取声母,所有字母小写;
-# 2. 所有表对应的python mapper 类的名称规则是:字母组成同表名,但首字母大写;
-# 3. 所有表对应的python mapper的接口类名称规则:python mapper 类名称前加大写I
-# 4. 所有表主键名称为id,为整型,自增长
+# 2. 表名加数据库名前缀,数据库名取英文前四位,para_fashej
+# 3. 所有表对应的python mapper 类的名称规则是:字母组成同表名,但首字母大写;
+# 4. 所有表对应的python mapper的接口类名称规则:python mapper 类名称前加大写I
+# 5. 所有表主键名称为id,为整型,自增长
 # """
 #############################################
 class IModel(Interface):
     """编号number 记录表
     """
-    modelId = schema.Int(
+    id = schema.Int(
             title=_(u"model table primary key"),
         )   
     # 型号代码
@@ -116,7 +117,7 @@ class Fashej(ORMBase):
     """
     implements(IFashej)
 
-    __tablename__ = 'fashej'
+    __tablename__ = 'para_fashej'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashej_id_seq'),
             primary_key=True,
@@ -226,7 +227,7 @@ class Jieshouj(ORMBase):
     """
     implements(IJieshouj)
 
-    __tablename__ = 'jieshouj'
+    __tablename__ = 'para_jieshouj'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshouj_id_seq'),
             primary_key=True,
@@ -315,7 +316,7 @@ class Fashetx(ORMBase):
     """
     implements(IFashetx)
 
-    __tablename__ = 'fashetx'
+    __tablename__ = 'para_fashetx'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashetx_id_seq'),
             primary_key=True,
@@ -389,7 +390,7 @@ class Jieshoutx(ORMBase):
     """
     implements(IJieshoutx)
 
-    __tablename__ = 'jieshoutx'
+    __tablename__ = 'para_jieshoutx'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshoutx_id_seq'),
             primary_key=True,
@@ -462,7 +463,7 @@ class Lvboq(ORMBase):
     """
     implements(ILvboq)
 
-    __tablename__ = 'lvboq'
+    __tablename__ = 'para_lvboq'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('lvboq_id_seq'),
             primary_key=True,
@@ -517,7 +518,7 @@ class Dianxingtxzyzk(ORMBase):
     """
     implements(IDianxingtxzyzk)
 
-    __tablename__ = 'dianxingtxzyzk'
+    __tablename__ = 'para_dianxingtxzyzk'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('dianxingtxzyzk_id_seq'),
             primary_key=True,
@@ -551,7 +552,7 @@ class Tianxianzk(ORMBase):
     """
     implements(ITianxianzk)
 
-    __tablename__ = 'tianxianzk'
+    __tablename__ = 'para_tianxianzk'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('tianxianzk_id_seq'),
             primary_key=True,
@@ -584,7 +585,7 @@ class Jieshoujzk(ORMBase):
     """
     implements(IJieshoujzk)
 
-    __tablename__ = 'jieshoujzk'
+    __tablename__ = 'para_jieshoujzk'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('jieshoujzk_id_seq'),
             primary_key=True,
@@ -617,7 +618,7 @@ class Fashejzk(ORMBase):
     """
     implements(IFashejzk)
 
-    __tablename__ = 'fashejzk'
+    __tablename__ = 'para_fashejzk'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('fashejzk_id_seq'),
             primary_key=True,
