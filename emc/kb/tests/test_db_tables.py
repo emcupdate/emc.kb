@@ -164,15 +164,40 @@ class TestDatabase(unittest.TestCase):
 
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'            
-        self.create_tables(tbls=['Lvboq'])
+#         self.create_tables(tbls=['Lvboq'])
 #         self.drop_tables(tbls=['Lvboq'])
-        import pdb
-        pdb.set_trace()
+#         import pdb
+#         pdb.set_trace()
         
 # ('sb-1234','滤波器1','pc-1-pass','m',1500,1600,1400,5,1.5)
         values = dict(cssbdm="sb-1234",cssbmc=u"滤波器1",pcdm="pc-1-pass",location=u"m",
                       freq=1500,f_upper=1600,f_lower=1400,order1=5,s21=1.5)        
         dbapi = queryUtility(IDbapi, name='lvboq')
+        dbapi.add(values)
+        import pdb
+        pdb.set_trace()
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+        import pdb
+        pdb.set_trace()
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+        rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_dianxingtxzyzk(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+#         self.create_tables(tbls=['Dianxingtxzyzk'])
+#         self.drop_tables(tbls=['Dianxingtxzyzk'])
+#         import pdb
+#         pdb.set_trace()
+        
+# ('喇叭天线1',10)
+        values = dict(type_antennas=u"喇叭天线1",gain=10)        
+        dbapi = queryUtility(IDbapi, name='dianxingtxzyzk')
         dbapi.add(values)
         import pdb
         pdb.set_trace()

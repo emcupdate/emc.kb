@@ -65,7 +65,12 @@
 	provides=".interfaces.IDbapi"
 	component=".databasepage.dbapi.lvboq"
 	name="lvboq"
-	/>						 
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.dianxingtxzyzk"
+	name="dianxingtxzyzk"
+	/>							 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  

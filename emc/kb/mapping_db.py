@@ -656,7 +656,7 @@ class Ceshishysh(ORMBase):
     """
     implements(ICeshishysh)
 
-    __tablename__ = 'ceshishysh'
+    __tablename__ = 'test_ceshishysh'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshishysh_id_seq'),
             primary_key=True,
@@ -710,7 +710,7 @@ class Ceshiry(ORMBase):
     """
     implements(ICeshiry)
 
-    __tablename__ = 'ceshiry'
+    __tablename__ = 'test_ceshiry'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshiry_id_seq'),
             primary_key=True,
@@ -773,7 +773,7 @@ class Ceshiff(ORMBase):
     """
     implements(ICeshiff)
 
-    __tablename__ = 'ceshiff'
+    __tablename__ = 'test_ceshiff'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshiff_id_seq'),
             primary_key=True,
@@ -872,7 +872,7 @@ class Ceshibg(ORMBase):
     """
     implements(ICeshibg)
 
-    __tablename__ = 'ceshibg'
+    __tablename__ = 'test_ceshibg'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshibg_id_seq'),
             primary_key=True,
@@ -974,7 +974,7 @@ class Ceshixm(ORMBase):
     """
     implements(ICeshixm)
 
-    __tablename__ = 'ceshixm'
+    __tablename__ = 'test_ceshixm'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('ceshixm_id_seq'),
             primary_key=True,

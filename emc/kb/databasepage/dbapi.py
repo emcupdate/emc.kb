@@ -270,4 +270,8 @@ jieshoutx = Dbapi(session,'emc.kb.mapping_db','para_jieshoutx','Jieshoutx',colum
 clmns = ['id','cssbdm','cssbmc','pcdm','location','freq','f_upper','f_lower','order1','s21']
 search_clmns = ['cssbmc','location']
 lvboq = Dbapi(session,'emc.kb.mapping_db','para_lvboq','Lvboq',columns=clmns,fullsearch_clmns=search_clmns)
-       
+
+clmns = ['id','type_antennas','gain']
+search_clmns = ['type_antennas','gain']
+dianxingtxzyzk = Dbapi(session,'emc.kb.mapping_db','para_dianxingtxzyzk','Dianxingtxzyzk',columns=clmns,fullsearch_clmns=search_clmns)
+        
