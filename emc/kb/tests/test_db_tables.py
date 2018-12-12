@@ -50,20 +50,14 @@ class TestDatabase(unittest.TestCase):
         for tb in tbls:
             import_str = "from %(p)s import %(t)s as tablecls" % dict(p='emc.kb.mapping_db',t=tb) 
             exec import_str
-            import pdb
-            pdb.set_trace()
             tablecls.__table__.create(engine)
 
     def test_dbapi_fashej(self):
 
         import os
-        os.environ['NLS_LANG'] = '.AL32UTF8'        
-#         Model.__table__.drop(engine)
-#         Model.__table__.create(engine)      
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
 #         self.create_tables(tbls=['Fashej'])
 #         self.drop_tables(tbls=['Fashej'])
-#         Session.rollback()
-#         Session.close()
 #         import pdb
 #         pdb.set_trace()
         
@@ -73,6 +67,34 @@ class TestDatabase(unittest.TestCase):
                       freq_upper=0,freq_lower=2.8,bw=20,base_power=1.1,
                       tzlx="AM-V",bzf=2,mid_freq=1,comment1=u"常用发射机1")        
         dbapi = queryUtility(IDbapi, name='fashej')
+        dbapi.add(values)
+        import pdb
+        pdb.set_trace()
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+        import pdb
+        pdb.set_trace()
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+        rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_jieshouj(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+#         self.create_tables(tbls=['Jieshouj'])
+#         self.drop_tables(tbls=['Jieshouj'])
+#         import pdb
+#         pdb.set_trace()
+        
+#('sb-1234','接收机1','sb-1234-1','m',1800,900,300,1500,1000,50000,-90,'1',300,1500)
+        values = dict(sbdm="sb-1234",sbmc=u"接收机1",pcdm="sb-1234-1",location=u"m",
+                      fb_upper=1800,fb_lower=900,freq=300,f_upper=1500,
+                      f_lower=1000,bw_receiver=50000,sen_receiver=-90,mf_freq_sign='1',
+                      mf_freq=300,lo_freq=1500)        
+        dbapi = queryUtility(IDbapi, name='jieshouj')
         dbapi.add(values)
         import pdb
         pdb.set_trace()

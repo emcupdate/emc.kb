@@ -249,8 +249,13 @@ adminlog = Dbapi(session,'emc.kb.mapping_log_db','admin_logs','AdminLog')
 userlog =  Dbapi(session,'emc.kb.mapping_log_db','user_logs','UserLog')
 model_sch = ['xhmc','xhdm']
 model = Dbapi(session,'emc.kb.mapping_db','model','Model',fullsearch_clmns=model_sch)
-fashejclmns = ['id','sbdm','sbmc','pcdm','location','freq','pd_upper','pd_lower','num','freq_upper',
+clmns = ['id','sbdm','sbmc','pcdm','location','freq','pd_upper','pd_lower','num','freq_upper',
                'freq_lower']
-fashej_sch = ['sbdm','sbmc']
-fashej = Dbapi(session,'emc.kb.mapping_db','para_fashej','Fashej',columns=fashejclmns,fullsearch_clmns=fashej_sch)
- 
+search_clmns = ['sbdm','sbmc']
+fashej = Dbapi(session,'emc.kb.mapping_db','para_fashej','Fashej',columns=clmns,fullsearch_clmns=search_clmns)
+
+clmns = ['id','sbdm','sbmc','pcdm','location','fb_upper','fb_lower','freq','f_upper','f_lower',
+               'bw_receiver','sen_receiver','mf_freq_sign','mf_freq','lo_freq']
+search_clmns = ['sbdm','sbmc']
+jieshouj = Dbapi(session,'emc.kb.mapping_db','para_jieshouj','Jieshouj',columns=clmns,fullsearch_clmns=search_clmns)
+  
