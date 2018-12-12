@@ -22,7 +22,7 @@ class TestDatabase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
-    def drop_tables(self,tbls):
+    def test_drop_tables(self):
         """create all db tables
         employees.drop(engine)
         employees.create(engine)
@@ -36,13 +36,14 @@ class TestDatabase(unittest.TestCase):
             exec import_str
             tablecls.__table__.drop(engine)                    
 
-    def create_tables(self,tbls):
+    def create_tables(self,tbls=None):
         """create all db tables
         employees.drop(engine)
         employees.create(engine)
         """
 
-        tbls = ['Model','Fashej','Jieshouj','Fashetx','Jieshoutx','Lvboq','Dianxingtxzyzk',
+        if tbls == None:
+            tbls = ['Model','Fashej','Jieshouj','Fashetx','Jieshoutx','Lvboq','Dianxingtxzyzk',
                 'Tianxianzk','Jieshoujzk','Fashejzk','Ceshishysh',
                 'Ceshiry','Ceshiff','Ceshibg','Ceshixm']
         for tb in tbls:
