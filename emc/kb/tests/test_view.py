@@ -20,7 +20,7 @@ class TestView(unittest.TestCase):
 
         setRoles(portal, TEST_USER_ID, ('Manager',))
 
-        portal.invokeFactory('Folder', 'Members')
+#         portal.invokeFactory('Folder', 'Members')
         portal.invokeFactory('emc.kb.folder', 'folder') 
         portal['folder'].invokeFactory('emc.kb.kbfolder', 'kbfolder')
         portal['folder'].invokeFactory('emc.kb.ormfolder', 'ormfolder')
@@ -77,3 +77,51 @@ class TestView(unittest.TestCase):
         
         self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
         
+    def testAdminlogView(self):
+        app = self.layer['app']
+        portal = self.layer['portal']
+
+        browser = Browser(app)
+        browser.handleErrors = False             
+        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+#         browser.addHeader('Authorization', 'Basic %s:%s' % ('user3', 'secret',))
+        import transaction
+        transaction.commit()
+        base = portal.absolute_url()
+        browser.open(base + "/@@admin_logs")
+        
+        self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
+ 
+
+    def testFashejView(self):
+        app = self.layer['app']
+        portal = self.layer['portal']
+
+        browser = Browser(app)
+        browser.handleErrors = False             
+        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+#         browser.addHeader('Authorization', 'Basic %s:%s' % ('user3', 'secret',))
+        import transaction
+        transaction.commit()
+        base = portal['folder']['ormfolder'].absolute_url()
+        browser.open(base + "/model_listings")
+        
+        self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
+        
+
+    def testAdminlogView(self):
+        app = self.layer['app']
+        portal = self.layer['portal']
+
+        browser = Browser(app)
+        browser.handleErrors = False             
+        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+#         browser.addHeader('Authorization', 'Basic %s:%s' % ('user3', 'secret',))
+        import transaction
+        transaction.commit()
+        base = portal['folder']['ormfolder'].absolute_url()
+        browser.open(base + "/model_listings")
+        
+        self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
+        
+
