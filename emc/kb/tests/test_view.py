@@ -104,12 +104,12 @@ class TestView(unittest.TestCase):
         import transaction
         transaction.commit()
         base = portal['folder']['ormfolder'].absolute_url()
-        browser.open(base + "/model_listings")
+        browser.open(base + "/fashej_listings")
         
         self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
         
 
-    def testAdminlogView(self):
+    def testJieshoujView(self):
         app = self.layer['app']
         portal = self.layer['portal']
 
@@ -120,7 +120,7 @@ class TestView(unittest.TestCase):
         import transaction
         transaction.commit()
         base = portal['folder']['ormfolder'].absolute_url()
-        browser.open(base + "/model_listings")
+        browser.open(base + "/jieshouj_listings")
         
         self.assertTrue("row table table-striped table-bordered table-condensed listing" in browser.contents)
         

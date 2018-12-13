@@ -35,6 +35,8 @@ class TestDatabase(unittest.TestCase):
         for tb in tbls:
             import_str = "from %(p)s import %(t)s as tablecls" % dict(p='emc.kb.mapping_db',t=tb) 
             exec import_str
+            import pdb
+            pdb.set_trace()
             tablecls.__table__.drop(engine)                    
 
     def create_tables(self,tbls=None):
@@ -62,22 +64,22 @@ class TestDatabase(unittest.TestCase):
 #         pdb.set_trace()
         
 # ('333333002','发射机01','asd2w23sds212211111','m',2.4,0,2.8,10,0,2.8,20,1.1,'AM-V',2,1,' 常用发射机1')
-        values = dict(sbdm="333333002",sbmc=u"发射机01",pcdm="asd2w23sds212211111",location=u"m",
+        values = dict(sbdm="333333003",sbmc=u"发射机02",pcdm="asd2w23sds212211111",location=u"m",
                       freq=2.4,pd_upper=0,pd_lower=2.8,num=10,
                       freq_upper=0,freq_lower=2.8,bw=20,base_power=1.1,
                       tzlx="AM-V",bzf=2,mid_freq=1,comment1=u"常用发射机1")        
         dbapi = queryUtility(IDbapi, name='fashej')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+#         import pdb
+#         pdb.set_trace()
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+#         import pdb
+#         pdb.set_trace()
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
 
     def test_dbapi_jieshouj(self):
@@ -96,16 +98,14 @@ class TestDatabase(unittest.TestCase):
                       mf_freq=300,lo_freq=1500)        
         dbapi = queryUtility(IDbapi, name='jieshouj')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
  
     def test_dbapi_fashetx(self):
@@ -122,16 +122,14 @@ class TestDatabase(unittest.TestCase):
                       gain=10.2,polarization='Ver',fwbskd=30,fybskd=20,txzxj=10)        
         dbapi = queryUtility(IDbapi, name='fashetx')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
  
     def test_dbapi_jieshoutx(self):
@@ -140,24 +138,21 @@ class TestDatabase(unittest.TestCase):
         os.environ['NLS_LANG'] = '.AL32UTF8'            
 #         self.create_tables(tbls=['Jieshoutx'])
 #         self.drop_tables(tbls=['Jieshoutx'])
-        import pdb
-        pdb.set_trace()
+
         
 # ('sb-1234','接收天线1','pc-1-pass','m',10.2,'Ver',30,20,10)
         values = dict(cssbdm="sb-1234",cssbmc=u"接收天线1",pcdm="pc-1-pass",location=u"m",
                       gain=10.2,polarization='Ver',fwbskd=30,fybskd=20,txzxj=10)        
-        dbapi = queryUtility(IDbapi, name='fashetx')
+        dbapi = queryUtility(IDbapi, name='jieshoutx')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
 
     def test_dbapi_lvboq(self):
@@ -174,16 +169,14 @@ class TestDatabase(unittest.TestCase):
                       freq=1500,f_upper=1600,f_lower=1400,order1=5,s21=1.5)        
         dbapi = queryUtility(IDbapi, name='lvboq')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
 
     def test_dbapi_dianxingtxzyzk(self):
@@ -199,16 +192,14 @@ class TestDatabase(unittest.TestCase):
         values = dict(type_antennas=u"喇叭天线1",gain=10)        
         dbapi = queryUtility(IDbapi, name='dianxingtxzyzk')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
  
     def test_dbapi_tianxianzk(self):
@@ -224,16 +215,14 @@ class TestDatabase(unittest.TestCase):
         values = dict(lib_name=u"TX-sbdm1",lib_code='天线库1')        
         dbapi = queryUtility(IDbapi, name='tianxianzk')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
 
     def test_dbapi_tianxianzk(self):
@@ -249,16 +238,14 @@ class TestDatabase(unittest.TestCase):
         values = dict(lib_name=u"RE-sbdm1",lib_code='接收机库1')        
         dbapi = queryUtility(IDbapi, name='jieshoujzk')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
                            
     def test_dbapi_add(self):
@@ -270,14 +257,12 @@ class TestDatabase(unittest.TestCase):
         values = dict(xhdm="a10",xhmc=u"计算机")        
         dbapi = queryUtility(IDbapi, name='model')
         dbapi.add(values)
-        import pdb
-        pdb.set_trace()
+
         nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-        import pdb
-        pdb.set_trace()
+
         id = nums[0].id        
         rt = dbapi.getByCode(id)
         self.assertTrue(nums is not None)
         self.assertEqual(len(nums),1)
-        rt = dbapi.DeleteByCode(id)
+#         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)

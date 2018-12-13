@@ -157,11 +157,17 @@ class Dbapi(object):
             return recorders
         except:
             return []    
-        
-    def DeleteByCode(self,id):
-        "delete the specify id recorder"
+    
+    def init_table(self):
+        "import table class"
         import_str = "from %(p)s import %(t)s as tablecls" % dict(p=self.package,t=self.factorycls) 
         exec import_str
+        return tablecls           
+    
+    def DeleteByCode(self,id):
+        "delete the specify id recorder"
+
+        tablecls = self.init_table()
         if id != "":
             sqltext = "SELECT * FROM %(tbl)s WHERE id=:id" % dict(tbl=self.table) 
             try:
@@ -174,6 +180,33 @@ class Dbapi(object):
             except:
                 session.rollback()
                 return False
+        else:
+            return None
+
+    def updateByCode(self,kwargs):
+        "update the speicy table recorder"
+        """
+        session.query(User).from_statement(text("SELECT * FROM users WHERE name=:name")).\
+params(name='ed').all()
+session.query(User).from_statement(
+text("SELECT * FROM users WHERE name=:name")).params(name='ed').all()
+        """
+
+        id = kwargs['id']
+        if id != "":
+            tablecls = self.init_table()
+            sqltext = "SELECT * FROM %s WHERE id=:id" % self.table
+            try:
+                recorder = session.query(tablecls).\
+                from_statement(text(sqltext)).\
+                params(id=id).one()
+                updatedattrs = [kw for kw in kwargs.keys() if kw != 'id']
+                for kw in updatedattrs:
+                    setattr(recorder,kw,kwargs[kw])
+                session.commit()
+            except:
+                session.rollback()
+                pass
         else:
             return None
 
@@ -244,11 +277,21 @@ class Dbapi(object):
             s.commit()
         except:
             s.rollback()
-        
-adminlog = Dbapi(session,'emc.kb.mapping_log_db','admin_logs','AdminLog')
-userlog =  Dbapi(session,'emc.kb.mapping_log_db','user_logs','UserLog')
-model_sch = ['xhmc','xhdm']
-model = Dbapi(session,'emc.kb.mapping_db','model','Model',fullsearch_clmns=model_sch)
+
+# log lib
+clmns = ['adminid','userid','datetime','ip','type','operlevel','description','result']
+search_clmns = ['adminid','userid','datetime','ip','operlevel','description']        
+adminlog = Dbapi(session,'emc.kb.mapping_log_db','admin_logs','AdminLog',columns=clmns,fullsearch_clmns=search_clmns)
+
+clmns = ['userid','datetime','ip','type','operlevel','description','result']
+search_clmns = ['userid','datetime','ip','operlevel','description']
+userlog =  Dbapi(session,'emc.kb.mapping_log_db','user_logs','UserLog',columns=clmns,fullsearch_clmns=search_clmns)
+
+
+search_clmns = ['xhmc','xhdm']
+model = Dbapi(session,'emc.kb.mapping_db','model','Model',fullsearch_clmns=search_clmns)
+
+# parameters lib
 clmns = ['id','sbdm','sbmc','pcdm','location','freq','pd_upper','pd_lower','num','freq_upper',
                'freq_lower']
 search_clmns = ['sbdm','sbmc']

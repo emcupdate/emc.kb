@@ -18,7 +18,7 @@
 		<div id="ajaxsearch" style="display: none" 
 			tal:attributes="data-ajax-target python:context.absolute_url() + '/@@dbajaxsearch'"></div>
 		<div class="container-fluid">
-			<div class="row ajaxsearch hidden">
+			<div class="row ajaxsearch">
 				<div class="form-group col-xs-9 col-sm-6 col-sm-offset-3">
 					<input type="text"
 						onkeypress="if(event.keyCode==13) {searchEventParent();return false}"
@@ -38,21 +38,17 @@
 			</div>			
 			<input type="hidden" value="0" id="dateSearch">
 			<!-- search model table ,so index name define as "xhdm" -->
-			<input type="hidden" value="xhdm" id="solrSortColumn">
-			<input type="hidden" value="desc" id="solrSortDirection">
+			<input type="hidden" value="id" id="solrSortColumn">
+			<input type="hidden" value="reverse" id="solrSortDirection">
 
             <!--搜索选择结果排序-->
             <!-- db table index name as li item -->
             <div class="row">
             	<div class="col-xs-12 col-sm-4">
             	<ul id="eventListSort" class="pager">
-                    <li><span>排序：</span></li>                    
+                    <li><span>排序：</span></li>
                     <li><a class="a" id="startTimestamp" href="javascript:void(0)">
-
-                    	<span data-name="xhdm" class="glyphicon glyphicon-arrow-up">代码</span>
-                    	</a></li>
-                    <li><a class="a" id="modelId" href="javascript:void(0)">
-                    	<span data-name="created" class="glyphicon glyphicon-arrow-up">时间</span>
+                    	<span data-name="id" class="glyphicon glyphicon-arrow-up">时间</span>
                     	</a></li>
                 </ul>
                 </div>

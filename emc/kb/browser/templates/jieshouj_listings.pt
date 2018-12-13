@@ -18,7 +18,7 @@
 		<div id="ajaxsearch" style="display: none"
 			tal:attributes="data-ajax-target python:context.absolute_url() + '/@@jieshouj_ajaxsearch'"></div>
 		<div class="container-fluid">
-			<div class="row ajaxsearch hidden">
+			<div class="row ajaxsearch">
 				<div class="form-group col-xs-9 col-sm-6 col-sm-offset-3">
 					<input type="text"
 						onkeypress="if(event.keyCode==13) {searchEventParent();return false}"
@@ -38,8 +38,8 @@
 			</div>
 			<input type="hidden" value="0" id="dateSearch">
 			<!-- search fashej table ,so index name define as "sbdm" -->
-			<input type="hidden" value="sbdm" id="solrSortColumn">
-			<input type="hidden" value="desc" id="solrSortDirection">
+			<input type="hidden" value="id" id="solrSortColumn">
+			<input type="hidden" value="reverse" id="solrSortDirection">
 
             <!--搜索选择结果排序-->
             <!-- db table index name as li item -->
@@ -48,11 +48,7 @@
             	<ul id="eventListSort" class="pager">
                     <li><span>排序：</span></li>
                     <li><a class="a" id="startTimestamp" href="javascript:void(0)">
-
-                    	<span data-name="sbdm" class="glyphicon glyphicon-arrow-up">代码</span>
-                    	</a></li>
-                    <li><a class="a" id="modelId" href="javascript:void(0)">
-                    	<span data-name="created" class="glyphicon glyphicon-arrow-up">时间</span>
+                    	<span data-name="id" class="glyphicon glyphicon-arrow-up">时间</span>
                     	</a></li>
                 </ul>
                 </div>

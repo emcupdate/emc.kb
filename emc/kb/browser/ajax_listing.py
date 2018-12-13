@@ -244,6 +244,22 @@ class FashejzkView(FashejView):
         return recorders
 
 
+class TianxianzyzkView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('tianxianzyzk')
+        recorders = locator.query(query)
+        return recorders
+    
+    
+
 ###### output class
  # ajax multi-condition search relation db
 class ajaxsearch(grok.View):
@@ -545,16 +561,16 @@ class Jieshoujajaxsearch(ajaxsearch):
                                 </a>
                                 </td>
                                 </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            sbdm=i[0],
-                                            sbmc= i[1],
-                                            pcdm= i[2],
-                                            location= i[3],
-                                            fb_upper= i[4],
-                                            fb_lower= i[5],
-                                            freq= i[6],
-                                            f_upper= i[7],
-                                            f_lower= i[8],
-                                            bw_receiver= i[9],
+                                            sbdm=i[1],
+                                            sbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            fb_upper= i[5],
+                                            fb_lower= i[6],
+                                            freq= i[7],
+                                            f_upper= i[8],
+                                            f_lower= i[9],
+                                            bw_receiver= i[10],
                                             edit_url="%s/@@update_jieshouj/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_jieshouj/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
@@ -603,15 +619,15 @@ class Fashetxajaxsearch(Fashejajaxsearch):
                                 </a>
                                 </td>
                                 </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            cssbdm=i[0],
-                                            cssbmc= i[1],
-                                            pcdm= i[2],
-                                            location= i[3],
-                                            gain= i[4],
-                                            polarization= i[5],
-                                            fwbskd= i[6],
-                                            fybskd= i[7],
-                                            txzxj= i[8],
+                                            cssbdm=i[1],
+                                            cssbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            gain= i[5],
+                                            polarization= i[6],
+                                            fwbskd= i[7],
+                                            fybskd= i[8],
+                                            txzxj= i[9],
                                             edit_url="%s/@@update_fashetx/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_fashetx/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
@@ -660,15 +676,15 @@ class Jieshoutxajaxsearch(Fashejajaxsearch):
                                 </a>
                                 </td>
                                 </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            cssbdm=i[0],
-                                            cssbmc= i[1],
-                                            pcdm= i[2],
-                                            location= i[3],
-                                            gain= i[4],
-                                            polarization= i[5],
-                                            fwbskd= i[6],
-                                            fybskd= i[7],
-                                            txzxj= i[8],
+                                            cssbdm=i[1],
+                                            cssbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            gain= i[5],
+                                            polarization= i[6],
+                                            fwbskd= i[7],
+                                            fybskd= i[8],
+                                            txzxj= i[9],
                                             edit_url="%s/@@update_jieshoutx/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_jieshoutx/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
@@ -878,7 +894,6 @@ class DeleteFashej(DeleteModel):
         #Let z3c.form do its magic
         super(DeleteFashej, self).update()
 
-
     @button.buttonAndHandler(_(u"Delete"))
     def submit(self, action):
         """Delete model recorder
@@ -893,10 +908,10 @@ class DeleteFashej(DeleteModel):
             funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
-            self.request.response.redirect(self.context.absolute_url() + '/fashej_listings')
+            self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
         confirm = _(u"Your data  has been deleted.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/fashej_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
 
     @button.buttonAndHandler(_(u"Cancel"))
     def cancel(self, action):
@@ -904,7 +919,7 @@ class DeleteFashej(DeleteModel):
         """
         confirm = _(u"Delete cancelled.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/fashej_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashej_listings')
 
 
 class InputFashej(InputModel):
@@ -963,8 +978,6 @@ class UpdateFashej(UpdateModel):
     label = _(u"update fa she ji data")
     fields = field.Fields(IFashej).omit('id')
 
-
-
     def getContent(self):
         # Get the model table query funcations
         locator = queryUtility(IDbapi, name='fashej')
@@ -988,7 +1001,6 @@ class UpdateFashej(UpdateModel):
             self.status = self.formErrorsMessage
             return
         funcations = queryUtility(IDbapi, name='fashej')
-
         try:
             funcations.updateByCode(data)
         except InputError, e:
@@ -1014,24 +1026,14 @@ class DeleteJieshouj(DeleteModel):
 
     grok.name('delete_jieshouj')
     label = _(u"delete jie shou ji data")
-    fields = field.Fields(IJieshouj).omit('jieshoujId')
-
-
-    sbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.sbdm is None:
-            self.sbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IJieshouj).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IJieshoujLocator)
+        locator = queryUtility(IDbapi, name='jieshouj')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.sbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1045,19 +1047,19 @@ class DeleteJieshouj(DeleteModel):
         """Delete model recorder
         """
 
-        data, errors = self.extractData()
+        data, errors = self.extractData()        
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoujLocator)
+        funcations = queryUtility(IDbapi, name='jieshouj')
         try:
-            funcations.DeleteByCode(self.sbdm)
+            funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
-            self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings')
+            self.request.response.redirect(self.context.absolute_url() + '/@@jieshouj_listings')
         confirm = _(u"Your data  has been deleted.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshouj_listings')
 
     @button.buttonAndHandler(_(u"Cancel"))
     def cancel(self, action):
@@ -1065,7 +1067,7 @@ class DeleteJieshouj(DeleteModel):
         """
         confirm = _(u"Delete cancelled.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/jieshouj_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshouj_listings')
 
 class InputJieshouj(InputModel):
     """input db jieshouj table data
@@ -1074,7 +1076,7 @@ class InputJieshouj(InputModel):
     grok.name('input_jieshouj')
 
     label = _(u"Input jie shou ji data")
-    fields = field.Fields(IJieshouj).omit('jieshoujId')
+    fields = field.Fields(IJieshouj).omit('id')
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1096,7 +1098,7 @@ class InputJieshouj(InputModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoujLocator)
+        funcations = queryUtility(IDbapi, name='jieshouj')
         try:
             funcations.add(data)
         except InputError, e:
@@ -1120,23 +1122,14 @@ class UpdateJieshouj(UpdateModel):
     """
     grok.name('update_jieshouj')
     label = _(u"update jieshouj data")
-    fields = field.Fields(IJieshouj).omit('jieshoujId')
-
-    sbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.sbdm is None:
-            self.sbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IJieshouj).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IJieshoujLocator)
+        locator = queryUtility(IDbapi, name='jieshouj')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.sbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1149,11 +1142,11 @@ class UpdateJieshouj(UpdateModel):
         """
 
         data, errors = self.extractData()
+        data['id'] = self.id
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoujLocator)
-
+        funcations = queryUtility(IDbapi, name='jieshouj')
         try:
             funcations.updateByCode(data)
         except InputError, e:
@@ -1178,24 +1171,14 @@ class DeleteFashetx(DeleteModel):
 
     grok.name('delete_fashetx')
     label = _(u"delete fa she tian xian data")
-    fields = field.Fields(IFashetx).omit('fashetxId')
-
-
-    cssbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.cssbdm is None:
-            self.cssbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IFashetx).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IFashetxLocator)
+        locator = queryUtility(IDbapi, name='fashetx')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.cssbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1208,20 +1191,19 @@ class DeleteFashetx(DeleteModel):
     def submit(self, action):
         """Delete model recorder
         """
-
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashetxLocator)
+        funcations = queryUtility(IDbapi, name='fashetx')
         try:
-            funcations.DeleteByCode(self.cssbdm)
+            funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
-            self.request.response.redirect(self.context.absolute_url() + '/fashetx_listings')
+            self.request.response.redirect(self.context.absolute_url() + '/@@fashetx_listings')
         confirm = _(u"Your data  has been deleted.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/fashetx_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashetx_listings')
 
     @button.buttonAndHandler(_(u"Cancel"))
     def cancel(self, action):
@@ -1229,7 +1211,7 @@ class DeleteFashetx(DeleteModel):
         """
         confirm = _(u"Delete cancelled.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/fashetx_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@fashetx_listings')
 
 class InputFashetx(InputModel):
     """input db fashetx table data
@@ -1238,7 +1220,7 @@ class InputFashetx(InputModel):
     grok.name('input_fashetx')
 
     label = _(u"Input fa she tian xian data")
-    fields = field.Fields(IFashetx).omit('fashetxId')
+    fields = field.Fields(IFashetx).omit('id')
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1260,7 +1242,7 @@ class InputFashetx(InputModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashetxLocator)
+        funcations = queryUtility(IDbapi, name='fashetx')
         try:
             funcations.add(data)
         except InputError, e:
@@ -1284,23 +1266,14 @@ class UpdateFashetx(UpdateModel):
     """
     grok.name('update_fashetx')
     label = _(u"update fa she tian xian data")
-    fields = field.Fields(IFashetx).omit('fashetxId')
-
-    cssbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.cssbdm is None:
-            self.cssbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IFashetx).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IFashetxLocator)
+        locator = queryUtility(IDbapi, name='fashetx')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.cssbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1313,11 +1286,11 @@ class UpdateFashetx(UpdateModel):
         """
 
         data, errors = self.extractData()
+        data['id'] = self.id
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashetxLocator)
-
+        funcations = queryUtility(IDbapi, name='fashetx')
         try:
             funcations.updateByCode(data)
         except InputError, e:
@@ -1341,24 +1314,14 @@ class DeleteJieshoutx(DeleteModel):
 
     grok.name('delete_jieshoutx')
     label = _(u"delete jie shou tian xian data")
-    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
-
-
-    cssbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.cssbdm is None:
-            self.cssbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IJieshoutx).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IJieshoutxLocator)
+        locator = queryUtility(IDbapi, name='jieshoutx')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.cssbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1376,15 +1339,15 @@ class DeleteJieshoutx(DeleteModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoutxLocator)
+        funcations = queryUtility(IDbapi, name='jieshoutx')
         try:
-            funcations.DeleteByCode(self.cssbdm)
+            funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
-            self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+            self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
         confirm = _(u"Your data  has been deleted.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
 
     @button.buttonAndHandler(_(u"Cancel"))
     def cancel(self, action):
@@ -1392,25 +1355,18 @@ class DeleteJieshoutx(DeleteModel):
         """
         confirm = _(u"Delete cancelled.")
         IStatusMessage(self.request).add(confirm, type='info')
-        self.request.response.redirect(self.context.absolute_url() + '/jieshoutx_listings')
+        self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
 
 class InputJieshoutx(InputModel):
     """input db jieshoutx table data
     """
 
     grok.name('input_jieshoutx')
-
     label = _(u"Input jie shou tian xian data")
-    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
+    fields = field.Fields(IJieshoutx).omit('id')
 
     def update(self):
         self.request.set('disable_border', True)
-
-        # Get the model table query funcations
-#         locator = getUtility(IModelLocator)
-        # to do
-        # fetch first record as sample data
-#         self.screening = locator.screeningById(self.screeningId)
 
         # Let z3c.form do its magic
         super(InputJieshoutx, self).update()
@@ -1423,7 +1379,7 @@ class InputJieshoutx(InputModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoutxLocator)
+        funcations = queryUtility(IDbapi, name='jieshoutx')
         try:
             funcations.add(data)
         except InputError, e:
@@ -1447,23 +1403,14 @@ class UpdateJieshoutx(UpdateModel):
     """
     grok.name('update_jieshoutx')
     label = _(u"update jie shou tian xian data")
-    fields = field.Fields(IJieshoutx).omit('jieshoutxId')
-
-    cssbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.cssbdm is None:
-            self.cssbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IJieshoutx).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IJieshoutxLocator)
+        locator = queryUtility(IDbapi, name='jieshoutx')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.cssbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1476,11 +1423,11 @@ class UpdateJieshoutx(UpdateModel):
         """
 
         data, errors = self.extractData()
+        data['id'] =self.id
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IJieshoutxLocator)
-
+        funcations = queryUtility(IDbapi, name='jieshoutx')
         try:
             funcations.updateByCode(data)
         except InputError, e:
@@ -1498,3 +1445,355 @@ class UpdateJieshoutx(UpdateModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@jieshoutx_listings')
 # end 接收天线 数据库操作
+## 滤波器 数据库操作
+class DeleteLvboq(DeleteModel):
+    "delete the specify Lvboq recorder"
+
+    grok.name('delete_lvboq')
+    label = _(u"delete jie shou tian xian data")
+    fields = field.Fields(ILvboq).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='lvboq')
+        return locator.getByCode(self.id)
+
+    def update(self):
+        self.request.set('disable_border', True)
+        super(DeleteLvboq, self).update()
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete jieshoutx recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='lvboq')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+
+class InputLvboq(InputModel):
+    """input db Lvboq table data
+    """
+    grok.name('input_lvboq')
+    label = _(u"Input jie shou tian xian data")
+    fields = field.Fields(ILvboq).omit('id')
+
+    def update(self):
+        self.request.set('disable_border', True)
+
+        # Let z3c.form do its magic
+        super(InputLvboq, self).update()
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit Lvboq recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='lvboq')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+
+class UpdateLvboq(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_lvboq')
+    label = _(u"update jie shou tian xian data")
+    fields = field.Fields(ILvboq).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='lvboq')
+        return locator.getByCode(self.id)
+
+    def update(self):
+        self.request.set('disable_border', True)
+        # Let z3c.form do its magic
+        super(UpdateJieshoutx, self).update()
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='lvboq')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@lvboq_listings')
+# end 滤波器 数据库操作
+
+## 典型天线增益子库 数据库操作
+class DeleteDianxingtxzyzk(DeleteModel):
+    "delete the specify Dianxingtxzyzk recorder"
+
+    grok.name('delete_dianxingtxzyzk')
+    label = _(u"delete jie shou tian xian data")
+    fields = field.Fields(IDianxingtxzyzk).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='dianxingtxzyzk')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete jieshoutx recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='dianxingtxzyzk')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+
+class InputDianxingtxzyzk(InputModel):
+    """input db Lvboq table data
+    """
+    grok.name('input_dianxingtxzyzk')
+    label = _(u"Input jie shou tian xian data")
+    fields = field.Fields(IDianxingtxzyzk).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit Lvboq recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='dianxingtxzyzk')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+
+class UpdateDianxingtxzyzk(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_lvboq')
+    label = _(u"update jie shou tian xian data")
+    fields = field.Fields(IDianxingtxzyzk).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='dianxingtxzyzk')
+        return locator.getByCode(self.id)
+
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='dianxingtxzyzk')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@dianxingtxzyzk_listings')
+# end 典型天线增益子库 数据库操作
+
+## 天线子库 数据库操作
+class DeleteTianxianzk(DeleteModel):
+    "delete the specify Tianxianzk recorder"
+
+    grok.name('delete_tianxianzk')
+    label = _(u"delete tian xian ziku data")
+    fields = field.Fields(ITianxianzk).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='tianxianzk')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete tianxianzk recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='tianxianzk')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+
+class InputTianxianzk(InputModel):
+    """input db Lvboq table data
+    """
+    grok.name('input_tianxianzk')
+    label = _(u"Input tian xian ziku data")
+    fields = field.Fields(ITianxianzk).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit tianxianzk recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='tianxianzk')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+
+class UpdateDianxingtxzyzk(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_tianxianzk')
+    label = _(u"update tian xian ziku data")
+    fields = field.Fields(ITianxianzk).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='tianxianzk')
+        return locator.getByCode(self.id)
+
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='tianxianzk')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
+# end 典型天线增益子库 数据库操作
