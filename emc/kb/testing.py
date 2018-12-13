@@ -22,13 +22,13 @@ class Topic(PloneSandboxLayer):
     
     def setUpZope(self, app, configurationContext):
         # Load ZCML
-#         import plone.app.contenttypes
-#         import collective.saconnect
+        import plone.formwidget.autocomplete
+        import emc.project
         import emc.memberArea
         import emc.kb
         import emc.theme
-#         xmlconfig.file('configure.zcml', plone.app.contenttypes, context=configurationContext)
-#         xmlconfig.file('configure.zcml', collective.saconnect, context=configurationContext)        
+        xmlconfig.file('configure.zcml', plone.formwidget.autocomplete, context=configurationContext)
+        xmlconfig.file('configure.zcml', emc.project, context=configurationContext)        
         xmlconfig.file('configure.zcml', emc.kb, context=configurationContext)
         xmlconfig.file('configure.zcml', emc.theme, context=configurationContext)
         xmlconfig.file('configure.zcml', emc.memberArea, context=configurationContext)        
@@ -53,7 +53,7 @@ class Topic(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'emc.theme:default')
 #         applyProfile(portal, 'collective.saconnect:default') 
-#         applyProfile(portal, 'plone.app.contenttypes:default')        
+        applyProfile(portal, 'emc.project:default')        
         applyProfile(portal, 'emc.kb:default')
         applyProfile(portal, 'emc.memberArea:default')
 #        applyProfile(portal, 'eisoo.policy:default')
