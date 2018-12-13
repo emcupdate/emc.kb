@@ -9,7 +9,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore import permissions
 from Products.CMFCore.interfaces import ISiteRoot
 from plone.memoize.instance import memoize
-from emc.kb import _
 from Products.Five.browser import BrowserView
 # from collective.gtags.source import TagsSourceBinder
 from zope.component import getUtility
@@ -18,7 +17,9 @@ from plone.directives import form
 from z3c.form import field, button
 from Products.statusmessages.interfaces import IStatusMessage
 from emc.kb.interfaces import InputError
-from emc.kb.interfaces import IModelLocator,IFashejLocator,IJieshoujLocator,IFashetxLocator,IJieshoutxLocator
+from zope.component import queryUtility
+from emc.kb.interfaces import IDbapi
+# from emc.kb.interfaces import IModelLocator,IFashejLocator,IJieshoujLocator,IFashetxLocator,IJieshoutxLocator
 from emc.kb.mapping_db import IModel,Model
 from emc.kb.mapping_db import Fashej,IFashej
 from emc.kb.mapping_db import Jieshouj,IJieshouj
@@ -35,6 +36,7 @@ from zope.interface import implements
 from zope.publisher.interfaces import IPublishTraverse
 from zExceptions import NotFound
 from emc.kb import InputDb
+from emc.kb import _
 grok.templatedir('templates')
 
 class ModelView(BrowserView):
@@ -51,6 +53,12 @@ class ModelView(BrowserView):
         pm = getToolByName(context, "portal_membership")
         return pm
 
+    def get_locator(self,name):
+        "get db specify name table api"
+
+        dbapi = queryUtility(IDbapi, name=name)
+        return dbapi
+
     def getPathQuery(self):
 
         """返回 db url
@@ -61,13 +69,45 @@ class ModelView(BrowserView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Model
-        from emc.kb.interfaces import IModelLocator
-        from zope.component import getUtility
-        locator = getUtility(IModelLocator)
-        models = locator.queryModel(start=query['start'],size=query['size'])
-        return models
 
+        locator = self.get_locator('model')
+        recorders = locator.query(query)
+        return recorders
+### log lib start
+#admin_logs table
+class AdminLogView(ModelView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:admin_logs
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+
+        locator = self.get_locator('adminlog')
+        recorders = locator.query(query)
+        return recorders
+
+
+#user_logs table
+class UserLogView(ModelView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:user_logs
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('userlog')
+        recorders = locator.query(query)
+        return recorders
+### log lib end
+
+### parameters lib start
 # fashej table
 class FashejView(ModelView):
     """
@@ -79,15 +119,12 @@ class FashejView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Fashej
-        from emc.kb.interfaces import IFashejLocator
-        from zope.component import getUtility
-        locator = getUtility(IFashejLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('fashej')
+        recorders = locator.query(query)
         return recorders
 
 
-class JieshoujView(ModelView):
+class JieshoujView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -97,54 +134,12 @@ class JieshoujView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Jieshouj
-        from emc.kb.interfaces import IJieshoujLocator
-        from zope.component import getUtility
-        locator = getUtility(IJieshoujLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
-        return recorders
-
-
-#admin_logs table
-class AdminLogView(FashejView):
-    """
-    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
-    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
-    该参数，查询数据库，并返回结果。
-    view name:admin_logs
-    """
-
-    def search_multicondition(self,query):
-        "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_log_db import AdminLog
-        from emc.kb.interfaces import IAdminLogLocator
-        from zope.component import getUtility
-        locator = getUtility(IAdminLogLocator)
+        locator = self.get_locator('jieshouj')
         recorders = locator.query(query)
         return recorders
-
-
-#user_logs table
-class UserLogView(FashejView):
-    """
-    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
-    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
-    该参数，查询数据库，并返回结果。
-    view name:user_logs
-    """
-
-    def search_multicondition(self,query):
-        "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_log_db import UserLog
-        from emc.kb.interfaces import IUserLogLocator
-        from zope.component import getUtility
-        locator = getUtility(IUserLogLocator)
-        recorders = locator.query(query)
-        return recorders
-    
     
 # fashetx table
-class FashetxView(ModelView):
+class FashetxView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -154,15 +149,12 @@ class FashetxView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Fashetx
-        from emc.kb.interfaces import IFashetxLocator
-        from zope.component import getUtility
-        locator = getUtility(IFashetxLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('fashetx')
+        recorders = locator.query(query)
         return recorders
 
-
-class JieshoutxView(ModelView):
+# jieshoutx table
+class JieshoutxView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -172,14 +164,12 @@ class JieshoutxView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Jieshoutx
-        from emc.kb.interfaces import IJieshoutxLocator
-        from zope.component import getUtility
-        locator = getUtility(IJieshoutxLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('jieshoutx')
+        recorders = locator.query(query)
         return recorders
 
-class LvboqView(ModelView):
+
+class LvboqView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -189,15 +179,12 @@ class LvboqView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.mapping_db import  Lvboq
-        from emc.kb.interfaces import ILvboqLocator
-        from zope.component import getUtility
-        locator = getUtility(ILvboqLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('lvboq')
+        recorders = locator.query(query)
         return recorders
 
 
-class DianxingtxzyzkView(ModelView):
+class DianxingtxzyzkView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -207,14 +194,12 @@ class DianxingtxzyzkView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.interfaces import IDianxingtxzyzkLocator
-        from zope.component import getUtility
-        locator = getUtility(IDianxingtxzyzkLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('dianxingtxzyzk')
+        recorders = locator.query(query)
         return recorders
 
 
-class TianxianzkView(ModelView):
+class TianxianzkView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -224,14 +209,12 @@ class TianxianzkView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.interfaces import ITianxianzkLocator
-        from zope.component import getUtility
-        locator = getUtility(ITianxianzkLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('tianxianzk')
+        recorders = locator.query(query)
         return recorders
 
 
-class JieshoujzkView(ModelView):
+class JieshoujzkView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -241,14 +224,12 @@ class JieshoujzkView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.interfaces import IJieshoujzkLocator
-        from zope.component import getUtility
-        locator = getUtility(IJieshoujzkLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('jieshoujzk')
+        recorders = locator.query(query)
         return recorders
 
 
-class FashejzkView(ModelView):
+class FashejzkView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
     从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
@@ -258,16 +239,12 @@ class FashejzkView(ModelView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        from emc.kb.interfaces import IFashejzkLocator
-        from zope.component import getUtility
-        locator = getUtility(IFashejzkLocator)
-        recorders = locator.query(start=query['start'],size=query['size'])
+        locator = self.get_locator('fashejzk')
+        recorders = locator.query(query)
         return recorders
 
 
-
-
-
+###### output class
  # ajax multi-condition search relation db
 class ajaxsearch(grok.View):
     """AJAX action for search DB.
@@ -375,67 +352,7 @@ class ajaxsearch(grok.View):
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
-
-class Fashejajaxsearch(ajaxsearch):
-    """AJAX action for search DB.
-    receive front end ajax transform parameters
-    """
-
-    grok.name('fashej_ajaxsearch')
-
-    def searchview(self,viewname="fashej_listings"):
-        searchview = getMultiAdapter((self.context, self.request),name=viewname)
-        return searchview
-
-    def output(self,start,size,totalnum,resultDicLists):
-        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
-        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
-        outhtml = ""
-        k = 0
-        contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
-                                <td class="col-md-1 text-center">%(sbdm)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
-                                <td class="col-md-1">%(pcdm)s</td>
-                                <td class="col-md-1">%(location)s</td>
-                                <td class="col-md-1">%(freq)s</td>
-                                <td class="col-md-1">%(pd_upper)s</td>
-                                <td class="col-md-1">%(pd_lower)s</td>
-                                <td class="col-md-1">%(num)s</td>
-                                <td class="col-md-1">%(freq_upper)s</td>
-                                <td class="col-md-1">%(freq_lower)s</td>
-                                <td class="col-md-1 text-center">
-                                <a href="%(edit_url)s" title="edit">
-                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
-                                  </span>
-                                </a>
-                                </td>
-                                <td class="col-md-1 text-center">
-                                <a href="%(delete_url)s" title="delete">
-                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
-                                  </span>
-                                </a>
-                                </td>
-                                </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            sbdm=i[0],
-                                            sbmc= i[1],
-                                            pcdm= i[2],
-                                            location= i[3],
-                                            freq= i[4],
-                                            pd_upper= i[5],
-                                            pd_lower= i[6],
-                                            num= i[7],
-                                            freq_upper= i[8],
-                                            freq_lower= i[9],
-                                            edit_url="%s/@@update_fashej/%s" % (contexturl,i[0]),
-                                            delete_url="%s/@@delete_fashej/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
-        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
-        return data
-
-
+### log output class
 class AdminLogajaxsearch(ajaxsearch):
     """AJAX action for search DB.
     receive front end ajax transform parameters
@@ -456,8 +373,7 @@ class AdminLogajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-
-        for i in resultDicLists:
+        for i in resultDicLists:           
             out = """<tr class="text-left">                                
                                 <td class="col-md-1 text-left">%(adminid)s</td>
                                 <td class="col-md-1">%(userid)s</td>
@@ -524,7 +440,68 @@ class UserLogajaxsearch(ajaxsearch):
             k = k + 1
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
-    
+
+
+### parameters lib output class
+class Fashejajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+
+    grok.name('fashej_ajaxsearch')
+
+    def searchview(self,viewname="fashej_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(sbdm)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(freq)s</td>
+                                <td class="col-md-1">%(pd_upper)s</td>
+                                <td class="col-md-1">%(pd_lower)s</td>
+                                <td class="col-md-1">%(num)s</td>
+                                <td class="col-md-1">%(freq_upper)s</td>
+                                <td class="col-md-1">%(freq_lower)s</td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbdm=i[1],
+                                            sbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            freq= i[5],
+                                            pd_upper= i[6],
+                                            pd_lower= i[7],
+                                            num= i[8],
+                                            freq_upper= i[9],
+                                            freq_lower= i[10],
+                                            edit_url="%s/@@update_fashej/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_fashej/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+        
     
 class Jieshoujajaxsearch(ajaxsearch):
     """AJAX action for search DB.
@@ -700,7 +677,7 @@ class Jieshoutxajaxsearch(Fashejajaxsearch):
         return data
 
 
-
+###### database actions
 # Delete Update Input block
 class DeleteModel(form.Form):
     "delete the specify model recorder"
@@ -710,30 +687,27 @@ class DeleteModel(form.Form):
     grok.require('emc.kb.input_db')
 
     label = _(u"delete model data")
-    fields = field.Fields(IModel).omit('modelId')
+    fields = field.Fields(IModel).omit('id')
     ignoreContext = False
 
-    xhdm = None
+    id = None
     #receive url parameters
     def publishTraverse(self, request, name):
-        if self.xhdm is None:
-            self.xhdm = name
+        if self.id is None:
+            self.id = name
             return self
         else:
             raise NotFound()
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IModelLocator)
+        locator = queryUtility(IDbapi, name='model')
         #to do
         #fetch the pending deleting  record
-        return locator.getModelByCode(self.xhdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
-
-        # Get the model table query funcations
-
         #Let z3c.form do its magic
         super(DeleteModel, self).update()
 
@@ -747,9 +721,9 @@ class DeleteModel(form.Form):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IModelLocator)
+        funcations = queryUtility(IDbapi, name='model')
         try:
-            funcations.DeleteByCode(self.xhdm)
+            funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
             self.request.response.redirect(self.context.absolute_url() + '/model_listings')
@@ -796,9 +770,9 @@ class InputModel(form.Form):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IModelLocator)
+        funcations = queryUtility(IDbapi, name='model')
         try:
-            funcations.addModel(xhdm=data['xhdm'],xhmc=data['xhmc'])
+            funcations.add(data)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
             self.request.response.redirect(self.context.absolute_url() + '/model_listings')
@@ -825,22 +799,22 @@ class UpdateModel(form.Form):
     grok.require('emc.kb.input_db')
 
     label = _(u"update model data")
-    fields = field.Fields(IModel).omit('modelId','xhdm')
+    fields = field.Fields(IModel).omit('id')
     ignoreContext = False
-    xhdm = None
+    id = None
     #receive url parameters
     # reset content
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IModelLocator)
+        locator = queryUtility(IDbapi, name='model')
         # to do
         # fetch first record as sample data
-        return locator.getModelByCode(self.xhdm)
+        return locator.getByCode(self.id)
 
 
     def publishTraverse(self, request, name):
-        if self.xhdm is None:
-            self.xhdm = name
+        if self.id is None:
+            self.id = name
             return self
         else:
             raise NotFound()
@@ -866,9 +840,9 @@ class UpdateModel(form.Form):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IModelLocator)
+        funcations = queryUtility(IDbapi, name='model')
         try:
-            funcations.updateByCode(xhdm=self.xhdm,xhmc=data['xhmc'])
+            funcations.updateByCode(data)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
             self.request.response.redirect(self.context.absolute_url() + '/model_listings')
@@ -889,24 +863,14 @@ class DeleteFashej(DeleteModel):
 
     grok.name('delete_fashej')
     label = _(u"delete fa she ji data")
-    fields = field.Fields(IFashej).omit('fashejId')
-
-
-    sbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.sbdm is None:
-            self.sbdm = name
-            return self
-        else:
-            raise NotFound()
+    fields = field.Fields(IFashej).omit('id')
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IFashejLocator)
+        locator = queryUtility(IDbapi, name='fashej')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.sbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -924,9 +888,9 @@ class DeleteFashej(DeleteModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashejLocator)
+        funcations = queryUtility(IDbapi, name='fashej')
         try:
-            funcations.DeleteByCode(self.sbdm)
+            funcations.DeleteByCode(self.id)
         except InputError, e:
             IStatusMessage(self.request).add(str(e), type='error')
             self.request.response.redirect(self.context.absolute_url() + '/fashej_listings')
@@ -950,7 +914,7 @@ class InputFashej(InputModel):
     grok.name('input_fashej')
 
     label = _(u"Input fa she ji data")
-    fields = field.Fields(IFashej).omit('fashejId')
+    fields = field.Fields(IFashej).omit('id')
 
     def update(self):
         self.request.set('disable_border', True)
@@ -972,7 +936,7 @@ class InputFashej(InputModel):
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashejLocator)
+        funcations = queryUtility(IDbapi, name='fashej')
         try:
             funcations.add(data)
         except InputError, e:
@@ -997,23 +961,16 @@ class UpdateFashej(UpdateModel):
     """
     grok.name('update_fashej')
     label = _(u"update fa she ji data")
-    fields = field.Fields(IFashej).omit('fashejId')
+    fields = field.Fields(IFashej).omit('id')
 
-    sbdm = None
-    #receive url parameters
-    def publishTraverse(self, request, name):
-        if self.sbdm is None:
-            self.sbdm = name
-            return self
-        else:
-            raise NotFound()
+
 
     def getContent(self):
         # Get the model table query funcations
-        locator = getUtility(IFashejLocator)
+        locator = queryUtility(IDbapi, name='fashej')
         # to do
         # fetch first record as sample data
-        return locator.getByCode(self.sbdm)
+        return locator.getByCode(self.id)
 
     def update(self):
         self.request.set('disable_border', True)
@@ -1026,10 +983,11 @@ class UpdateFashej(UpdateModel):
         """
 
         data, errors = self.extractData()
+        data['id'] = self.id
         if errors:
             self.status = self.formErrorsMessage
             return
-        funcations = getUtility(IFashejLocator)
+        funcations = queryUtility(IDbapi, name='fashej')
 
         try:
             funcations.updateByCode(data)
