@@ -274,4 +274,17 @@ lvboq = Dbapi(session,'emc.kb.mapping_db','para_lvboq','Lvboq',columns=clmns,ful
 clmns = ['id','type_antennas','gain']
 search_clmns = ['type_antennas','gain']
 dianxingtxzyzk = Dbapi(session,'emc.kb.mapping_db','para_dianxingtxzyzk','Dianxingtxzyzk',columns=clmns,fullsearch_clmns=search_clmns)
-        
+
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['lib_code','lib_name']
+tianxianzk = Dbapi(session,'emc.kb.mapping_db','para_tianxianzk','Tianxianzk',columns=clmns,fullsearch_clmns=search_clmns)
+
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['lib_code','lib_name']
+jieshoujzk = Dbapi(session,'emc.kb.mapping_db','para_jieshoujzk','Jieshoujzk',columns=clmns,fullsearch_clmns=search_clmns)
+ 
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['lib_code','lib_name']
+fashejzk = Dbapi(session,'emc.kb.mapping_db','para_fashejzk','Fashejzk',columns=clmns,fullsearch_clmns=search_clmns)
+ 
+         
