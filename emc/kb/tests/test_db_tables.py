@@ -249,7 +249,7 @@ class TestDatabase(unittest.TestCase):
         self.assertTrue(rt)
 
 ### enviroment lib
-    def test_dbapi_bachangp(self):
+    def test_dbapi_bachang(self):
 
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'            

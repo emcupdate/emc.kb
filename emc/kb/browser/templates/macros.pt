@@ -80,8 +80,28 @@
                   </li>
           </ul>
         </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容环境数据库<span class="caret"></span></a>          
+          <ul class="dropdown-menu" role="menu">
+          	<li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@bachang_listings">
+                     靶场信息
+                  </a>
+                  </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@bachangzhdw_listings">
+                     靶场遮挡物信息
+                  </a>
+                  </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@bachangfshj_listings">
+                     靶场发射机信息
+                  </a>
+                  </li>
+          </ul>
+        </li>        
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容公用数据库<span class="caret"></span></a>          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容测试数据库<span class="caret"></span></a>          
           <ul class="dropdown-menu" role="menu">
           	<li>
                  <a tal:attributes="href string:${kb/absolute_url}/@@fashej_listings">
@@ -105,7 +125,31 @@
                   </li>
           </ul>
         </li>      
-      
+ <!--       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容公用数据库<span class="caret"></span></a>          
+          <ul class="dropdown-menu" role="menu">
+          	<li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@fashej_listings">
+                     典型天线增益子库
+                  </a>
+                  </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@fashetx_listings">
+                     天线子库
+                  </a>
+                  </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@jieshouj_listings">
+                     接收机子库
+                  </a>
+                  </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@jieshoutx_listings">
+                     发射机子库
+                  </a>
+                  </li>
+          </ul>
+        </li>      -->      
       </ul>      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

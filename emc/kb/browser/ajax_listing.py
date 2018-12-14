@@ -29,7 +29,10 @@ from emc.kb.mapping_db import ILvboq,Lvboq
 from emc.kb.mapping_db import IDianxingtxzyzk,Dianxingtxzyzk
 from emc.kb.mapping_db import ITianxianzk,Tianxianzk
 from emc.kb.mapping_db import IJieshoujzk,Jieshoujzk
+from emc.kb.mapping_db import IBachang,Bachang
 from emc.kb.mapping_db import IFashejzk,Fashejzk
+from emc.kb.mapping_db import IBachangzhdw,Bachangzhdw
+from emc.kb.mapping_db import IBachangfshj,Bachangfshj
 from emc.kb.contents.ormfolder import Iormfolder
 # update data view
 from zope.interface import implements
@@ -259,7 +262,54 @@ class TianxianzyzkView(FashejView):
         return recorders
     
     
+### parameters lib end
+### enviroment lib start
+# bachang table
+class BachangView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
 
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('bachang')
+        recorders = locator.query(query)
+        return recorders
+
+# bachangzhdw table
+class BachangzhdwView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('bachangzhdw')
+        recorders = locator.query(query)
+        return recorders
+    
+# bachangfshj table
+class BachangfshjView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('bachangfshj')
+        recorders = locator.query(query)
+        return recorders    
+
+### enviroment lib end    
 ###### output class
  # ajax multi-condition search relation db
 class ajaxsearch(grok.View):
@@ -692,6 +742,66 @@ class Jieshoutxajaxsearch(Fashejajaxsearch):
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
+### enviroment lib output class
+class Bachangajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+
+    grok.name('bachang_ajaxsearch')
+
+    def searchview(self,viewname="bachang_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(name)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(bcdm)s</a></td>
+                                <td class="col-md-2">%(location)s</td>
+                                <td class="col-md-1">%(length)s</td>
+                                <td class="col-md-1">%(width)s</td>
+                                <td class="col-md-1">%(wk)s</td>
+                                <td class="col-md-1">%(ti)s</td>
+                                <td class="col-md-1">%(landform)s</td>
+                                <td class="col-md-1">%(xh)s</td>                               
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbdm=i[1],
+                                            sbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            freq= i[5],
+                                            pd_upper= i[6],
+                                            pd_lower= i[7],
+                                            num= i[8],
+                                            freq_upper= i[9],
+                                            freq_lower= i[10],
+                                            edit_url="%s/@@update_bachang/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_bachang/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+        
+ 
 
 ###### database actions
 # Delete Update Input block
@@ -1797,3 +1907,117 @@ class UpdateDianxingtxzyzk(UpdateModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@tianxianzk_listings')
 # end 典型天线增益子库 数据库操作
+
+###### enviroment lib actions
+## 靶场 数据库操作
+class DeleteBachang(DeleteModel):
+    "delete the specify Bachang recorder"
+
+    grok.name('delete_bachang')
+    label = _(u"delete ba chang data")
+    fields = field.Fields(IBachang).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachang')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Bachang recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachang')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+
+class InputBachang(InputModel):
+    """input db bachang table data
+    """
+    grok.name('input_bachang')
+    label = _(u"Input ba chang data")
+    fields = field.Fields(IBachang).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit bachang recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachang')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+
+class UpdateDianxingtxzyzk(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_bachang')
+    label = _(u"update ba chang data")
+    fields = field.Fields(IBachang).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachang')
+        return locator.getByCode(self.id)
+
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachang')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
+# end 靶场 数据库操作
