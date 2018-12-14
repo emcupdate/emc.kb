@@ -1008,17 +1008,7 @@ class Ceshixm(ORMBase):
 
 # 靶场start
 class IBachang(Interface):
-    """靶场name
-bcdm
-location
-length
-width
-wk
-ti
-landform
-xh
-
-    """
+    """靶场 """
     id = schema.Int(
             title=_(u"talbe primary key")
         )
@@ -1051,10 +1041,10 @@ xh
         )
     
     
-class Ceshixm(ORMBase):
-    """Database-backed implementation of ICeshibxm
+class Bachang(ORMBase):
+    """Database-backed implementation of IBachang
     """
-    implements(ICeshixm)
+    implements(IBachang)
 
     __tablename__ = 'envi_bachang'
 
@@ -1068,13 +1058,13 @@ class Ceshixm(ORMBase):
     bcdm = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
-    location = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+    location = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
         )
     length = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
             nullable=False,
         )
-    width = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    width = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
             nullable=False,
         )
     wk = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
@@ -1089,32 +1079,16 @@ class Ceshixm(ORMBase):
     xh = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )    
-# 测试项目end
+# 靶场end
 
 # 靶场遮挡物start
 class IBachangzhdw(Interface):
-    """测试项目
-    bcdm
-shelter_name
-zdno
-lu_x
-lu_y
-lu_z
-ld_x
-ld_y
-ld_z
-ru_x
-ru_y
-ru_z
-rd_x
-rd_y
-rd_z
-
+    """靶场遮挡物    
     """
     id = schema.Int(
             title=_(u"talbe primary key")
         )
-    bcdm = schema.Int(
+    bcdm = schema.TextLine(
             title=_(u"ba chang dai ma")
         )
     shelter_name = schema.TextLine(
@@ -1162,9 +1136,9 @@ rd_z
 
 
 class Bachangzhdw(ORMBase):
-    """Database-backed implementation of ICeshibxm
+    """Database-backed implementation of IBachangzhdw
     """
-    implements(ICeshixm)
+    implements(IBachangzhdw)
 
     __tablename__ = 'envi_bachangzhdw'
 
@@ -1172,7 +1146,7 @@ class Bachangzhdw(ORMBase):
             primary_key=True,
             autoincrement=True,
         )
-    bcdm = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+    bcdm = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
     shelter_name = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
@@ -1272,10 +1246,10 @@ class IBachangfshj(Interface):
     tzlx = schema.TextLine(
             title=_(u"tiao zhi lei xing")
         )
-    bzf = schema.TextLine(
+    bzf = schema.Float(
             title=_(u"ben zheng pin lv")
         )
-    zp = schema.TextLine(
+    zp = schema.Float(
             title=_(u"zhong pin")
         )
     bz = schema.TextLine(
@@ -1283,11 +1257,11 @@ class IBachangfshj(Interface):
         )    
 
 class Bachangfshj(ORMBase):
-    """Database-backed implementation of ICeshibxm
+    """Database-backed implementation of IBachangfshj
     """
-    implements(ICeshixm)
+    implements(IBachangfshj)
 
-    __tablename__ = 'test_bachangfshj'
+    __tablename__ = 'envi_bachangfshj'
 
     id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('bachangfshj_id_seq'),
             primary_key=True,
@@ -1324,10 +1298,10 @@ class Bachangfshj(ORMBase):
             nullable=False,
         )
     fu = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
-            nullable=False,
+            nullable=True,
         )
     fl = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
-            nullable=False,
+            nullable=True,
         )
     bt = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
             nullable=False,
@@ -1345,6 +1319,6 @@ class Bachangfshj(ORMBase):
             nullable=False,
         )
     bz = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
-            nullable=False,
+            nullable=True,
         )                                     
 # 测试项目end

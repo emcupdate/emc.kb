@@ -85,7 +85,22 @@
 	provides=".interfaces.IDbapi"
 	component=".databasepage.dbapi.fashejzk"
 	name="fashejzk"
-	/>										 
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.bachang"
+	name="bachang"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.bachangzhdw"
+	name="bachangzhdw"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.bachangfshj"
+	name="bachangfshj"
+	/>											 
   <!-- Grok the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  

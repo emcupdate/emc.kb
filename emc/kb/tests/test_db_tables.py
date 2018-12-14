@@ -247,7 +247,84 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(len(nums),1)
 #         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
-                           
+
+### enviroment lib
+    def test_dbapi_bachangp(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Bachang'])
+#         self.drop_tables(tbls=['Bachang'])
+        import pdb
+        pdb.set_trace()
+#bachangbachangbachang        
+# ('RE-sbdm1','接收机库1')
+        values = dict(name=u"靶场01",bcdm='bc-001',location='m',length=19.2,width=20.3,
+                      wk=1,ti=2,landform='测试',xh='test')        
+        dbapi = queryUtility(IDbapi, name='bachang')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_bachangzhdw(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Bachangzhdw'])
+#         self.drop_tables(tbls=['Bachangzhdw'])
+        import pdb
+        pdb.set_trace()
+#'shelter_name','lt_x','lt_y','lt_z','ld_x','ld_y','ld_z','rt_x','rt_y','rt_z',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(bcdm='bc-002',shelter_name=u"靶场01",zdno=10,lt_x=19.2,
+                      lt_y=20.3,lt_z=10.3,ld_x=4.24,ld_y=0.3,ld_z=0.69,rt_x=2.02,rt_y=3.38,rt_z=1.1,
+                      rd_x=2.1,rd_y=3.2,rd_z=1.1)        
+        dbapi = queryUtility(IDbapi, name='bachangzhdw')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_bachangfshj(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+#         self.create_tables(tbls=['Bachangfshj'])
+#         self.drop_tables(tbls=['Bachangfshj'])
+        import pdb
+        pdb.set_trace()
+#''sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(bcdm='bc-002',sbmc=u"靶场01",fsno=10,x=19.2,
+                      y=20.3,z=10.3,ft=4,pt_u=0.69,pt_l=2,num=3,fu=1.1,fl=1.3,
+                      bt=1,pt=2,bzf=12.5678,zp=12.09,tzlx='测试',bz='test')        
+        dbapi = queryUtility(IDbapi, name='bachangfshj')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+                                           
     def test_dbapi_add(self):
 
         import os

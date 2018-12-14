@@ -329,5 +329,18 @@ jieshoujzk = Dbapi(session,'emc.kb.mapping_db','para_jieshoujzk','Jieshoujzk',co
 clmns = ['id','lib_code','lib_name']
 search_clmns = ['lib_code','lib_name']
 fashejzk = Dbapi(session,'emc.kb.mapping_db','para_fashejzk','Fashejzk',columns=clmns,fullsearch_clmns=search_clmns)
+#enviroment lib
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['bcdm','name']
+bachang = Dbapi(session,'emc.kb.mapping_db','envi_bachang','Bachang',columns=None,fullsearch_clmns=search_clmns)
  
+clmns = ['id','shelter_name','lt_x','lt_y','lt_z','ld_x','ld_y','ld_z','rt_x','rt_y','rt_z',
+         'rt_x','rt_y','rt_z']
+search_clmns = ['bcdm','shelter_name']
+bachangzhdw = Dbapi(session,'emc.kb.mapping_db','envi_bachangzhdw','Bachangzhdw',columns=clmns,fullsearch_clmns=search_clmns)
+ 
+clmns = ['id','sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz']
+search_clmns = ['sbmc','tzlx']
+bachangfshj = Dbapi(session,'emc.kb.mapping_db','envi_bachangfshj','Bachangfshj',columns=clmns,fullsearch_clmns=search_clmns)
+    
          
