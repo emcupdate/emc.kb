@@ -1005,3 +1005,346 @@ class Ceshixm(ORMBase):
             nullable=False,
         )
 # 测试项目end
+
+# 靶场start
+class IBachang(Interface):
+    """靶场name
+bcdm
+location
+length
+width
+wk
+ti
+landform
+xh
+
+    """
+    id = schema.Int(
+            title=_(u"talbe primary key")
+        )
+    name = schema.TextLine(
+            title=_(u"ba chang ming cheng")
+        )
+    bcdm = schema.TextLine(
+            title=_(u"ba chang dai ma")
+        )
+    location = schema.TextLine(
+            title=_(u"ba chang wei zhi")
+        )
+    length = schema.Float(
+            title=_(u"ba chang chang du")
+        )
+    width = schema.Float(
+            title=_(u"ba chang kuan du")
+        )
+    wk = schema.Int(
+            title=_(u"zhe dang wu ge shu")
+        )
+    ti = schema.Int(
+            title=_(u"gu you fa she ji shu")
+        )
+    landform = schema.TextLine(
+            title=_(u"ba chang di xing tiao jian")
+        )
+    xh = schema.TextLine(
+            title=_(u"ba chang shi he xing hao")
+        )
+    
+    
+class Ceshixm(ORMBase):
+    """Database-backed implementation of ICeshibxm
+    """
+    implements(ICeshixm)
+
+    __tablename__ = 'envi_bachang'
+
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('bachang_id_seq'),
+            primary_key=True,
+            autoincrement=True,
+        )
+    name = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    bcdm = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
+            nullable=False,
+        )
+    location = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    length = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    width = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    wk = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    ti = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    landform = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    xh = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
+            nullable=False,
+        )    
+# 测试项目end
+
+# 靶场遮挡物start
+class IBachangzhdw(Interface):
+    """测试项目
+    bcdm
+shelter_name
+zdno
+lu_x
+lu_y
+lu_z
+ld_x
+ld_y
+ld_z
+ru_x
+ru_y
+ru_z
+rd_x
+rd_y
+rd_z
+
+    """
+    id = schema.Int(
+            title=_(u"talbe primary key")
+        )
+    bcdm = schema.Int(
+            title=_(u"ba chang dai ma")
+        )
+    shelter_name = schema.TextLine(
+            title=_(u"zhe dang wu ming cheng")
+        )
+    zdno = schema.Int(
+            title=_(u"xiang mu ming cheng")
+        )
+    lu_x = schema.Float(
+            title=_(u"zuo shang x zuo biao")
+        )
+    lu_y = schema.Float(
+            title=_(u"zuo shang y zuo biao")
+        )
+    lu_z = schema.Float(
+            title=_(u"zuo shang z zuo biao")
+        )
+    ld_x = schema.Float(
+            title=_(u"zuo xia x zuo biao")
+        )
+    ld_y = schema.Float(
+            title=_(u"zuo xia y zuo biao")
+        )
+    ld_z = schema.Float(
+            title=_(u"zuo xia z zuo biao")
+        )
+    ru_x = schema.Float(
+            title=_(u"you shang x zuo biao")
+        )
+    ru_y = schema.Float(
+            title=_(u"you shang y zuo biao")
+        )
+    ru_z = schema.Float(
+            title=_(u"you shang z zuo biao")
+        )
+    rd_x = schema.Float(
+            title=_(u"you xia x zuo biao")
+        )                                    
+    rd_y = schema.Float(
+            title=_(u"you xia x zuo biao")
+        )
+    rd_z = schema.Float(
+            title=_(u"you xia x zuo biao")
+        )
+
+
+class Bachangzhdw(ORMBase):
+    """Database-backed implementation of ICeshibxm
+    """
+    implements(ICeshixm)
+
+    __tablename__ = 'envi_bachangzhdw'
+
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('bachangzhdw_id_seq'),
+            primary_key=True,
+            autoincrement=True,
+        )
+    bcdm = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    shelter_name = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    zdno = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    lt_x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    lt_y = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    lt_z = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    ld_x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    ld_y = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    ld_z = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rt_x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rt_y = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rt_z = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rd_x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rd_y = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    rd_z = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+            
+# 测试项目end
+
+# 靶场发射机的电磁特性start
+class IBachangfshj(Interface):
+    """靶场发射机
+    """
+    id = schema.Int(
+            title=_(u"talbe primary key")
+        )
+    bcdm = schema.Int(
+            title=_(u"ba chang dai ma")
+        )
+    sbmc = schema.TextLine(
+            title=_(u"fa she ji ming cheng")
+        )
+    fsno = schema.Int(
+            title=_(u"fa she ji xu hao")
+        )
+    x = schema.Float(
+            title=_(u"ba chang x zuo biao")
+        )
+    y = schema.Float(
+            title=_(u"ba chang y zuo biao")
+        )
+    z = schema.Float(
+            title=_(u"ba chang z zuo biao")
+        )                
+    ft = schema.TextLine(
+            title=_(u"gong zuo pin lv")
+        )
+    pd_u = schema.Float(
+            title=_(u"shang bian pin")
+        )
+    pd_l = schema.Float(
+            title=_(u"xia bian pin")
+        )
+    num = schema.Int(
+            title=_(u"pin lv dian shu")
+        )
+    fu = schema.Float(
+            title=_(u"pin duan shang xian")
+        )
+    fl = schema.Float(
+            title=_(u"pin duan xia xian")
+        )
+    bt = schema.Float(
+            title=_(u"fa she dai kuan")
+        )
+    pt = schema.Float(
+            title=_(u"ji pin gong lv")
+        )                        
+    tzlx = schema.TextLine(
+            title=_(u"tiao zhi lei xing")
+        )
+    bzf = schema.TextLine(
+            title=_(u"ben zheng pin lv")
+        )
+    zp = schema.TextLine(
+            title=_(u"zhong pin")
+        )
+    bz = schema.TextLine(
+            title=_(u"bei zhu")
+        )    
+
+class Bachangfshj(ORMBase):
+    """Database-backed implementation of ICeshibxm
+    """
+    implements(ICeshixm)
+
+    __tablename__ = 'test_bachangfshj'
+
+    id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),Sequence('bachangfshj_id_seq'),
+            primary_key=True,
+            autoincrement=True,
+        )
+    bcdm = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
+            nullable=False,
+        )
+    sbmc = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )
+    fsno = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    y = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    z = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    ft = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    pt_u = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    pt_l = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    num = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+            nullable=False,
+        )
+    fu = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    fl = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    bt = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    pt = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    tzlx = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
+            nullable=False,
+        )
+    bzf = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    zp = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
+            nullable=False,
+        )
+    bz = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+            nullable=False,
+        )                                     
+# 测试项目end
