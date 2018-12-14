@@ -70,10 +70,10 @@
             <table class="row table table-striped table-bordered table-condensed listing">
             	<thead>
             		<tr data-toggle="tooltip" title="点击排序">
-            			<th class="col-md-1 text-center">靶场名称</th>
+            			<th class="col-md-2 text-center">靶场名称</th>
             			<th class="col-md-1 text-left">靶场代码</th>
-            			<th class="col-md-2 text-left">靶场位置</th>
-            			<th class="col-md-1 text-center">靶场长度</th>
+            			<th class="col-md-1 text-left">靶场位置</th>
+            			<th class="col-md-1 text-left">靶场长度</th>
             			<th class="col-md-1 text-left">靶场宽度</th>
             			<th class="col-md-1 text-left">遮挡物数</th>
             			<th class="col-md-1 text-left">发射机数</th>
@@ -85,10 +85,10 @@
             	</thead>
             	<tbody id="searchResultDiv">
             		<tr>
-            			<td class="col-md-1 text-center">靶场名称</td>
+            			<td class="col-md-2 text-center">靶场名称</td>
             			<td class="col-md-1 text-left">靶场代码</td>
-            			<td class="col-md-2 text-left">靶场位置</td>
-            			<td class="col-md-1 text-center">靶场长度</td>
+            			<td class="col-md-1 text-left">靶场位置</td>
+            			<td class="col-md-1 text-left">靶场长度</td>
             			<td class="col-md-1 text-left">靶场宽度</td>
             			<td class="col-md-1 text-left">遮挡物数</td>
             			<td class="col-md-1 text-left">发射机数</td>

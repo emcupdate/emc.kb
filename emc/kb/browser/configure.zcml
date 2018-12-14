@@ -96,8 +96,23 @@
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/fashejzk_listings.pt"
         class=".ajax_listing.FashejzkView"/>
-        
-         
- 
+     <browser:page
+        name="bachang_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/bachang_listings.pt"
+        class=".ajax_listing.BachangView"/>       
+    <browser:page
+        name="bachangzhdw_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/bachangzhdw_listings.pt"
+        class=".ajax_listing.BachangzhdwView"/>         
+     <browser:page
+        name="bachangfshj_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/bachangfshj_listings.pt"
+        class=".ajax_listing.BachangfshjView"/>
                
 </configure>

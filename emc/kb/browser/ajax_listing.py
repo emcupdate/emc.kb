@@ -747,7 +747,6 @@ class Bachangajaxsearch(ajaxsearch):
     """AJAX action for search DB.
     receive front end ajax transform parameters
     """
-
     grok.name('bachang_ajaxsearch')
 
     def searchview(self,viewname="bachang_listings"):
@@ -762,9 +761,9 @@ class Bachangajaxsearch(ajaxsearch):
         contexturl = self.context.absolute_url()
         for i in resultDicLists:
             out = """<tr class="text-left">
-                                <td class="col-md-1 text-center">%(name)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(bcdm)s</a></td>
-                                <td class="col-md-2">%(location)s</td>
+                                <td class="col-md-2 text-center"><a href="%(objurl)s">%(name)s</a></td>
+                                <td class="col-md-1 text-left">%(bcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(length)s</td>
                                 <td class="col-md-1">%(width)s</td>
                                 <td class="col-md-1">%(wk)s</td>
@@ -784,25 +783,138 @@ class Bachangajaxsearch(ajaxsearch):
                                 </a>
                                 </td>
                                 </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            sbdm=i[1],
-                                            sbmc= i[2],
-                                            pcdm= i[3],
-                                            location= i[4],
-                                            freq= i[5],
-                                            pd_upper= i[6],
-                                            pd_lower= i[7],
-                                            num= i[8],
-                                            freq_upper= i[9],
-                                            freq_lower= i[10],
+                                            name=i[1],
+                                            bcdm= i[2],
+                                            location= i[3],
+                                            length= i[4],
+                                            width= i[5],
+                                            wk= i[6],
+                                            ti= i[7],
+                                            landform= i[8],
+                                            xh= i[9],
                                             edit_url="%s/@@update_bachang/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_bachang/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
             k = k + 1
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
-        
- 
 
+
+class Bachangzhdwajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('bachangzhdw_ajaxsearch')
+
+    def searchview(self,viewname="bachangzhdw_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">                                
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(shelter_name)s</a></td>
+                                <td class="col-md-1">%(lt_x)s</td>
+                                <td class="col-md-1">%(lt_y)s</td>
+                                <td class="col-md-1">%(lt_z)s</td>
+                                <td class="col-md-1">%(ld_x)s</td>
+                                <td class="col-md-1">%(ld_y)s</td>
+                                <td class="col-md-1">%(ld_z)s</td>
+                                <td class="col-md-1">%(rt_x)s</td>
+                                <td class="col-md-1">%(rt_x)s</td>
+                                <td class="col-md-1">%(rt_z)s</td>                               
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            shelter_name=i[1],
+                                            lt_x= i[2],
+                                            lt_y= i[3],
+                                            lt_z= i[4],
+                                            ld_x= i[5],
+                                            ld_y= i[6],
+                                            ld_z= i[7],
+                                            rt_x= i[8],
+                                            rt_y= i[9],
+                                            rt_z= i[10],
+                                            edit_url="%s/@@update_bachangzhdw/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_bachangzhdw/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data        
+ 
+class Bachangfshjajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('bachangfshj_ajaxsearch')
+
+    def searchview(self,viewname="bachangfshj_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
+                                <td class="col-md-1">%(x)s</td>
+                                <td class="col-md-1">%(y)s</td>
+                                <td class="col-md-1">%(z)s</td>
+                                <td class="col-md-1">%(ft)s</td>
+                                <td class="col-md-1">%(pt_u)s</td>
+                                <td class="col-md-1">%(pt_l)s</td>
+                                <td class="col-md-1">%(num)s</td>
+                                <td class="col-md-1">%(fu)s</td>
+                                <td class="col-md-1">%(fl)s</td>                               
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbmc=i[1],
+                                            x= i[2],
+                                            y= i[3],
+                                            z= i[4],
+                                            ft= i[5],
+                                            pt_u= i[6],
+                                            pt_l= i[7],
+                                            num= i[8],
+                                            fu= i[9],
+                                            fl= i[10],
+                                            edit_url="%s/@@update_bachangfshj/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_bachangfshj/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
 ###### database actions
 # Delete Update Input block
 class DeleteModel(form.Form):
@@ -1981,8 +2093,8 @@ class InputBachang(InputModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
 
-class UpdateDianxingtxzyzk(UpdateModel):
-    """update Lvboq table row data
+class UpdateBachang(UpdateModel):
+    """update Bachang table row data
     """
     grok.name('update_bachang')
     label = _(u"update ba chang data")
@@ -2021,3 +2133,226 @@ class UpdateDianxingtxzyzk(UpdateModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@bachang_listings')
 # end 靶场 数据库操作
+## 靶场遮挡物 数据库操作
+class DeleteBachangzhdw(DeleteModel):
+    "delete the specify Bachangzhdw recorder"
+
+    grok.name('delete_bachangzhdw')
+    label = _(u"delete ba chang data")
+    fields = field.Fields(IBachangzhdw).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachangzhdw')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Bachangzhdw recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangzhdw')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+
+class InputBachangzhdw(InputModel):
+    """input db bachangzhdw table data
+    """
+    grok.name('input_bachangzhdw')
+    label = _(u"Input ba chang data")
+    fields = field.Fields(IBachangzhdw).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit bachangzhdw recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangzhdw')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+
+class UpdateBachangzhdw(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_bachangzhdw')
+    label = _(u"update ba chang data")
+    fields = field.Fields(IBachangzhdw).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachangzhdw')
+        return locator.getByCode(self.id)
+
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangzhdw')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangzhdw_listings')
+# end 靶场遮挡物 数据库操作
+## 靶场发射机 数据库操作
+class DeleteBachangfshj(DeleteModel):
+    "delete the specify Bachangfshj recorder"
+
+    grok.name('delete_bachangfshj')
+    label = _(u"delete ba chang data")
+    fields = field.Fields(IBachangfshj).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachangfshj')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Bachangfshj recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangfshj')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+
+class InputBachangfshj(InputModel):
+    """input db bachangfshj table data
+    """
+    grok.name('input_bachangfshj')
+    label = _(u"Input data")
+    fields = field.Fields(IBachangfshj).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit bachangfshj recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangfshj')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+
+class UpdateBachangfshj(UpdateModel):
+    """update Lvboq table row data
+    """
+    grok.name('update_bachangfshj')
+    label = _(u"update data")
+    fields = field.Fields(IBachangfshj).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='bachangfshj')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='bachangfshj')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
+# end 靶场发射机 数据库操作

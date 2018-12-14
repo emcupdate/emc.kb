@@ -944,9 +944,6 @@ class ICeshixm(Interface):
     id = schema.Int(
             title=_(u"talbe primary key")
         )
-    project_id = schema.Int(
-            title=_(u"bei ce xiang mu bian hao")
-        )
     device = schema.TextLine(
             title=_(u"bei ce jian")
         )
@@ -980,9 +977,7 @@ class Ceshixm(ORMBase):
             primary_key=True,
             autoincrement=True,
         )
-    project_id = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
-            nullable=False,
-        )
+
     device = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
         )

@@ -104,25 +104,30 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">电磁兼容测试数据库<span class="caret"></span></a>          
           <ul class="dropdown-menu" role="menu">
           	<li>
-                 <a tal:attributes="href string:${kb/absolute_url}/@@fashej_listings">
-                     典型天线增益子库
+                 <a tal:attributes="href string:${kb/absolute_url}/@@ceshishysh_listings">
+                     测试实验室
                   </a>
                   </li>
                   <li>
-                 <a tal:attributes="href string:${kb/absolute_url}/@@fashetx_listings">
-                     天线子库
+                 <a tal:attributes="href string:${kb/absolute_url}/@@ceshiry_listings">
+                     测试人员
                   </a>
                   </li>
                   <li>
-                 <a tal:attributes="href string:${kb/absolute_url}/@@jieshouj_listings">
-                     接收机子库
+                 <a tal:attributes="href string:${kb/absolute_url}/@@ceshiff_listings">
+                     测试方法
                   </a>
                   </li>
                   <li>
-                 <a tal:attributes="href string:${kb/absolute_url}/@@jieshoutx_listings">
-                     发射机子库
+                 <a tal:attributes="href string:${kb/absolute_url}/@@ceshibg_listings">
+                     测试报告
                   </a>
                   </li>
+                  <li>
+                 <a tal:attributes="href string:${kb/absolute_url}/@@ceshixm_listings">
+                     测试项目
+                  </a>
+                  </li>                  
           </ul>
         </li>      
  <!--       <li class="dropdown">
