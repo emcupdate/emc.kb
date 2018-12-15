@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-12-07 02:08+0000\n"
+"POT-Creation-Date: 2018-12-15 06:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,23 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ./browser/ajax_listing.py:760
+#: ./browser/ajax_listing.py:1313
 msgid "Cancel"
 msgstr ""
 
-#: ./browser/ajax_listing.py:741
+#: ./browser/ajax_listing.py:1294
 msgid "Delete"
 msgstr ""
 
-#: ./browser/ajax_listing.py:764
+#: ./browser/ajax_listing.py:1317
 msgid "Delete cancelled."
 msgstr ""
 
-#: ./mapping_db.py:827
+#: ./mapping_db.py:825
 msgid "EUT bian hao"
 msgstr ""
 
-#: ./mapping_db.py:830
+#: ./mapping_db.py:828
 msgid "EUT xing hao"
 msgstr ""
 
@@ -48,31 +48,43 @@ msgstr ""
 msgid "How many recorders that log at least will be reserved before the log dumped."
 msgstr ""
 
-#: ./browser/ajax_listing.py:814
+#: ./browser/ajax_listing.py:2408
+msgid "Input ba chang data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:1367
 msgid "Input cancelled."
 msgstr ""
 
-#: ./browser/ajax_listing.py:952
+#: ./browser/ajax_listing.py:2632
+msgid "Input data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:1494
 msgid "Input fa she ji data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1282
+#: ./browser/ajax_listing.py:1785
 msgid "Input fa she tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1118
+#: ./browser/ajax_listing.py:1641
 msgid "Input jie shou ji data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1445
+#: ./browser/ajax_listing.py:1928
 msgid "Input jie shou tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:775
+#: ./browser/ajax_listing.py:1328
 msgid "Input model data"
 msgstr ""
 
-#: ./configure.zcml:52
+#: ./browser/ajax_listing.py:2294
+msgid "Input tian xian ziku data"
+msgstr ""
+
+#: ./configure.zcml:142
 msgid "Installs the emc.kb package"
 msgstr ""
 
@@ -89,15 +101,15 @@ msgstr ""
 msgid "Please enter details of log"
 msgstr ""
 
-#: ./browser/ajax_listing.py:791
+#: ./browser/ajax_listing.py:1344
 msgid "Submit"
 msgstr ""
 
-#: ./browser/ajax_listing.py:806
+#: ./browser/ajax_listing.py:1359
 msgid "Thank you! Your data  will be update in back end DB."
 msgstr ""
 
-#: ./browser/ajax_listing.py:756
+#: ./browser/ajax_listing.py:1309
 msgid "Your data  has been deleted."
 msgstr ""
 
@@ -118,43 +130,79 @@ msgstr ""
 msgid "all_day"
 msgstr ""
 
+#: ./mapping_db.py:1020
+msgid "ba chang chang du"
+msgstr ""
+
+#: ./mapping_db.py:1014
+msgid "ba chang dai ma"
+msgstr ""
+
+#: ./mapping_db.py:1032
+msgid "ba chang di xing tiao jian"
+msgstr ""
+
+#: ./mapping_db.py:1023
+msgid "ba chang kuan du"
+msgstr ""
+
+#: ./mapping_db.py:1011
+msgid "ba chang ming cheng"
+msgstr ""
+
+#: ./mapping_db.py:1035
+msgid "ba chang shi he xing hao"
+msgstr ""
+
+#: ./mapping_db.py:1017
+msgid "ba chang wei zhi"
+msgstr ""
+
+#: ./mapping_db.py:1209
+msgid "ba chang x zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1212
+msgid "ba chang y zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1215
+msgid "ba chang z zuo biao"
+msgstr ""
+
 #: ./interfaces.py:32
 msgid "batch size"
 msgstr ""
 
-#: ./mapping_db.py:824
+#: ./mapping_db.py:822
 msgid "bei ce jian"
 msgstr ""
 
-#: ./mapping_db.py:950
-msgid "bei ce xiang mu bian hao"
-msgstr ""
-
-#: ./mapping_db.py:115
+#: ./mapping_db.py:113
 msgid "bei zhu"
 msgstr ""
 
-#: ./mapping_db.py:109
+#: ./mapping_db.py:107
 msgid "ben zhen pin lv"
 msgstr ""
 
-#: ./mapping_db.py:767
+#: ./mapping_db.py:1245
+msgid "ben zheng pin lv"
+msgstr ""
+
+#: ./mapping_db.py:765
 msgid "ce shi bu zhou"
 msgstr ""
 
-#: ./mapping_db.py:839
+#: ./mapping_db.py:837
 msgid "ce shi di dian"
 msgstr ""
 
-#: ./mapping_db.py:869
+#: ./mapping_db.py:867
 msgid "ce shi jie guo"
 msgstr ""
 
-#: ./mapping_db.py:764
-msgid "ce shi kuang tu"
-msgstr ""
-
-#: ./mapping_db.py:860
+#: ./mapping_db.py:858
 msgid "ce shi ren yuan"
 msgstr ""
 
@@ -190,51 +238,51 @@ msgstr ""
 msgid "ce shi ren yuan zhi cheng"
 msgstr ""
 
-#: ./mapping_db.py:836
+#: ./mapping_db.py:834
 msgid "ce shi ri qi"
 msgstr ""
 
-#: ./mapping_db.py:842
+#: ./mapping_db.py:840
 msgid "ce shi she bei"
 msgstr ""
 
-#: ./mapping_db.py:848
+#: ./mapping_db.py:846
 msgid "ce shi she bei bian hao"
 msgstr ""
 
-#: ./mapping_db.py:845
+#: ./mapping_db.py:843
 msgid "ce shi she bei xing hao"
 msgstr ""
 
-#: ./mapping_db.py:968
+#: ./mapping_db.py:963
 msgid "ce shi shu ju"
 msgstr ""
 
-#: ./mapping_db.py:962
+#: ./mapping_db.py:957
 msgid "ce shi shuo ming"
 msgstr ""
 
-#: ./mapping_db.py:851
+#: ./mapping_db.py:849
 msgid "ce shi yi ju"
 msgstr ""
 
-#: ./mapping_db.py:965
+#: ./mapping_db.py:960
 msgid "ce shi yi qi"
 msgstr ""
 
-#: ./mapping_db.py:815
+#: ./mapping_db.py:813
 msgid "ce shi zheng shu bian hao"
 msgstr ""
 
-#: ./mapping_db.py:288
+#: ./mapping_db.py:286
 msgid "cong shu she bei dai ma"
 msgstr ""
 
-#: ./mapping_db.py:291
+#: ./mapping_db.py:289
 msgid "cong shu she bei ming cheng"
 msgstr ""
 
-#: ./mapping_db.py:647
+#: ./mapping_db.py:645
 msgid "dan wei"
 msgstr ""
 
@@ -258,24 +306,36 @@ msgstr ""
 msgid "db map folder"
 msgstr ""
 
-#: ./browser/ajax_listing.py:891
+#: ./browser/ajax_listing.py:2370
+msgid "delete ba chang data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:2706
+msgid "delete data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:1444
 msgid "delete fa she ji data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1222
+#: ./browser/ajax_listing.py:1736
 msgid "delete fa she tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1058
+#: ./browser/ajax_listing.py:1591
 msgid "delete jie shou ji data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1385
+#: ./browser/ajax_listing.py:1879
 msgid "delete jie shou tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:712
+#: ./browser/ajax_listing.py:1268
 msgid "delete model data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:2256
+msgid "delete tian xian ziku data"
 msgstr ""
 
 #. Default: "Warning! This operation will remove database record."
@@ -293,79 +353,91 @@ msgstr ""
 msgid "description_update_model_record"
 msgstr ""
 
-#: ./configure.zcml:52
+#: ./configure.zcml:142
 msgid "emc.kb"
 msgstr ""
 
-#: ./mapping_db.py:70
+#: ./mapping_db.py:1236
+msgid "fa she dai kuan"
+msgstr ""
+
+#: ./mapping_db.py:68
 msgid "fa she ji ming cheng"
 msgstr ""
 
-#: ./mapping_db.py:752
+#: ./mapping_db.py:1206
+msgid "fa she ji xu hao"
+msgstr ""
+
+#: ./mapping_db.py:750
 msgid "fang fa bian hao"
 msgstr ""
 
-#: ./mapping_db.py:755
+#: ./mapping_db.py:753
 msgid "fang fa biao ti"
 msgstr ""
 
-#: ./mapping_db.py:306
+#: ./mapping_db.py:304
 msgid "fang wei bo su dai kuan"
 msgstr ""
 
-#: ./mapping_db.py:100
+#: ./mapping_db.py:98
 msgid "fashe dai kuan"
 msgstr ""
 
-#: ./mapping_db.py:309
+#: ./mapping_db.py:307
 msgid "fu yang bo su dai kuan"
 msgstr ""
 
-#: ./mapping_db.py:770
+#: ./mapping_db.py:768
 msgid "fu zhu"
 msgstr ""
 
-#: ./mapping_db.py:653
+#: ./mapping_db.py:651
 msgid "gai kuang"
 msgstr ""
 
-#: ./mapping_db.py:448
+#: ./mapping_db.py:446
 msgid "gong zuo pin lv"
 msgstr ""
 
-#: ./mapping_db.py:82
+#: ./mapping_db.py:80
 msgid "gongzuo pinlv"
+msgstr ""
+
+#: ./mapping_db.py:1029
+msgid "gu you fa she ji shu"
 msgstr ""
 
 #: ./interfaces.py:14
 msgid "how many days that log at least will be reserved"
 msgstr ""
 
-#: ./mapping_db.py:650
+#: ./mapping_db.py:648
 msgid "ji bie"
 msgstr ""
 
-#: ./mapping_db.py:303
+#: ./mapping_db.py:301
 msgid "ji hua"
 msgstr ""
 
-#: ./mapping_db.py:103
+#: ./mapping_db.py:101
 msgid "ji pin gong lv"
 msgstr ""
 
-#: ./mapping_db.py:212
+#: ./mapping_db.py:210
 msgid "jie shou ji dai kuan"
 msgstr ""
 
-#: ./mapping_db.py:215
+#: ./mapping_db.py:213
 msgid "jie shou ji lin ming du"
 msgstr ""
 
-#: ./mapping_db.py:188
+#: ./mapping_db.py:186
 msgid "jie shou ji ming cheng"
 msgstr ""
 
-#: ./mapping_db.py:365
+#: ./mapping_db.py:363
 msgid "jie shou tian xian ming cheng"
 msgstr ""
 
@@ -381,15 +453,15 @@ msgstr ""
 msgid "level of the operation"
 msgstr ""
 
-#: ./mapping_db.py:460
+#: ./mapping_db.py:458
 msgid "lv bo qi cha sun"
 msgstr ""
 
-#: ./mapping_db.py:457
+#: ./mapping_db.py:455
 msgid "lv bo qi ji shu"
 msgstr ""
 
-#: ./mapping_db.py:439
+#: ./mapping_db.py:437
 msgid "lv bo qi ming cheng"
 msgstr ""
 
@@ -397,23 +469,23 @@ msgstr ""
 msgid "max recorders"
 msgstr ""
 
-#: ./mapping_db.py:644
+#: ./mapping_db.py:642
 msgid "ming cheng"
 msgstr ""
 
-#: ./mapping_db.py:22
+#: ./mapping_db.py:31
 msgid "model code"
 msgstr ""
 
-#: ./mapping_db.py:26
+#: ./mapping_db.py:35
 msgid "model name"
 msgstr ""
 
-#: ./mapping_db.py:18
+#: ./mapping_db.py:27
 msgid "model table primary key"
 msgstr ""
 
-#: ./mapping_db.py:695
+#: ./mapping_db.py:693
 msgid "nian ling"
 msgstr ""
 
@@ -421,27 +493,31 @@ msgstr ""
 msgid "operation time"
 msgstr ""
 
-#: ./mapping_db.py:197
+#: ./mapping_db.py:195
 msgid "pin duan shang xian"
 msgstr ""
 
-#: ./mapping_db.py:200
+#: ./mapping_db.py:198
 msgid "pin duan xia xian"
 msgstr ""
 
-#: ./mapping_db.py:91
+#: ./mapping_db.py:1227
+msgid "pin lv dian shu"
+msgstr ""
+
+#: ./mapping_db.py:89
 msgid "pinlv dian shu"
 msgstr ""
 
-#: ./mapping_db.py:94
+#: ./mapping_db.py:92
 msgid "pinlv shang xian"
 msgstr ""
 
-#: ./mapping_db.py:97
+#: ./mapping_db.py:95
 msgid "pinlv xia xian"
 msgstr ""
 
-#: ./mapping_db.py:863
+#: ./mapping_db.py:861
 msgid "qian fa ren"
 msgstr ""
 
@@ -453,35 +529,31 @@ msgstr ""
 msgid "result of the operation"
 msgstr ""
 
-#: ./mapping_db.py:85
+#: ./mapping_db.py:83
 msgid "shang bian pin"
 msgstr ""
 
-#: ./mapping_db.py:67
+#: ./mapping_db.py:65
 msgid "she bei dai ma"
 msgstr ""
 
-#: ./mapping_db.py:866
+#: ./mapping_db.py:864
 msgid "shen he ren"
 msgstr ""
 
-#: ./mapping_db.py:857
+#: ./mapping_db.py:855
 msgid "shi du"
 msgstr ""
 
-#: ./mapping_db.py:959
-msgid "shi yi tu"
-msgstr ""
-
-#: ./mapping_db.py:758
+#: ./mapping_db.py:756
 msgid "shi yong fan wei"
 msgstr ""
 
-#: ./mapping_db.py:64
+#: ./mapping_db.py:62
 msgid "table primary key"
 msgstr ""
 
-#: ./mapping_db.py:641
+#: ./mapping_db.py:639
 msgid "talbe primary key"
 msgstr ""
 
@@ -501,15 +573,15 @@ msgstr ""
 msgid "the user id of user which had been processed by administrator"
 msgstr ""
 
-#: ./mapping_db.py:511
+#: ./mapping_db.py:509
 msgid "tian xian lei xing"
 msgstr ""
 
-#: ./mapping_db.py:312
+#: ./mapping_db.py:310
 msgid "tian xian zhi xiang jiao"
 msgstr ""
 
-#: ./mapping_db.py:106
+#: ./mapping_db.py:104
 msgid "tiao zhi lei xing"
 msgstr ""
 
@@ -521,39 +593,51 @@ msgstr ""
 msgid "type of the operation"
 msgstr ""
 
-#: ./browser/ajax_listing.py:999
+#: ./browser/ajax_listing.py:2441
+msgid "update ba chang data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:2665
+msgid "update data"
+msgstr ""
+
+#: ./browser/ajax_listing.py:1541
 msgid "update fa she ji data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1328
+#: ./browser/ajax_listing.py:1831
 msgid "update fa she tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1491
+#: ./browser/ajax_listing.py:1968
 msgid "update jie shou tian xian data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:1164
+#: ./browser/ajax_listing.py:1687
 msgid "update jieshouj data"
 msgstr ""
 
-#: ./browser/ajax_listing.py:827
+#: ./browser/ajax_listing.py:1380
 msgid "update model data"
 msgstr ""
 
-#: ./mapping_db.py:818
+#: ./browser/ajax_listing.py:2327
+msgid "update tian xian ziku data"
+msgstr ""
+
+#: ./mapping_db.py:816
 msgid "wei tuo fang"
 msgstr ""
 
-#: ./mapping_db.py:821
+#: ./mapping_db.py:819
 msgid "wei tuo fang di zhi"
 msgstr ""
 
-#: ./mapping_db.py:78
+#: ./mapping_db.py:76
 msgid "wei zhi"
 msgstr ""
 
-#: ./mapping_db.py:854
+#: ./mapping_db.py:852
 msgid "wen du"
 msgstr ""
 
@@ -561,66 +645,114 @@ msgstr ""
 msgid "when log numbers reach at some Percentage,send warning message"
 msgstr ""
 
-#: ./mapping_db.py:88
+#: ./mapping_db.py:86
 msgid "xia bian pin"
 msgstr ""
 
-#: ./mapping_db.py:956
+#: ./mapping_db.py:951
 msgid "xiang mu ming cheng"
 msgstr ""
 
-#: ./mapping_db.py:692
+#: ./mapping_db.py:690
 msgid "xing bie"
 msgstr ""
 
-#: ./mapping_db.py:689
+#: ./mapping_db.py:687
 msgid "xing ming"
 msgstr ""
 
-#: ./mapping_db.py:698
+#: ./mapping_db.py:696
 msgid "xue li"
 msgstr ""
 
-#: ./mapping_db.py:761
+#: ./mapping_db.py:759
 msgid "yi qi she bei"
 msgstr ""
 
-#: ./mapping_db.py:300
+#: ./mapping_db.py:1114
+msgid "you shang x zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1117
+msgid "you shang y zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1120
+msgid "you shang z zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1123
+msgid "you xia x zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:298
 msgid "zeng yi"
 msgstr ""
 
-#: ./mapping_db.py:704
+#: ./mapping_db.py:1026
+msgid "zhe dang wu ge shu"
+msgstr ""
+
+#: ./mapping_db.py:1090
+msgid "zhe dang wu ming cheng"
+msgstr ""
+
+#: ./mapping_db.py:702
 msgid "zheng shu bian hao"
 msgstr ""
 
-#: ./mapping_db.py:701
+#: ./mapping_db.py:699
 msgid "zhi cheng"
 msgstr ""
 
-#: ./mapping_db.py:833
+#: ./mapping_db.py:831
 msgid "zhi zao shang"
 msgstr ""
 
-#: ./mapping_db.py:112
+#: ./mapping_db.py:110
 msgid "zhong pin"
 msgstr ""
 
-#: ./mapping_db.py:218
+#: ./mapping_db.py:216
 msgid "zhong pin fu hao"
 msgstr ""
 
-#: ./mapping_db.py:221
+#: ./mapping_db.py:219
 msgid "zhong pin pin lv"
 msgstr ""
 
-#: ./mapping_db.py:74
+#: ./mapping_db.py:72
 msgid "zhuang tai pi ci dai ma"
 msgstr ""
 
-#: ./mapping_db.py:545
+#: ./mapping_db.py:543
 msgid "zi ku dai ma"
 msgstr ""
 
-#: ./mapping_db.py:548
+#: ./mapping_db.py:546
 msgid "zi ku ming cheng"
+msgstr ""
+
+#: ./mapping_db.py:1096
+msgid "zuo shang x zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1099
+msgid "zuo shang y zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1102
+msgid "zuo shang z zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1105
+msgid "zuo xia x zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1108
+msgid "zuo xia y zuo biao"
+msgstr ""
+
+#: ./mapping_db.py:1111
+msgid "zuo xia z zuo biao"
 msgstr ""
