@@ -33,6 +33,11 @@ from emc.kb.mapping_db import IBachang,Bachang
 from emc.kb.mapping_db import IFashejzk,Fashejzk
 from emc.kb.mapping_db import IBachangzhdw,Bachangzhdw
 from emc.kb.mapping_db import IBachangfshj,Bachangfshj
+from emc.kb.mapping_db import ICeshiry
+from emc.kb.mapping_db import ICeshixm
+from emc.kb.mapping_db import ICeshibg
+from emc.kb.mapping_db import ICeshiff
+from emc.kb.mapping_db import ICeshishysh
 from emc.kb.contents.ormfolder import Iormfolder
 # update data view
 from zope.interface import implements
@@ -264,7 +269,7 @@ class TianxianzyzkView(FashejView):
     
 ### parameters lib end
 ### enviroment lib start
-# bachang table
+# ceshixm table
 class BachangView(FashejView):
     """
     DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
@@ -1132,7 +1137,7 @@ class Ceshiryajaxsearch(ajaxsearch):
                                             edu_level= i[4],
                                             post= i[5], 
                                             certificate_code= i[6],  
-                                            unit= i[6],                                                                                                                                    
+                                            unit= i[7],                                                                                                                                    
                                             edit_url="%s/@@update_ceshiry/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshiry/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
@@ -2692,3 +2697,554 @@ class UpdateBachangfshj(UpdateModel):
         IStatusMessage(self.request).add(confirm, type='info')
         self.request.response.redirect(self.context.absolute_url() + '/@@bachangfshj_listings')
 # end 靶场发射机 数据库操作
+###### test lib actions
+## 测试项目 数据库操作
+class DeleteCeshixm(DeleteModel):
+    "delete the specify Ceshixm recorder"
+
+    grok.name('delete_ceshixm')
+    label = _(u"delete data")
+    fields = field.Fields(ICeshixm).omit('id')
+
+    def getContent(self):
+        locator = queryUtility(IDbapi, name='ceshixm')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Ceshixm recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshixm')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+
+class InputCeshixm(InputModel):
+    """input db ceshixm table data
+    """
+    grok.name('input_ceshixm')
+    label = _(u"Input data")
+    fields = field.Fields(ICeshixm).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit ceshixm recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshixm')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+
+class UpdateCeshixm(UpdateModel):
+    """update Ceshixm table row data
+    """
+    grok.name('update_ceshixm')
+    label = _(u"update data")
+    fields = field.Fields(ICeshixm).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='ceshixm')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshixm')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshixm_listings')
+# end 靶场 数据库操作
+## 测试报告 数据库操作
+class DeleteCeshibg(DeleteModel):
+    "delete the specify Ceshibg recorder"
+
+    grok.name('delete_ceshibg')
+    label = _(u"delete data")
+    fields = field.Fields(ICeshibg).omit('id')
+
+    def getContent(self):
+        locator = queryUtility(IDbapi, name='ceshibg')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Ceshibg recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshibg')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+
+class InputCeshibg(InputModel):
+    """input db ceshibg table data
+    """
+    grok.name('input_ceshibg')
+    label = _(u"Input data")
+    fields = field.Fields(ICeshibg).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit ceshibg recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshibg')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+
+class UpdateCeshibg(UpdateModel):
+    """update Ceshibg table row data
+    """
+    grok.name('update_ceshibg')
+    label = _(u"update data")
+    fields = field.Fields(ICeshibg).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='ceshibg')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshibg')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshibg_listings')
+# end 测试报告 数据库操作
+## 测试方法 数据库操作
+class DeleteCeshiff(DeleteModel):
+    "delete the specify Ceshiff recorder"
+
+    grok.name('delete_ceshiff')
+    label = _(u"delete data")
+    fields = field.Fields(ICeshiff).omit('id')
+
+    def getContent(self):
+        locator = queryUtility(IDbapi, name='ceshiff')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Ceshiff recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiff')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+
+class InputCeshiff(InputModel):
+    """input db ceshiff table data
+    """
+    grok.name('input_ceshiff')
+    label = _(u"Input data")
+    fields = field.Fields(ICeshiff).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit ceshiff recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiff')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+
+class UpdateCeshiff(UpdateModel):
+    """update Ceshiff table row data
+    """
+    grok.name('update_ceshiff')
+    label = _(u"update data")
+    fields = field.Fields(ICeshiff).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='ceshiff')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiff')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiff_listings')
+# end 测试方法 数据库操作
+## 测试实验室 数据库操作
+class DeleteCeshishysh(DeleteModel):
+    "delete the specify Ceshishysh recorder"
+
+    grok.name('delete_ceshishysh')
+    label = _(u"delete data")
+    fields = field.Fields(ICeshishysh).omit('id')
+
+    def getContent(self):
+        locator = queryUtility(IDbapi, name='ceshishysh')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Ceshishysh recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshishysh')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+
+class InputCeshishysh(InputModel):
+    """input db ceshishysh table data
+    """
+    grok.name('input_ceshishysh')
+    label = _(u"Input data")
+    fields = field.Fields(ICeshishysh).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit ceshishysh recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshishysh')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+
+class UpdateCeshishysh(UpdateModel):
+    """update Ceshishysh table row data
+    """
+    grok.name('update_ceshishysh')
+    label = _(u"update data")
+    fields = field.Fields(ICeshishysh).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='ceshishysh')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshishysh')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshishysh_listings')
+# end 测试实验室 数据库操作
+## 测试人员 数据库操作
+class DeleteCeshiry(DeleteModel):
+    "delete the specify Ceshiry recorder"
+
+    grok.name('delete_ceshiry')
+    label = _(u"delete data")
+    fields = field.Fields(ICeshiry).omit('id')
+
+    def getContent(self):
+        locator = queryUtility(IDbapi, name='ceshiry')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def submit(self, action):
+        """Delete Ceshiry recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiry')
+        try:
+            funcations.DeleteByCode(self.id)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+        confirm = _(u"Your data  has been deleted.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data delete
+        """
+        confirm = _(u"Delete cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+
+class InputCeshiry(InputModel):
+    """input db ceshiry table data
+    """
+    grok.name('input_ceshiry')
+    label = _(u"Input data")
+    fields = field.Fields(ICeshiry).omit('id')
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Submit ceshiry recorder
+        """
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiry')
+        try:
+            funcations.add(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+
+class UpdateCeshiry(UpdateModel):
+    """update Ceshiry table row data
+    """
+    grok.name('update_ceshiry')
+    label = _(u"update data")
+    fields = field.Fields(ICeshiry).omit('id')
+
+    def getContent(self):
+        # Get the model table query funcations
+        locator = queryUtility(IDbapi, name='ceshiry')
+        return locator.getByCode(self.id)
+
+    @button.buttonAndHandler(_(u"Submit"))
+    def submit(self, action):
+        """Update model recorder
+        """
+        data, errors = self.extractData()
+        data['id'] =self.id
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        funcations = queryUtility(IDbapi, name='ceshiry')
+        try:
+            funcations.updateByCode(data)
+        except InputError, e:
+            IStatusMessage(self.request).add(str(e), type='error')
+            self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+        confirm = _(u"Thank you! Your data  will be update in back end DB.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def cancel(self, action):
+        """Cancel the data input
+        """
+        confirm = _(u"Input cancelled.")
+        IStatusMessage(self.request).add(confirm, type='info')
+        self.request.response.redirect(self.context.absolute_url() + '/@@ceshiry_listings')
+# end 测试人员 数据库操作

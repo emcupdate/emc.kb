@@ -963,7 +963,7 @@ class ICeshixm(Interface):
             title=_(u"ce shi shu ju")
         )
     t_result = schema.TextLine(
-            title=_(u"ce shi shu ju")
+            title=_(u"ce shi jie guo")
         )
 
 class Ceshixm(ORMBase):
