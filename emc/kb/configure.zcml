@@ -100,8 +100,33 @@
 	provides=".interfaces.IDbapi"
 	component=".databasepage.dbapi.bachangfshj"
 	name="bachangfshj"
-	/>											 
-  <!-- Grok the package to initialise schema interfaces and content classes -->
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.ceshixm"
+	name="ceshixm"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.ceshibg"
+	name="ceshibg"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.ceshiff"
+	name="ceshiff"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.ceshishysh"
+	name="ceshishysh"
+	/>
+ <utility
+	provides=".interfaces.IDbapi"
+	component=".databasepage.dbapi.ceshiry"
+	name="ceshiry"
+	/>																	 
+  <!-- Grok  the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  
 

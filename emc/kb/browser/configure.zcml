@@ -114,5 +114,35 @@
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/bachangfshj_listings.pt"
         class=".ajax_listing.BachangfshjView"/>
+     <browser:page
+        name="ceshixm_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/ceshixm_listings.pt"
+        class=".ajax_listing.CeshixmView"/>
+     <browser:page
+        name="ceshibg_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/ceshibg_listings.pt"
+        class=".ajax_listing.CeshibgView"/>
+     <browser:page
+        name="ceshiff_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/ceshiff_listings.pt"
+        class=".ajax_listing.CeshiffView"/>
+     <browser:page
+        name="ceshishysh_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/ceshishysh_listings.pt"
+        class=".ajax_listing.CeshishyshView"/>
+     <browser:page
+        name="ceshiry_listings"
+        permission="emc.kb.input_db"    
+        for="emc.kb.contents.ormfolder.Iormfolder"        
+        template="templates/ceshiry_listings.pt"
+        class=".ajax_listing.CeshiryView"/>                                        
                
 </configure>

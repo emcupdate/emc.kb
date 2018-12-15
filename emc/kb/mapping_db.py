@@ -758,9 +758,9 @@ class ICeshiff(Interface):
     device = schema.TextLine(
             title=_(u"yi qi she bei")
         )
-    diagram = schema.TextLine(
-            title=_(u"ce shi kuang tu")
-        )
+#     diagram = schema.TextLine(
+#             title=_(u"ce shi kuang tu")
+#         )
     step = schema.TextLine(
             title=_(u"ce shi bu zhou")
         )
@@ -791,9 +791,9 @@ class Ceshiff(ORMBase):
     device = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
-    diagram = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
-            nullable=False,
-        )
+#     diagram = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
+#             nullable=False,
+#         )
     step = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
@@ -923,13 +923,13 @@ class Ceshibg(ORMBase):
     huminitily = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='2,1'),
             nullable=False,
         )
-    t_man = sqlalchemy.schema.Column(sqlalchemy.types.String(10),
+    t_man = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
-    signer = sqlalchemy.schema.Column(sqlalchemy.types.String(10),
+    signer = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
-    assessor = sqlalchemy.schema.Column(sqlalchemy.types.String(10),
+    assessor = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )
     t_result = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
@@ -950,9 +950,9 @@ class ICeshixm(Interface):
     name = schema.TextLine(
             title=_(u"xiang mu ming cheng")
         )
-    diagram = schema.TextLine(
-            title=_(u"shi yi tu")
-        )
+#     diagram = schema.TextLine(
+#             title=_(u"shi yi tu")
+#         )
     t_remark = schema.TextLine(
             title=_(u"ce shi shuo ming")
         )
@@ -984,9 +984,9 @@ class Ceshixm(ORMBase):
     name = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
         )
-    diagram = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
-            nullable=False,
-        )
+#     diagram = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
+#             nullable=False,
+#         )
     t_remark = sqlalchemy.schema.Column(sqlalchemy.types.String(16),
             nullable=False,
         )

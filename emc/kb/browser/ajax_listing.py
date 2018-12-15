@@ -309,7 +309,79 @@ class BachangfshjView(FashejView):
         recorders = locator.query(query)
         return recorders    
 
-### enviroment lib end    
+### enviroment lib end
+### test lib start
+# ceshixm table
+class CeshixmView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('ceshixm')
+        recorders = locator.query(query)
+        return recorders 
+# ceshibg table
+class CeshibgView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('ceshibg')
+        recorders = locator.query(query)
+        return recorders 
+# ceshiff table
+class CeshiffView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('ceshiff')
+        recorders = locator.query(query)
+        return recorders 
+# ceshishysh table
+class CeshishyshView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('ceshishysh')
+        recorders = locator.query(query)
+        return recorders 
+# Ceshiry table
+class CeshiryView(FashejView):
+    """
+    DB AJAX 查询，返回分页结果,这个class 调用数据库表 功能集 utility,
+    从ajaxsearch view 构造 查询条件（通常是一个参数字典），该utility 接受
+    该参数，查询数据库，并返回结果。
+    view name:db_listing
+    """
+
+    def search_multicondition(self,query):
+        "query is dic,like :{'start':0,'size':10,'':}"
+        locator = self.get_locator('Ceshiry')
+        recorders = locator.query(query)
+        return recorders                 
+### test lib end      
 ###### output class
  # ajax multi-condition search relation db
 class ajaxsearch(grok.View):
@@ -915,6 +987,271 @@ class Bachangfshjajaxsearch(ajaxsearch):
             k = k + 1
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
+    
+
+### test lib output class
+class Ceshishyshajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('ceshishysh_ajaxsearch')
+
+    def searchview(self,viewname="ceshishysh_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-3 text-center"><a href="%(objurl)s">%(name)s</a></td>
+                                <td class="col-md-3 text-left">%(unit)s</td>
+                                <td class="col-md-1">%(level)s</td>
+                                <td class="col-md-3">%(survey)s</td>                               
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            unit= i[2],
+                                            level= i[3],
+                                            survey= i[4],
+                                            edit_url="%s/@@update_ceshishysh/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_ceshishysh/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+
+
+class Ceshiffajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('ceshiff_ajaxsearch')
+
+    def searchview(self,viewname="ceshiff_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(m_id)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(m_title)s</a></td>
+                                <td class="col-md-1">%(range)s</td>
+                                <td class="col-md-2">%(device)s</td>
+                                <td class="col-md-2">%(step)s</td>
+                                <td class="col-md-3">%(annotation)s</td>                                                                                              
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            m_id=i[1],
+                                            m_title= i[2],
+                                            range= i[3],
+                                            device= i[4],
+                                            step= i[5], 
+                                            annotation= i[6],                                                                                        
+                                            edit_url="%s/@@update_ceshiff/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_ceshiff/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+    
+
+class Ceshiryajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('ceshiry_ajaxsearch')
+
+    def searchview(self,viewname="ceshiry_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(name)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sex)s</a></td>
+                                <td class="col-md-1">%(age)s</td>
+                                <td class="col-md-1">%(edu_level)s</td>
+                                <td class="col-md-1">%(post)s</td>                                
+                                <td class="col-md-2">%(certificate_code)s</td>
+                                <td class="col-md-3">%(unit)s</td>                                                                                              
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            sex= i[2],
+                                            age= i[3],
+                                            edu_level= i[4],
+                                            post= i[5], 
+                                            certificate_code= i[6],  
+                                            unit= i[6],                                                                                                                                    
+                                            edit_url="%s/@@update_ceshiry/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_ceshiry/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+    
+                
+class Ceshixmajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('ceshixm_ajaxsearch')
+
+    def searchview(self,viewname="ceshixm_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(device)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(name)s</a></td>
+                                <td class="col-md-2">%(t_remark)s</td>
+                                <td class="col-md-1">%(t_strument)s</td>
+                                <td class="col-md-2">%(t_value)s</td>                                
+                                <td class="col-md-2">%(t_result)s</td>                                                                                             
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            sex= i[2],
+                                            age= i[3],
+                                            edu_level= i[4],
+                                            post= i[5], 
+                                            certificate_code= i[6],  
+                                            unit= i[6],                                                                                                                                    
+                                            edit_url="%s/@@update_ceshixm/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_ceshixm/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+    
+
+class Ceshibgajaxsearch(ajaxsearch):
+    """AJAX action for search DB.
+    receive front end ajax transform parameters
+    """
+    grok.name('ceshibg_ajaxsearch')
+
+    def searchview(self,viewname="ceshibg_listings"):
+        searchview = getMultiAdapter((self.context, self.request),name=viewname)
+        return searchview
+
+    def output(self,start,size,totalnum,resultDicLists):
+        """根据参数total,resultDicLists,返回json 输出,resultDicLists like this:
+        [(u'C7', u'\u4ed6\u7684\u624b\u673a')]"""
+        outhtml = ""
+        k = 0
+        contexturl = self.context.absolute_url()
+        for i in resultDicLists:
+            out = """<tr class="text-left">
+                                <td class="col-md-1 text-center">%(t_id)s</td>
+                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(bailor)s</a></td>
+                                <td class="col-md-1">%(device)s</td>
+                                <td class="col-md-1">%(t_address)s</td>
+                                <td class="col-md-1">%(t_device)s</td>                                
+                                <td class="col-md-1">%(t_man)s</td> 
+                                <td class="col-md-1">%(reference)s</td>
+                                <td class="col-md-1">%(signer)s</td>
+                                <td class="col-md-1">%(assessor)s</td>                                
+                                <td class="col-md-1">%(t_result)s</td>                                                                                                                             
+                                <td class="col-md-1 text-center">
+                                <a href="%(edit_url)s" title="edit">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                <td class="col-md-1 text-center">
+                                <a href="%(delete_url)s" title="delete">
+                                  <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                  </span>
+                                </a>
+                                </td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            t_id=i[1],
+                                            bailor= i[2],
+                                            device= i[3],
+                                            t_address= i[4],
+                                            t_device= i[5], 
+                                            t_man= i[6],  
+                                            reference= i[7],
+                                            signer= i[8],
+                                            assessor= i[9], 
+                                            t_result= i[10],                                                                                                                                                                            
+                                            edit_url="%s/@@update_ceshibg/%s" % (contexturl,i[0]),
+                                            delete_url="%s/@@delete_ceshibg/%s" % (contexturl,i[0]))
+            outhtml = "%s%s" %(outhtml ,out)
+            k = k + 1
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data
+    
+                        
 ###### database actions
 # Delete Update Input block
 class DeleteModel(form.Form):

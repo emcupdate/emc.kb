@@ -257,7 +257,7 @@ class TestDatabase(unittest.TestCase):
 #         self.drop_tables(tbls=['Bachang'])
         import pdb
         pdb.set_trace()
-#bachangbachangbachang        
+       
 # ('RE-sbdm1','接收机库1')
         values = dict(name=u"靶场01",bcdm='bc-001',location='m',length=19.2,width=20.3,
                       wk=1,ti=2,landform='测试',xh='test')        
@@ -281,8 +281,7 @@ class TestDatabase(unittest.TestCase):
 #         self.drop_tables(tbls=['Bachangzhdw'])
         import pdb
         pdb.set_trace()
-#'shelter_name','lt_x','lt_y','lt_z','ld_x','ld_y','ld_z','rt_x','rt_y','rt_z',
-#          'rt_x','rt_y','rt_z'        
+       
 # ('RE-sbdm1','接收机库1')
         values = dict(bcdm='bc-002',shelter_name=u"靶场01",zdno=10,lt_x=19.2,
                       lt_y=20.3,lt_z=10.3,ld_x=4.24,ld_y=0.3,ld_z=0.69,rt_x=2.02,rt_y=3.38,rt_z=1.1,
@@ -325,6 +324,157 @@ class TestDatabase(unittest.TestCase):
 #         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
                                            
+    def test_dbapi_bachangzhdw(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Bachangzhdw'])
+#         self.drop_tables(tbls=['Bachangzhdw'])
+        import pdb
+        pdb.set_trace()
+       
+# ('RE-sbdm1','接收机库1')
+        values = dict(bcdm='bc-002',shelter_name=u"靶场01",zdno=10,lt_x=19.2,
+                      lt_y=20.3,lt_z=10.3,ld_x=4.24,ld_y=0.3,ld_z=0.69,rt_x=2.02,rt_y=3.38,rt_z=1.1,
+                      rd_x=2.1,rd_y=3.2,rd_z=1.1)        
+        dbapi = queryUtility(IDbapi, name='bachangzhdw')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_ceshixm(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Ceshixm'])
+#         self.drop_tables(tbls=['Ceshixm'])
+        import pdb
+        pdb.set_trace()
+#''sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(device='bc-002',name=u"项目01",t_remark='马人口',
+                      t_strument='示波器',t_value='work',t_result='pass')        
+        dbapi = queryUtility(IDbapi, name='ceshixm')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_ceshibg(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Ceshibg'])
+#         self.drop_tables(tbls=['Ceshibg'])
+        import pdb
+        pdb.set_trace()
+#''sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(t_id='bc-002',bailor=u"项目01",address='马人口',
+                      device='示波器',eut_id='work',eut_type='pass',
+                      manufacturor='示波器',t_date='work',t_address='pass',
+                      t_device='示波器',t_device_type='work',t_device_id='pass',
+                      reference='示波器',temp=12.5,huminitily=0.95,
+                      t_man='示波器',signer='work',assessor='pass',t_result='通过')        
+        dbapi = queryUtility(IDbapi, name='ceshibg')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_ceshiff(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Ceshiff'])
+#         self.drop_tables(tbls=['Ceshiff'])
+        import pdb
+        pdb.set_trace()
+#''sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(m_id='bc-002',m_title=u"项目01",range1='马人口',
+                      device='示波器',step='work',annotation='pass')        
+        dbapi = queryUtility(IDbapi, name='ceshiff')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_ceshishysh(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Ceshishysh'])
+#         self.drop_tables(tbls=['Ceshishysh'])
+        import pdb
+        pdb.set_trace()
+#''sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz',
+#          'rt_x','rt_y','rt_z'        
+# ('RE-sbdm1','接收机库1')
+        values = dict(name='bc-002',unit=u"项目01",level1='马人口',survey='示波器')        
+        dbapi = queryUtility(IDbapi, name='ceshishysh')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+
+    def test_dbapi_ceshiry(self):
+
+        import os
+        os.environ['NLS_LANG'] = '.AL32UTF8'            
+        self.create_tables(tbls=['Ceshiry'])
+#         self.drop_tables(tbls=['Ceshiry'])
+        import pdb
+        pdb.set_trace()
+
+        values = dict(name='bc-002',sex=u"男",age=18,edu_level='示波器',post='教授',
+                      certificate_code='bc-002',unit=u"男")        
+        dbapi = queryUtility(IDbapi, name='ceshiry')
+        dbapi.add(values)
+
+        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
+
+        id = nums[0].id        
+        rt = dbapi.getByCode(id)
+        self.assertTrue(nums is not None)
+        self.assertEqual(len(nums),1)
+#         rt = dbapi.DeleteByCode(id)
+        self.assertTrue(rt)
+                                                                   
     def test_dbapi_add(self):
 
         import os

@@ -342,5 +342,25 @@ bachangzhdw = Dbapi(session,'emc.kb.mapping_db','envi_bachangzhdw','Bachangzhdw'
 clmns = ['id','sbmc','x','y','z','ft','pt_u','pt_l','num','fu','fl','bt','pt','tzlx','bzf','zp','bz']
 search_clmns = ['sbmc','tzlx']
 bachangfshj = Dbapi(session,'emc.kb.mapping_db','envi_bachangfshj','Bachangfshj',columns=clmns,fullsearch_clmns=search_clmns)
-    
+# test lib
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['name','t_result']
+ceshixm = Dbapi(session,'emc.kb.mapping_db','envi_ceshixm','Ceshixm',columns=None,fullsearch_clmns=search_clmns)
+
+clmns = ['id','t_id','bailor','device','t_address','t_device','t_man','reference','signer','assessor','t_result']
+search_clmns = ['name','t_result']
+ceshibg = Dbapi(session,'emc.kb.mapping_db','envi_ceshibg','Ceshibg',columns=clmns,fullsearch_clmns=search_clmns)
+   
+clmns = ['id','m_id','m_title','range1','device','step','annotation']
+search_clmns = ['m_title','step']
+ceshiff = Dbapi(session,'emc.kb.mapping_db','envi_ceshiff','Ceshiff',columns=clmns,fullsearch_clmns=search_clmns)
+
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['name','survey']
+ceshishysh = Dbapi(session,'emc.kb.mapping_db','envi_ceshishysh','Ceshishysh',columns=None,fullsearch_clmns=search_clmns)
+   
+clmns = ['id','lib_code','lib_name']
+search_clmns = ['name','edu_level']
+ceshiry = Dbapi(session,'emc.kb.mapping_db','envi_ceshiry','Ceshiry',columns=None,fullsearch_clmns=search_clmns)
+                
          
