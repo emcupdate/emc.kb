@@ -323,31 +323,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(len(nums),1)
 #         rt = dbapi.DeleteByCode(id)
         self.assertTrue(rt)
-                                           
-    def test_dbapi_bachangzhdw(self):
-
-        import os
-        os.environ['NLS_LANG'] = '.AL32UTF8'            
-        self.create_tables(tbls=['Bachangzhdw'])
-#         self.drop_tables(tbls=['Bachangzhdw'])
-        import pdb
-        pdb.set_trace()
-       
-# ('RE-sbdm1','接收机库1')
-        values = dict(bcdm='bc-002',shelter_name=u"靶场01",zdno=10,lt_x=19.2,
-                      lt_y=20.3,lt_z=10.3,ld_x=4.24,ld_y=0.3,ld_z=0.69,rt_x=2.02,rt_y=3.38,rt_z=1.1,
-                      rd_x=2.1,rd_y=3.2,rd_z=1.1)        
-        dbapi = queryUtility(IDbapi, name='bachangzhdw')
-        dbapi.add(values)
-
-        nums = dbapi.query({'start':0,'size':1,'SearchableText':'','sort_order':'reverse'})
-
-        id = nums[0].id        
-        rt = dbapi.getByCode(id)
-        self.assertTrue(nums is not None)
-        self.assertEqual(len(nums),1)
-#         rt = dbapi.DeleteByCode(id)
-        self.assertTrue(rt)
+                                          
 
     def test_dbapi_ceshixm(self):
 

@@ -1089,9 +1089,9 @@ class IBachangzhdw(Interface):
     shelter_name = schema.TextLine(
             title=_(u"zhe dang wu ming cheng")
         )
-    zdno = schema.Int(
-            title=_(u"xiang mu ming cheng")
-        )
+#     zdno = schema.Int(
+#             title=_(u"xiang mu ming cheng")
+#         )
     lu_x = schema.Float(
             title=_(u"zuo shang x zuo biao")
         )
@@ -1147,9 +1147,9 @@ class Bachangzhdw(ORMBase):
     shelter_name = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
             nullable=False,
         )
-    zdno = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
-            nullable=False,
-        )
+#     zdno = sqlalchemy.schema.Column(sqlalchemy.types.Integer(),
+#             nullable=False,
+#         )
     lt_x = sqlalchemy.schema.Column(sqlalchemy.types.Float(precision='16,4'),
             nullable=False,
         )
