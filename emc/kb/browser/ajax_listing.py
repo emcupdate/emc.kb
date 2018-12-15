@@ -378,7 +378,7 @@ class CeshiryView(FashejView):
 
     def search_multicondition(self,query):
         "query is dic,like :{'start':0,'size':10,'':}"
-        locator = self.get_locator('Ceshiry')
+        locator = self.get_locator('ceshiry')
         recorders = locator.query(query)
         return recorders                 
 ### test lib end      
@@ -1178,13 +1178,12 @@ class Ceshixmajaxsearch(ajaxsearch):
                                 </a>
                                 </td>
                                 </tr> """% dict(objurl="%s/@@view" % contexturl,
-                                            name=i[1],
-                                            sex= i[2],
-                                            age= i[3],
-                                            edu_level= i[4],
-                                            post= i[5], 
-                                            certificate_code= i[6],  
-                                            unit= i[6],                                                                                                                                    
+                                            device=i[1],
+                                            name= i[2],
+                                            t_remark= i[3],
+                                            t_strument= i[4],
+                                            t_value= i[5], 
+                                            t_result= i[6],                                                                                                                                   
                                             edit_url="%s/@@update_ceshixm/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshixm/%s" % (contexturl,i[0]))
             outhtml = "%s%s" %(outhtml ,out)
