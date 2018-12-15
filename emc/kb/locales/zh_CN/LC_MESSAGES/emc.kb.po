@@ -33,7 +33,7 @@ msgstr "删除操作已取消"
 
 #: ./mapping_db.py:825
 msgid "EUT bian hao"
-msgstr ""
+msgstr "被测设备编号"
 
 #: ./mapping_db.py:828
 msgid "EUT xing hao"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ./interfaces.py:33
 msgid "How many log recorders will be deleted when every log dumped"
-msgstr "每次日志覆盖操作时,将允许删除的多少条最老记录?"
+msgstr "每次日志覆盖操作时,将允许删除的最老记录的条数?"
 
 #: ./interfaces.py:20
 msgid "How many recorders that log at least will be reserved before the log dumped."
@@ -49,7 +49,7 @@ msgstr "每次执行覆盖操作时,要达到多少条记录才触发覆盖"
 
 #: ./browser/ajax_listing.py:2408
 msgid "Input ba chang data"
-msgstr ""
+msgstr "输入靶场数据"
 
 #: ./browser/ajax_listing.py:1367
 msgid "Input cancelled."
@@ -57,7 +57,7 @@ msgstr "录入操作已取消"
 
 #: ./browser/ajax_listing.py:2632
 msgid "Input data"
-msgstr ""
+msgstr "输入数据"
 
 #: ./browser/ajax_listing.py:1494
 msgid "Input fa she ji data"
@@ -65,15 +65,15 @@ msgstr "输入发射机数据"
 
 #: ./browser/ajax_listing.py:1785
 msgid "Input fa she tian xian data"
-msgstr ""
+msgstr "输入发射天线数据"
 
 #: ./browser/ajax_listing.py:1641
 msgid "Input jie shou ji data"
-msgstr ""
+msgstr "输入接收机数据"
 
 #: ./browser/ajax_listing.py:1928
 msgid "Input jie shou tian xian data"
-msgstr ""
+msgstr "输入接收天线数据"
 
 #: ./browser/ajax_listing.py:1328
 msgid "Input model data"
@@ -81,11 +81,11 @@ msgstr "录入型号表数据"
 
 #: ./browser/ajax_listing.py:2294
 msgid "Input tian xian ziku data"
-msgstr ""
+msgstr "录入天线子库数据"
 
 #: ./configure.zcml:142
 msgid "Installs the emc.kb package"
-msgstr ""
+msgstr "安装电磁兼容数据库"
 
 #: ./browser/controlpanel.py:15
 #: ./profiles/default/controlpanel.xml
@@ -120,7 +120,7 @@ msgstr "${year} 年 ${month} 月 ${day} 日"
 
 #: ./mapping_log_db.py:22
 msgid "administrator's user id"
-msgstr ""
+msgstr "管理员用户的id"
 
 #. Default: ${year}年${month}月${day}日
 msgid "ago_date"
@@ -131,51 +131,51 @@ msgstr "所有"
 
 #: ./mapping_db.py:1020
 msgid "ba chang chang du"
-msgstr ""
+msgstr "靶场长度"
 
 #: ./mapping_db.py:1014
 msgid "ba chang dai ma"
-msgstr ""
+msgstr "靶场代码"
 
 #: ./mapping_db.py:1032
 msgid "ba chang di xing tiao jian"
-msgstr ""
+msgstr "靶场地形条件"
 
 #: ./mapping_db.py:1023
 msgid "ba chang kuan du"
-msgstr ""
+msgstr "靶场宽度"
 
 #: ./mapping_db.py:1011
 msgid "ba chang ming cheng"
-msgstr ""
+msgstr "靶场名称"
 
 #: ./mapping_db.py:1035
 msgid "ba chang shi he xing hao"
-msgstr ""
+msgstr "靶场适合型号"
 
 #: ./mapping_db.py:1017
 msgid "ba chang wei zhi"
-msgstr ""
+msgstr "靶场位置"
 
 #: ./mapping_db.py:1209
 msgid "ba chang x zuo biao"
-msgstr ""
+msgstr "靶场X坐标"
 
 #: ./mapping_db.py:1212
 msgid "ba chang y zuo biao"
-msgstr ""
+msgstr "靶场Y坐标"
 
 #: ./mapping_db.py:1215
 msgid "ba chang z zuo biao"
-msgstr ""
+msgstr "靶场Z坐标"
 
 #: ./interfaces.py:32
 msgid "batch size"
-msgstr ""
+msgstr "条目数量"
 
 #: ./mapping_db.py:822
 msgid "bei ce jian"
-msgstr ""
+msgstr "被测器件"
 
 #: ./mapping_db.py:113
 msgid "bei zhu"
@@ -187,91 +187,91 @@ msgstr "本振频率"
 
 #: ./mapping_db.py:1245
 msgid "ben zheng pin lv"
-msgstr ""
+msgstr "本征频率"
 
 #: ./mapping_db.py:765
 msgid "ce shi bu zhou"
-msgstr ""
+msgstr "测试步骤"
 
 #: ./mapping_db.py:837
 msgid "ce shi di dian"
-msgstr ""
+msgstr "测试地点"
 
 #: ./mapping_db.py:867
 msgid "ce shi jie guo"
-msgstr ""
+msgstr "测试结果"
 
 #: ./mapping_db.py:858
 msgid "ce shi ren yuan"
-msgstr ""
+msgstr "测试人员"
 
 #: ./mapping_t_db.py:69
 msgid "ce shi ren yuan dan wei ID"
-msgstr ""
+msgstr "测试人员单位ID"
 
 #: ./mapping_t_db.py:51
 msgid "ce shi ren yuan ming cheng"
-msgstr ""
+msgstr "测试人员名称"
 
 #: ./mapping_t_db.py:57
 msgid "ce shi ren yuan nian ling"
-msgstr ""
+msgstr "测试人员年龄"
 
 #: ./mapping_t_db.py:48
 msgid "ce shi ren yuan talbe primary key"
-msgstr ""
+msgstr "测试人员表主键"
 
 #: ./mapping_t_db.py:54
 msgid "ce shi ren yuan xing bie"
-msgstr ""
+msgstr "测试人员性别"
 
 #: ./mapping_t_db.py:60
 msgid "ce shi ren yuan xue li"
-msgstr ""
+msgstr "测试人员学历"
 
 #: ./mapping_t_db.py:66
 msgid "ce shi ren yuan zheng shu bian hao"
-msgstr ""
+msgstr "测试人员证书编号"
 
 #: ./mapping_t_db.py:63
 msgid "ce shi ren yuan zhi cheng"
-msgstr ""
+msgstr "测试人员职称"
 
 #: ./mapping_db.py:834
 msgid "ce shi ri qi"
-msgstr ""
+msgstr "测试日期"
 
 #: ./mapping_db.py:840
 msgid "ce shi she bei"
-msgstr ""
+msgstr "测试设备"
 
 #: ./mapping_db.py:846
 msgid "ce shi she bei bian hao"
-msgstr ""
+msgstr "测试设备编号"
 
 #: ./mapping_db.py:843
 msgid "ce shi she bei xing hao"
-msgstr ""
+msgstr "测试设备型号"
 
 #: ./mapping_db.py:963
 msgid "ce shi shu ju"
-msgstr ""
+msgstr "测试数据"
 
 #: ./mapping_db.py:957
 msgid "ce shi shuo ming"
-msgstr ""
+msgstr "测试说明"
 
 #: ./mapping_db.py:849
 msgid "ce shi yi ju"
-msgstr ""
+msgstr "测试依据"
 
 #: ./mapping_db.py:960
 msgid "ce shi yi qi"
-msgstr ""
+msgstr "测试仪器"
 
 #: ./mapping_db.py:813
 msgid "ce shi zheng shu bian hao"
-msgstr ""
+msgstr "测试证书编号"
 
 #: ./mapping_db.py:286
 msgid "cong shu she bei dai ma"
@@ -283,23 +283,23 @@ msgstr "从属设备名称"
 
 #: ./mapping_db.py:645
 msgid "dan wei"
-msgstr ""
+msgstr "单位"
 
 #: ./mapping_t_db.py:21
 msgid "dan wei di zhi"
-msgstr ""
+msgstr "单位地址"
 
 #: ./mapping_t_db.py:24
 msgid "dan wei lian xi fang shi"
-msgstr ""
+msgstr "单位联系方式"
 
 #: ./mapping_t_db.py:18
 msgid "dan wei ming cheng"
-msgstr ""
+msgstr "单位名称"
 
 #: ./mapping_t_db.py:15
 msgid "danwei talbe primary key"
-msgstr ""
+msgstr "单位表主键"
 
 #: ./profiles/default/types/emc.kb.ormfolder.xml
 msgid "db map folder"
@@ -307,11 +307,11 @@ msgstr "数据库映射容器"
 
 #: ./browser/ajax_listing.py:2370
 msgid "delete ba chang data"
-msgstr ""
+msgstr "删除靶场数据"
 
 #: ./browser/ajax_listing.py:2706
 msgid "delete data"
-msgstr ""
+msgstr "删除数据"
 
 #: ./browser/ajax_listing.py:1444
 msgid "delete fa she ji data"
@@ -319,15 +319,15 @@ msgstr "删除发射机数据"
 
 #: ./browser/ajax_listing.py:1736
 msgid "delete fa she tian xian data"
-msgstr ""
+msgstr "删除发射天线数据"
 
 #: ./browser/ajax_listing.py:1591
 msgid "delete jie shou ji data"
-msgstr ""
+msgstr "删除接收机数据"
 
 #: ./browser/ajax_listing.py:1879
 msgid "delete jie shou tian xian data"
-msgstr ""
+msgstr "删除接收天线数据"
 
 #: ./browser/ajax_listing.py:1268
 msgid "delete model data"
@@ -335,7 +335,7 @@ msgstr "删除型号数据"
 
 #: ./browser/ajax_listing.py:2256
 msgid "delete tian xian ziku data"
-msgstr ""
+msgstr "删除天线子库数据"
 
 #. Default: "Warning! This operation will remove database record."
 #: ./browser/templates/delete_model.pt:14
@@ -354,11 +354,11 @@ msgstr "请更新型号数据"
 
 #: ./configure.zcml:142
 msgid "emc.kb"
-msgstr ""
+msgstr "电磁兼容数据库"
 
 #: ./mapping_db.py:1236
 msgid "fa she dai kuan"
-msgstr ""
+msgstr "发射带宽"
 
 #: ./mapping_db.py:68
 msgid "fa she ji ming cheng"
@@ -366,15 +366,15 @@ msgstr "发射机名称"
 
 #: ./mapping_db.py:1206
 msgid "fa she ji xu hao"
-msgstr ""
+msgstr "发射机序号"
 
 #: ./mapping_db.py:750
 msgid "fang fa bian hao"
-msgstr ""
+msgstr "方法编号"
 
 #: ./mapping_db.py:753
 msgid "fang fa biao ti"
-msgstr ""
+msgstr "方法标题"
 
 #: ./mapping_db.py:304
 msgid "fang wei bo su dai kuan"
@@ -390,11 +390,11 @@ msgstr "俯仰波束带宽"
 
 #: ./mapping_db.py:768
 msgid "fu zhu"
-msgstr ""
+msgstr "备注"
 
 #: ./mapping_db.py:651
 msgid "gai kuang"
-msgstr ""
+msgstr "概况"
 
 #: ./mapping_db.py:446
 msgid "gong zuo pin lv"
@@ -406,7 +406,7 @@ msgstr "工作频率"
 
 #: ./mapping_db.py:1029
 msgid "gu you fa she ji shu"
-msgstr ""
+msgstr "固有发射机数"
 
 #: ./interfaces.py:14
 msgid "how many days that log at least will be reserved"
@@ -414,7 +414,7 @@ msgstr "日志应当至少保留多少天?"
 
 #: ./mapping_db.py:648
 msgid "ji bie"
-msgstr ""
+msgstr "级别"
 
 #: ./mapping_db.py:301
 msgid "ji hua"
@@ -442,15 +442,15 @@ msgstr "接收机天线名称"
 
 #: ./profiles/default/types/emc.kb.folder.xml
 msgid "knowledge base root folder"
-msgstr "知识库"
+msgstr "知识库根目录"
 
 #: ./profiles/default/types/emc.kb.folder.xml
 msgid "knowledge folder"
-msgstr "知识库"
+msgstr "知识库目录"
 
 #: ./mapping_log_db.py:39
 msgid "level of the operation"
-msgstr ""
+msgstr "操作的等级"
 
 #: ./mapping_db.py:458
 msgid "lv bo qi cha sun"
@@ -466,11 +466,11 @@ msgstr "滤波器名称"
 
 #: ./interfaces.py:19
 msgid "max recorders"
-msgstr ""
+msgstr "最大记录数"
 
 #: ./mapping_db.py:642
 msgid "ming cheng"
-msgstr ""
+msgstr "名称"
 
 #: ./mapping_db.py:31
 msgid "model code"
@@ -486,11 +486,11 @@ msgstr "型号表主键"
 
 #: ./mapping_db.py:693
 msgid "nian ling"
-msgstr ""
+msgstr "年龄"
 
 #: ./mapping_log_db.py:30
 msgid "operation time"
-msgstr ""
+msgstr "操作时间"
 
 #: ./mapping_db.py:195
 msgid "pin duan shang xian"
@@ -502,7 +502,7 @@ msgstr "频段下限"
 
 #: ./mapping_db.py:1227
 msgid "pin lv dian shu"
-msgstr ""
+msgstr "频率点数"
 
 #: ./mapping_db.py:89
 msgid "pinlv dian shu"
@@ -518,15 +518,15 @@ msgstr "频率下限"
 
 #: ./mapping_db.py:861
 msgid "qian fa ren"
-msgstr ""
+msgstr "签发人"
 
 #: ./profiles/default/types/emc.kb.kbfolder.xml
 msgid "resource folder"
-msgstr "资源"
+msgstr "资源目录"
 
 #: ./mapping_log_db.py:45
 msgid "result of the operation"
-msgstr ""
+msgstr "操作结果"
 
 #: ./mapping_db.py:83
 msgid "shang bian pin"
@@ -538,15 +538,15 @@ msgstr "设备代码"
 
 #: ./mapping_db.py:864
 msgid "shen he ren"
-msgstr ""
+msgstr "审核人"
 
 #: ./mapping_db.py:855
 msgid "shi du"
-msgstr ""
+msgstr "湿度"
 
 #: ./mapping_db.py:756
 msgid "shi yong fan wei"
-msgstr ""
+msgstr "适用范围"
 
 #: ./mapping_db.py:62
 msgid "table primary key"
@@ -554,23 +554,23 @@ msgstr "数据表主关键字"
 
 #: ./mapping_db.py:639
 msgid "talbe primary key"
-msgstr ""
+msgstr "表的主键"
 
 #: ./mapping_log_db.py:33
 msgid "the client's ip address"
-msgstr ""
+msgstr "客户端IP地址"
 
 #: ./mapping_log_db.py:42
 msgid "the operation's detail description"
-msgstr ""
+msgstr "操作的详细描述"
 
 #: ./mapping_log_db.py:18
 msgid "the table's primary key"
-msgstr ""
+msgstr "此表的主键"
 
 #: ./mapping_log_db.py:26
 msgid "the user id of user which had been processed by administrator"
-msgstr ""
+msgstr "管理员操作了用户的ID"
 
 #: ./mapping_db.py:509
 msgid "tian xian lei xing"
@@ -590,15 +590,15 @@ msgstr "日志超时覆盖设置"
 
 #: ./mapping_log_db.py:36
 msgid "type of the operation"
-msgstr ""
+msgstr "操作类型"
 
 #: ./browser/ajax_listing.py:2441
 msgid "update ba chang data"
-msgstr ""
+msgstr "更新靶场数据"
 
 #: ./browser/ajax_listing.py:2665
 msgid "update data"
-msgstr ""
+msgstr "更新数据"
 
 #: ./browser/ajax_listing.py:1541
 msgid "update fa she ji data"
@@ -606,15 +606,15 @@ msgstr "更新发射机数据"
 
 #: ./browser/ajax_listing.py:1831
 msgid "update fa she tian xian data"
-msgstr ""
+msgstr "更新发射天线数据"
 
 #: ./browser/ajax_listing.py:1968
 msgid "update jie shou tian xian data"
-msgstr ""
+msgstr "更新接收天线数据"
 
 #: ./browser/ajax_listing.py:1687
 msgid "update jieshouj data"
-msgstr ""
+msgstr "更新接收机数据"
 
 #: ./browser/ajax_listing.py:1380
 msgid "update model data"
@@ -622,15 +622,15 @@ msgstr "更新型号数据"
 
 #: ./browser/ajax_listing.py:2327
 msgid "update tian xian ziku data"
-msgstr ""
+msgstr "更新天线子库数据"
 
 #: ./mapping_db.py:816
 msgid "wei tuo fang"
-msgstr ""
+msgstr "委托方"
 
 #: ./mapping_db.py:819
 msgid "wei tuo fang di zhi"
-msgstr ""
+msgstr "委托方地址"
 
 #: ./mapping_db.py:76
 msgid "wei zhi"
@@ -638,7 +638,7 @@ msgstr "位置"
 
 #: ./mapping_db.py:852
 msgid "wen du"
-msgstr ""
+msgstr "温度"
 
 #: ./interfaces.py:27
 msgid "when log numbers reach at some Percentage,send warning message"
@@ -650,39 +650,39 @@ msgstr "下边频"
 
 #: ./mapping_db.py:951
 msgid "xiang mu ming cheng"
-msgstr ""
+msgstr "项目名称"
 
 #: ./mapping_db.py:690
 msgid "xing bie"
-msgstr ""
+msgstr "性别"
 
 #: ./mapping_db.py:687
 msgid "xing ming"
-msgstr ""
+msgstr "姓名"
 
 #: ./mapping_db.py:696
 msgid "xue li"
-msgstr ""
+msgstr "学历"
 
 #: ./mapping_db.py:759
 msgid "yi qi she bei"
-msgstr ""
+msgstr "仪器设备"
 
 #: ./mapping_db.py:1114
 msgid "you shang x zuo biao"
-msgstr ""
+msgstr "右上X坐标"
 
 #: ./mapping_db.py:1117
 msgid "you shang y zuo biao"
-msgstr ""
+msgstr "右上Y坐标"
 
 #: ./mapping_db.py:1120
 msgid "you shang z zuo biao"
-msgstr ""
+msgstr "右上Z坐标"
 
 #: ./mapping_db.py:1123
 msgid "you xia x zuo biao"
-msgstr ""
+msgstr "右下X坐标"
 
 #: ./mapping_db.py:298
 msgid "zeng yi"
@@ -690,23 +690,23 @@ msgstr "增益"
 
 #: ./mapping_db.py:1026
 msgid "zhe dang wu ge shu"
-msgstr ""
+msgstr "遮挡物(山脊)个数"
 
 #: ./mapping_db.py:1090
 msgid "zhe dang wu ming cheng"
-msgstr ""
+msgstr "遮挡物名称"
 
 #: ./mapping_db.py:702
 msgid "zheng shu bian hao"
-msgstr ""
+msgstr "证书编号"
 
 #: ./mapping_db.py:699
 msgid "zhi cheng"
-msgstr ""
+msgstr "职称"
 
 #: ./mapping_db.py:831
 msgid "zhi zao shang"
-msgstr ""
+msgstr "制造商"
 
 #: ./mapping_db.py:110
 msgid "zhong pin"
@@ -734,24 +734,24 @@ msgstr "子库名称"
 
 #: ./mapping_db.py:1096
 msgid "zuo shang x zuo biao"
-msgstr ""
+msgstr "左上X坐标"
 
 #: ./mapping_db.py:1099
 msgid "zuo shang y zuo biao"
-msgstr ""
+msgstr "左上Y坐标"
 
 #: ./mapping_db.py:1102
 msgid "zuo shang z zuo biao"
-msgstr ""
+msgstr "左上Z坐标"
 
 #: ./mapping_db.py:1105
 msgid "zuo xia x zuo biao"
-msgstr ""
+msgstr "左下X坐标"
 
 #: ./mapping_db.py:1108
 msgid "zuo xia y zuo biao"
-msgstr ""
+msgstr "左下Y坐标"
 
 #: ./mapping_db.py:1111
 msgid "zuo xia z zuo biao"
-msgstr ""
+msgstr "左下Z坐标"
