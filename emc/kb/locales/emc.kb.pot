@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-12-15 06:00+0000\n"
+"POT-Creation-Date: 2018-12-16 02:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,38 +206,6 @@ msgstr ""
 msgid "ce shi ren yuan"
 msgstr ""
 
-#: ./mapping_t_db.py:69
-msgid "ce shi ren yuan dan wei ID"
-msgstr ""
-
-#: ./mapping_t_db.py:51
-msgid "ce shi ren yuan ming cheng"
-msgstr ""
-
-#: ./mapping_t_db.py:57
-msgid "ce shi ren yuan nian ling"
-msgstr ""
-
-#: ./mapping_t_db.py:48
-msgid "ce shi ren yuan talbe primary key"
-msgstr ""
-
-#: ./mapping_t_db.py:54
-msgid "ce shi ren yuan xing bie"
-msgstr ""
-
-#: ./mapping_t_db.py:60
-msgid "ce shi ren yuan xue li"
-msgstr ""
-
-#: ./mapping_t_db.py:66
-msgid "ce shi ren yuan zheng shu bian hao"
-msgstr ""
-
-#: ./mapping_t_db.py:63
-msgid "ce shi ren yuan zhi cheng"
-msgstr ""
-
 #: ./mapping_db.py:834
 msgid "ce shi ri qi"
 msgstr ""
@@ -284,22 +252,6 @@ msgstr ""
 
 #: ./mapping_db.py:645
 msgid "dan wei"
-msgstr ""
-
-#: ./mapping_t_db.py:21
-msgid "dan wei di zhi"
-msgstr ""
-
-#: ./mapping_t_db.py:24
-msgid "dan wei lian xi fang shi"
-msgstr ""
-
-#: ./mapping_t_db.py:18
-msgid "dan wei ming cheng"
-msgstr ""
-
-#: ./mapping_t_db.py:15
-msgid "danwei talbe primary key"
 msgstr ""
 
 #: ./profiles/default/types/emc.kb.ormfolder.xml

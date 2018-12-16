@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eisoo.topic\n"
-"POT-Creation-Date: 2018-12-15 06:00+0000\n"
+"POT-Creation-Date: 2018-12-16 02:20+0000\n"
 "PO-Revision-Date: 2018-11-17 12:07+0800\n"
 "Last-Translator: Adam <yuejun.tang@gmail.com>\n"
 "Language-Team: 315ok.org <LL@li.org>\n"
@@ -205,38 +205,6 @@ msgstr "测试结果"
 msgid "ce shi ren yuan"
 msgstr "测试人员"
 
-#: ./mapping_t_db.py:69
-msgid "ce shi ren yuan dan wei ID"
-msgstr "测试人员单位ID"
-
-#: ./mapping_t_db.py:51
-msgid "ce shi ren yuan ming cheng"
-msgstr "测试人员名称"
-
-#: ./mapping_t_db.py:57
-msgid "ce shi ren yuan nian ling"
-msgstr "测试人员年龄"
-
-#: ./mapping_t_db.py:48
-msgid "ce shi ren yuan talbe primary key"
-msgstr "测试人员表主键"
-
-#: ./mapping_t_db.py:54
-msgid "ce shi ren yuan xing bie"
-msgstr "测试人员性别"
-
-#: ./mapping_t_db.py:60
-msgid "ce shi ren yuan xue li"
-msgstr "测试人员学历"
-
-#: ./mapping_t_db.py:66
-msgid "ce shi ren yuan zheng shu bian hao"
-msgstr "测试人员证书编号"
-
-#: ./mapping_t_db.py:63
-msgid "ce shi ren yuan zhi cheng"
-msgstr "测试人员职称"
-
 #: ./mapping_db.py:834
 msgid "ce shi ri qi"
 msgstr "测试日期"
@@ -284,22 +252,6 @@ msgstr "从属设备名称"
 #: ./mapping_db.py:645
 msgid "dan wei"
 msgstr "单位"
-
-#: ./mapping_t_db.py:21
-msgid "dan wei di zhi"
-msgstr "单位地址"
-
-#: ./mapping_t_db.py:24
-msgid "dan wei lian xi fang shi"
-msgstr "单位联系方式"
-
-#: ./mapping_t_db.py:18
-msgid "dan wei ming cheng"
-msgstr "单位名称"
-
-#: ./mapping_t_db.py:15
-msgid "danwei talbe primary key"
-msgstr "单位表主键"
 
 #: ./profiles/default/types/emc.kb.ormfolder.xml
 msgid "db map folder"
