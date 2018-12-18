@@ -66,7 +66,19 @@ class ModelView(BrowserView):
 
         dbapi = queryUtility(IDbapi, name=name)
         return dbapi
-
+    
+    @property
+    def canbeUpdate(self):
+# checkPermission function must be use Title style permission
+        canbe = self.pm().checkPermission("emc.kb:Update db",self.context)
+        return canbe
+    
+    @property
+    def canbeInput(self):
+# checkPermission function must be use Title style permission
+        canbe = self.pm().checkPermission("emc.kb:Input db",self.context)
+        return canbe    
+    
     def getPathQuery(self):
 
         """返回 db url
@@ -467,10 +479,11 @@ class ajaxsearch(grok.View):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
+#         inputable= self.canbeInput()
         for i in resultDicLists:
             out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(num)s</td>
-                                <td class="col-md-2 text-left"><a href="%(objurl)s">%(title)s</a></td>
+                                <td class="col-md-2 text-left"><a href="%(edit_url)s">%(title)s</a></td>
                                 <td class="col-md-7">%(description)s</td>
                                 <td class="col-md-1 text-center">
                                 <a href="%(edit_url)s" title="edit">
@@ -603,10 +616,11 @@ class Fashejajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(sbdm)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(sbmc)s</a></td>
                                 <td class="col-md-1">%(pcdm)s</td>
                                 <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(freq)s</td>
@@ -640,8 +654,35 @@ class Fashejajaxsearch(ajaxsearch):
                                             freq_lower= i[10],
                                             edit_url="%s/@@update_fashej/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_fashej/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(sbdm)s</td>
+                                <td class="col-md-2 text-left">%(sbmc)s</td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(freq)s</td>
+                                <td class="col-md-1">%(pd_upper)s</td>
+                                <td class="col-md-1">%(pd_lower)s</td>
+                                <td class="col-md-1">%(num)s</td>
+                                <td class="col-md-1">%(freq_upper)s</td>
+                                <td class="col-md-1">%(freq_lower)s</td>               
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbdm=i[1],
+                                            sbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            freq= i[5],
+                                            pd_upper= i[6],
+                                            pd_lower= i[7],
+                                            num= i[8],
+                                            freq_upper= i[9],
+                                            freq_lower= i[10])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1                
+                
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
         
@@ -663,10 +704,11 @@ class Jieshoujajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(sbdm)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(sbmc)s</a></td>
                                 <td class="col-md-1">%(pcdm)s</td>
                                 <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(fb_upper)s</td>
@@ -700,8 +742,34 @@ class Jieshoujajaxsearch(ajaxsearch):
                                             bw_receiver= i[10],
                                             edit_url="%s/@@update_jieshouj/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_jieshouj/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(sbdm)s</td>
+                                <td class="col-md-2 text-left">%(sbmc)s</td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(fb_upper)s</td>
+                                <td class="col-md-1">%(fb_lower)s</td>
+                                <td class="col-md-1">%(freq)s</td>
+                                <td class="col-md-1">%(f_upper)s</td>
+                                <td class="col-md-1">%(f_lower)s</td>
+                                <td class="col-md-1">%(bw_receiver)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbdm=i[1],
+                                            sbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            fb_upper= i[5],
+                                            fb_lower= i[6],
+                                            freq= i[7],
+                                            f_upper= i[8],
+                                            f_lower= i[9],
+                                            bw_receiver= i[10])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
@@ -722,10 +790,11 @@ class Fashetxajaxsearch(Fashejajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(cssbdm)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(cssbmc)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(cssbmc)s</a></td>
                                 <td class="col-md-1">%(pcdm)s</td>
                                 <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(gain)s</td>
@@ -757,8 +826,32 @@ class Fashetxajaxsearch(Fashejajaxsearch):
                                             txzxj= i[9],
                                             edit_url="%s/@@update_fashetx/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_fashetx/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(cssbdm)s</td>
+                                <td class="col-md-2 text-left">%(cssbmc)s</td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(gain)s</td>
+                                <td class="col-md-1">%(polarization)s</td>
+                                <td class="col-md-1">%(fwbskd)s</td>
+                                <td class="col-md-1">%(fybskd)s</td>
+                                <td class="col-md-1">%(txzxj)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            cssbdm=i[1],
+                                            cssbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            gain= i[5],
+                                            polarization= i[6],
+                                            fwbskd= i[7],
+                                            fybskd= i[8],
+                                            txzxj= i[9])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
@@ -779,10 +872,11 @@ class Jieshoutxajaxsearch(Fashejajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(cssbdm)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(cssbmc)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(cssbmc)s</a></td>
                                 <td class="col-md-1">%(pcdm)s</td>
                                 <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(gain)s</td>
@@ -814,8 +908,32 @@ class Jieshoutxajaxsearch(Fashejajaxsearch):
                                             txzxj= i[9],
                                             edit_url="%s/@@update_jieshoutx/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_jieshoutx/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(cssbdm)s</td>
+                                <td class="col-md-2 text-left"><%(cssbmc)s</td>
+                                <td class="col-md-1">%(pcdm)s</td>
+                                <td class="col-md-1">%(location)s</td>
+                                <td class="col-md-1">%(gain)s</td>
+                                <td class="col-md-1">%(polarization)s</td>
+                                <td class="col-md-1">%(fwbskd)s</td>
+                                <td class="col-md-1">%(fybskd)s</td>
+                                <td class="col-md-1">%(txzxj)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            cssbdm=i[1],
+                                            cssbmc= i[2],
+                                            pcdm= i[3],
+                                            location= i[4],
+                                            gain= i[5],
+                                            polarization= i[6],
+                                            fwbskd= i[7],
+                                            fybskd= i[8],
+                                            txzxj= i[9])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1                
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
@@ -836,9 +954,10 @@ class Bachangajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
-                                <td class="col-md-2 text-center"><a href="%(objurl)s">%(name)s</a></td>
+        if self.searchview().canbeInput:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center"><a href="%(edit_url)s">%(name)s</a></td>
                                 <td class="col-md-1 text-left">%(bcdm)s</td>
                                 <td class="col-md-1">%(location)s</td>
                                 <td class="col-md-1">%(length)s</td>
@@ -871,8 +990,32 @@ class Bachangajaxsearch(ajaxsearch):
                                             xh= i[9],
                                             edit_url="%s/@@update_bachang/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_bachang/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(name)s</td>
+                                <td class="col-md-1 text-left">%(bcdm)s</td>
+                                <td class="col-md-3">%(location)s</td>
+                                <td class="col-md-1">%(length)s</td>
+                                <td class="col-md-1">%(width)s</td>
+                                <td class="col-md-1">%(wk)s</td>
+                                <td class="col-md-1">%(ti)s</td>
+                                <td class="col-md-1">%(landform)s</td>
+                                <td class="col-md-1">%(xh)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            bcdm= i[2],
+                                            location= i[3],
+                                            length= i[4],
+                                            width= i[5],
+                                            wk= i[6],
+                                            ti= i[7],
+                                            landform= i[8],
+                                            xh= i[9])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
@@ -893,9 +1036,10 @@ class Bachangzhdwajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">                                
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(shelter_name)s</a></td>
+        if self.searchview().canbeInput:
+            for i in resultDicLists:
+                out = """<tr class="text-left">                                
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(shelter_name)s</a></td>
                                 <td class="col-md-1">%(lt_x)s</td>
                                 <td class="col-md-1">%(lt_y)s</td>
                                 <td class="col-md-1">%(lt_z)s</td>
@@ -930,8 +1074,34 @@ class Bachangzhdwajaxsearch(ajaxsearch):
                                             rt_z= i[10],
                                             edit_url="%s/@@update_bachangzhdw/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_bachangzhdw/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">                                
+                                <td class="col-md-2 text-left">%(shelter_name)s</td>
+                                <td class="col-md-2">%(lt_x)s</td>
+                                <td class="col-md-1">%(lt_y)s</td>
+                                <td class="col-md-1">%(lt_z)s</td>
+                                <td class="col-md-1">%(ld_x)s</td>
+                                <td class="col-md-1">%(ld_y)s</td>
+                                <td class="col-md-1">%(ld_z)s</td>
+                                <td class="col-md-1">%(rt_x)s</td>
+                                <td class="col-md-1">%(rt_x)s</td>
+                                <td class="col-md-1">%(rt_z)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            shelter_name=i[1],
+                                            lt_x= i[2],
+                                            lt_y= i[3],
+                                            lt_z= i[4],
+                                            ld_x= i[5],
+                                            ld_y= i[6],
+                                            ld_z= i[7],
+                                            rt_x= i[8],
+                                            rt_y= i[9],
+                                            rt_z= i[10])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data        
  
@@ -951,9 +1121,10 @@ class Bachangfshjajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sbmc)s</a></td>
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(sbmc)s</a></td>
                                 <td class="col-md-1">%(x)s</td>
                                 <td class="col-md-1">%(y)s</td>
                                 <td class="col-md-1">%(z)s</td>
@@ -988,8 +1159,34 @@ class Bachangfshjajaxsearch(ajaxsearch):
                                             fl= i[10],
                                             edit_url="%s/@@update_bachangfshj/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_bachangfshj/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-left">%(sbmc)s</td>
+                                <td class="col-md-2">%(x)s</td>
+                                <td class="col-md-1">%(y)s</td>
+                                <td class="col-md-1">%(z)s</td>
+                                <td class="col-md-1">%(ft)s</td>
+                                <td class="col-md-1">%(pt_u)s</td>
+                                <td class="col-md-1">%(pt_l)s</td>
+                                <td class="col-md-1">%(num)s</td>
+                                <td class="col-md-1">%(fu)s</td>
+                                <td class="col-md-1">%(fl)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            sbmc=i[1],
+                                            x= i[2],
+                                            y= i[3],
+                                            z= i[4],
+                                            ft= i[5],
+                                            pt_u= i[6],
+                                            pt_l= i[7],
+                                            num= i[8],
+                                            fu= i[9],
+                                            fl= i[10])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
     
@@ -1011,9 +1208,10 @@ class Ceshishyshajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
-                                <td class="col-md-3 text-center"><a href="%(objurl)s">%(name)s</a></td>
+        if self.searchview().canbeInput:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-3 text-center"><a href="%(edit_url)s">%(name)s</a></td>
                                 <td class="col-md-3 text-left">%(unit)s</td>
                                 <td class="col-md-1">%(level)s</td>
                                 <td class="col-md-3">%(survey)s</td>                               
@@ -1036,8 +1234,22 @@ class Ceshishyshajaxsearch(ajaxsearch):
                                             survey= i[4],
                                             edit_url="%s/@@update_ceshishysh/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshishysh/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-3 text-center">%(name)s</td>
+                                <td class="col-md-3 text-left">%(unit)s</td>
+                                <td class="col-md-1">%(level)s</td>
+                                <td class="col-md-3">%(survey)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            unit= i[2],
+                                            level= i[3],
+                                            survey= i[4])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
 
@@ -1058,10 +1270,11 @@ class Ceshiffajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(m_id)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(m_title)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(m_title)s</a></td>
                                 <td class="col-md-1">%(range)s</td>
                                 <td class="col-md-2">%(device)s</td>
                                 <td class="col-md-2">%(step)s</td>
@@ -1087,8 +1300,26 @@ class Ceshiffajaxsearch(ajaxsearch):
                                             annotation= i[6],                                                                                        
                                             edit_url="%s/@@update_ceshiff/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshiff/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(m_id)s</td>
+                                <td class="col-md-2 text-left">%(m_title)s</td>
+                                <td class="col-md-1">%(range)s</td>
+                                <td class="col-md-2">%(device)s</td>
+                                <td class="col-md-2">%(step)s</td>
+                                <td class="col-md-3">%(annotation)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            m_id=i[1],
+                                            m_title= i[2],
+                                            range= i[3],
+                                            device= i[4],
+                                            step= i[5], 
+                                            annotation= i[6])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
     
@@ -1109,10 +1340,11 @@ class Ceshiryajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(name)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(sex)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(sex)s</a></td>
                                 <td class="col-md-1">%(age)s</td>
                                 <td class="col-md-1">%(edu_level)s</td>
                                 <td class="col-md-1">%(post)s</td>                                
@@ -1140,8 +1372,28 @@ class Ceshiryajaxsearch(ajaxsearch):
                                             unit= i[7],                                                                                                                                    
                                             edit_url="%s/@@update_ceshiry/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshiry/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(name)s</td>
+                                <td class="col-md-2 text-left">%(sex)s</td>
+                                <td class="col-md-1">%(age)s</td>
+                                <td class="col-md-1">%(edu_level)s</td>
+                                <td class="col-md-1">%(post)s</td>                                
+                                <td class="col-md-2">%(certificate_code)s</td>
+                                <td class="col-md-3">%(unit)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            name=i[1],
+                                            sex= i[2],
+                                            age= i[3],
+                                            edu_level= i[4],
+                                            post= i[5], 
+                                            certificate_code= i[6],  
+                                            unit= i[7])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1            
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
     
@@ -1162,10 +1414,11 @@ class Ceshixmajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-2 text-center">%(device)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(name)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(name)s</a></td>
                                 <td class="col-md-2">%(t_remark)s</td>
                                 <td class="col-md-1">%(t_strument)s</td>
                                 <td class="col-md-2">%(t_value)s</td>                                
@@ -1191,8 +1444,26 @@ class Ceshixmajaxsearch(ajaxsearch):
                                             t_result= i[6],                                                                                                                                   
                                             edit_url="%s/@@update_ceshixm/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshixm/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+            for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-3 text-center">%(device)s</td>
+                                <td class="col-md-2 text-left">%(name)s</td>
+                                <td class="col-md-2">%(t_remark)s</td>
+                                <td class="col-md-1">%(t_strument)s</td>
+                                <td class="col-md-2">%(t_value)s</td>                                
+                                <td class="col-md-2">%(t_result)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            device=i[1],
+                                            name= i[2],
+                                            t_remark= i[3],
+                                            t_strument= i[4],
+                                            t_value= i[5], 
+                                            t_result= i[6])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1                
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
     
@@ -1213,10 +1484,11 @@ class Ceshibgajaxsearch(ajaxsearch):
         outhtml = ""
         k = 0
         contexturl = self.context.absolute_url()
-        for i in resultDicLists:
-            out = """<tr class="text-left">
+        if self.searchview().canbeInput:        
+            for i in resultDicLists:
+                out = """<tr class="text-left">
                                 <td class="col-md-1 text-center">%(t_id)s</td>
-                                <td class="col-md-1 text-left"><a href="%(objurl)s">%(bailor)s</a></td>
+                                <td class="col-md-1 text-left"><a href="%(edit_url)s">%(bailor)s</a></td>
                                 <td class="col-md-1">%(device)s</td>
                                 <td class="col-md-1">%(t_address)s</td>
                                 <td class="col-md-1">%(t_device)s</td>                                
@@ -1250,8 +1522,34 @@ class Ceshibgajaxsearch(ajaxsearch):
                                             t_result= i[10],                                                                                                                                                                            
                                             edit_url="%s/@@update_ceshibg/%s" % (contexturl,i[0]),
                                             delete_url="%s/@@delete_ceshibg/%s" % (contexturl,i[0]))
-            outhtml = "%s%s" %(outhtml ,out)
-            k = k + 1
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1
+        else:
+             for i in resultDicLists:
+                out = """<tr class="text-left">
+                                <td class="col-md-2 text-center">%(t_id)s</td>
+                                <td class="col-md-2 text-left">%(bailor)s</td>
+                                <td class="col-md-1">%(device)s</td>
+                                <td class="col-md-1">%(t_address)s</td>
+                                <td class="col-md-1">%(t_device)s</td>                                
+                                <td class="col-md-1">%(t_man)s</td> 
+                                <td class="col-md-1">%(reference)s</td>
+                                <td class="col-md-1">%(signer)s</td>
+                                <td class="col-md-1">%(assessor)s</td>                                
+                                <td class="col-md-1">%(t_result)s</td>
+                                </tr> """% dict(objurl="%s/@@view" % contexturl,
+                                            t_id=i[1],
+                                            bailor= i[2],
+                                            device= i[3],
+                                            t_address= i[4],
+                                            t_device= i[5], 
+                                            t_man= i[6],  
+                                            reference= i[7],
+                                            signer= i[8],
+                                            assessor= i[9], 
+                                            t_result= i[10])
+                outhtml = "%s%s" %(outhtml ,out)
+                k = k + 1           
         data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
         return data
     

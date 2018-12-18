@@ -69,12 +69,12 @@
             </div>
             <table class="row table table-striped table-bordered table-condensed listing">
             	<thead>
-            		<tr data-toggle="tooltip" title="点击排序">
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python:view.canbeInput">
             			<th class="col-md-1 text-center">从属设备代码</th>
             			<th class="col-md-1 text-left">发射天线名称</th>
             			<th class="col-md-1 text-left">状态批次代码</th>
-            			<th class="col-md-1 text-center">位置</th>
-                  <th class="col-md-1 text-left">增益</th>
+            			<th class="col-md-1 text-left">位置</th>
+                  		<th class="col-md-1 text-left">增益</th>
             			<th class="col-md-1 text-left">极化</th>
             			<th class="col-md-1 text-left">方位波束带宽</th>
             			<th class="col-md-1 text-left">俯仰波束带宽</th>
@@ -82,6 +82,17 @@
             			<th class="col-md-1 text-center">编辑</th>
             			<th class="col-md-1 text-center">删除</th>
             		</tr>
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python:not view.canbeInput">
+            			<th class="col-md-2 text-center">从属设备代码</th>
+            			<th class="col-md-2 text-left">发射天线名称</th>
+            			<th class="col-md-1 text-left">状态批次代码</th>
+            			<th class="col-md-1 text-left">位置</th>
+                  		<th class="col-md-1 text-left">增益</th>
+            			<th class="col-md-1 text-left">极化</th>
+            			<th class="col-md-1 text-left">方位波束带宽</th>
+            			<th class="col-md-1 text-left">俯仰波束带宽</th>
+            			<th class="col-md-1 text-left">天线指向角</th>
+            		</tr>            		
             	</thead>
             	<tbody id="searchResultDiv">
             		<tr>

@@ -38,109 +38,109 @@
    
     <browser:page
         name="model_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/model_listings.pt"
         class=".ajax_listing.ModelView"/>
     <browser:page
         name="fashej_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/fashej_listings.pt"
         class=".ajax_listing.FashejView"/>
     <browser:page
         name="jieshouj_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/jieshouj_listings.pt"
         class=".ajax_listing.JieshoujView"/>
     <browser:page
         name="fashetx_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/fashetx_listings.pt"
         class=".ajax_listing.FashetxView"/>
     <browser:page
         name="jieshoutx_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/jieshoutx_listings.pt"
         class=".ajax_listing.JieshoutxView"/>
     <browser:page
         name="lvboq_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/lvboq_listings.pt"
         class=".ajax_listing.LvboqView"/>
     <browser:page
         name="dianxingtxzyzk_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/dianxingtxzyzk_listings.pt"
         class=".ajax_listing.DianxingtxzyzkView"/>
     <browser:page
         name="tianxianzyzk_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/tianxianzyzk_listings.pt"
         class=".ajax_listing.TianxianzyzkView"/>
     <browser:page
         name="jieshoujzk_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/jieshoujzk_listings.pt"
         class=".ajax_listing.JieshoujzkView"/>
     <browser:page
         name="fashejzk_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/fashejzk_listings.pt"
         class=".ajax_listing.FashejzkView"/>
      <browser:page
         name="bachang_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/bachang_listings.pt"
         class=".ajax_listing.BachangView"/>       
     <browser:page
         name="bachangzhdw_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/bachangzhdw_listings.pt"
         class=".ajax_listing.BachangzhdwView"/>         
      <browser:page
         name="bachangfshj_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/bachangfshj_listings.pt"
         class=".ajax_listing.BachangfshjView"/>
      <browser:page
         name="ceshixm_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/ceshixm_listings.pt"
         class=".ajax_listing.CeshixmView"/>
      <browser:page
         name="ceshibg_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/ceshibg_listings.pt"
         class=".ajax_listing.CeshibgView"/>
      <browser:page
         name="ceshiff_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/ceshiff_listings.pt"
         class=".ajax_listing.CeshiffView"/>
      <browser:page
         name="ceshishysh_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/ceshishysh_listings.pt"
         class=".ajax_listing.CeshishyshView"/>
      <browser:page
         name="ceshiry_listings"
-        permission="emc.kb.input_db"    
+        permission="emc.kb.view_db"    
         for="emc.kb.contents.ormfolder.Iormfolder"        
         template="templates/ceshiry_listings.pt"
         class=".ajax_listing.CeshiryView"/>                                        

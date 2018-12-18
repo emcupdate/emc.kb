@@ -69,7 +69,7 @@
             </div>
             <table class="row table table-striped table-bordered table-condensed listing">
             	<thead>
-            		<tr data-toggle="tooltip" title="点击排序">
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python:view.canbeInput">
             			<th class="col-md-1 text-center">设备代码</th>
             			<th class="col-md-1 text-left">发射机名称</th>
             			<th class="col-md-1 text-left">状态批次代码</th>
@@ -83,6 +83,18 @@
             			<th class="col-md-1 text-center">编辑</th>
             			<th class="col-md-1 text-center">删除</th>
             		</tr>
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python: not view.canbeInput">
+            			<th class="col-md-2 text-center">设备代码</th>
+            			<th class="col-md-2 text-left">发射机名称</th>
+            			<th class="col-md-1 text-left">状态批次代码</th>
+            			<th class="col-md-1 text-center">位置</th>
+            			<th class="col-md-1 text-left">工作频率</th>
+            			<th class="col-md-1 text-left">上边频</th>
+            			<th class="col-md-1 text-left">下边频</th>
+            			<th class="col-md-1 text-left">频率点数</th>
+            			<th class="col-md-1 text-left">频率上限</th>
+            			<th class="col-md-1 text-left">频率下限</th>           			            			            			
+            		</tr>            		
             	</thead>
             	<tbody id="searchResultDiv">
             		<tr>

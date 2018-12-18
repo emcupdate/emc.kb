@@ -69,7 +69,7 @@
             </div>
             <table class="row table table-striped table-bordered table-condensed listing">
             	<thead>
-            		<tr data-toggle="tooltip" title="点击排序">
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python:view.canbeInput">
             			<th class="col-md-1 text-center">遮挡物名称</th>
             			<th class="col-md-1 text-left">左上x坐标</th>
             			<th class="col-md-1 text-left">左上y坐标</th>
@@ -83,6 +83,18 @@
             			<th class="col-md-1 text-center">编辑</th>
             			<th class="col-md-1 text-center">删除</th>
             		</tr>
+            		<tr data-toggle="tooltip" title="点击排序" tal:condition="python:not view.canbeInput">
+            			<th class="col-md-2 text-center">遮挡物名称</th>
+            			<th class="col-md-2 text-left">左上x坐标</th>
+            			<th class="col-md-1 text-left">左上y坐标</th>
+            			<th class="col-md-1 text-left">左上z坐标</th>
+            			<th class="col-md-1 text-left">左下x坐标</th>
+            			<th class="col-md-1 text-left">左下y坐标</th>
+            			<th class="col-md-1 text-left">左下z坐标</th>
+            			<th class="col-md-1 text-left">右上x坐标</th>
+            			<th class="col-md-1 text-left">右上y坐标</th>
+            			<th class="col-md-1 text-left">右上z坐标</th>           			            			            			
+            		</tr>            		
             	</thead>
             	<tbody id="searchResultDiv">
             		<tr>
