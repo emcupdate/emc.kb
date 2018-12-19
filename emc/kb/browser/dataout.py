@@ -14,21 +14,21 @@ from emc.kb import _
 # todo code cp932
 # need byte string
 data_VALUES = [
-               u"主体".encode('cp932'),
-               u"客体".encode('cp932'),
-               u"时间".encode('cp932'),
-               u"ip".encode('cp932'),
-               u"级别".encode('cp932'),
-               u"描述".encode('cp932'),
-               u"结果".encode('cp932')
+               u"主体".encode('utf-8'),
+               u"客体".encode('utf-8'),
+               u"时间".encode('utf-8'),
+               u"ip".encode('utf-8'),
+               u"级别".encode('utf-8'),
+               u"描述".encode('utf-8'),
+               u"结果".encode('utf-8')
                ]
 userlog_header = [
-               u"用户".encode('cp932'),
-               u"时间".encode('cp932'),
-               u"ip".encode('cp932'),
-               u"级别".encode('cp932'),
-               u"描述".encode('cp932'),
-               u"结果".encode('cp932')
+               u"用户".encode('utf-8'),
+               u"时间".encode('utf-8'),
+               u"ip".encode('utf-8'),
+               u"级别".encode('utf-8'),
+               u"描述".encode('utf-8'),
+               u"结果".encode('utf-8')
                ]
 
 class AdminLogDataOut (grok.View):
@@ -124,7 +124,7 @@ class AdminLogDataOut (grok.View):
         Add the right header and the CSV file.
         """
         self.request.response.addHeader('Content-Disposition', "attachment; filename=%s" % filename)
-        self.request.response.addHeader('Content-Type', "text/csv;charset=cp932")
+        self.request.response.addHeader('Content-Type', "text/csv;charset=utf-8")
         self.request.response.addHeader("Content-Transfer-Encoding", "8bit")        
         self.request.response.addHeader('Content-Length', "%d" % len(data))
         self.request.response.addHeader('Pragma', "no-cache")
