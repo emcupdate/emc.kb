@@ -78,7 +78,7 @@
             <table class="row table table-striped table-bordered table-condensed listing">
             	<thead>
             		<tr data-toggle="tooltip" title="点击排序">
-            			<th class="col-md-1 text-left">客体</th>
+            			<th class="col-md-1 text-left">主体</th>
             			<th class="col-md-2 text-left">时间</th>
             			<th class="col-md-2 text-center">ip</th>
             			<th class="col-md-1 text-left">类型</th>
