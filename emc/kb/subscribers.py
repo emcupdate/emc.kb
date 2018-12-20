@@ -1,6 +1,16 @@
+#-*- coding: UTF-8 -*-
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
+from AccessControl.SecurityManagement import getSecurityManager
 from plone.app.contenttypes.interfaces import IFolder
+from zope.component import adapter
+from plone.registry.interfaces import IRecordModifiedEvent
+from zope.component import getUtility
 from five import grok
+import datetime
+from emc.kb.interfaces import ILogSettings
+from emc.kb.interfaces import IAdminLogLocator
+from emc.policy import get_ip,fmt,getfullname_orid
+
 
 @grok.subscribe(IFolder,IObjectAddedEvent)
 def SetLayout(obj, event):
@@ -13,4 +23,20 @@ def SetLayout(obj, event):
     if pattern not in path:pass
     else:
         obj.setLayout(default_layout)
+ 
+@adapter(ILogSettings, IRecordModifiedEvent)
+def detectLogsetChange(settings, event):
     
+    user = getSecurityManager().getUser()
+    if user is None:return     
+    ip = get_ip()
+    if ip=="":ip=' '
+    adminid = getfullname_orid(user)
+    values = {'adminid':adminid,'userid':u'log设置','datetime':datetime.datetime.now().strftime(fmt),
+              'ip':ip,'type':0,'operlevel':4,'result':1,'description':u''}                
+    values['description'] = u"%s更改了log设置:%s,由%s改为%s" % (adminid,
+                                                        event.record.fieldName,
+                                                        event.oldValue,
+                                                        event.newValue) 
+    locator = getUtility(IAdminLogLocator)
+    locator.add(values)    

@@ -134,6 +134,13 @@
 	component=".databasepage.dbapi.ceshiry"
 	name="ceshiry"
 	/>																	 
+
+	<subscriber
+    	for="emc.kb.interfaces.ILogSettings
+    	plone.registry.interfaces.IRecordModifiedEvent"
+    	handler=".subscribers.detectLogsetChange"
+    /> 
+
   <!-- Grok  the package to initialise schema interfaces and content classes -->
 
   <grok:grok package="." />  
