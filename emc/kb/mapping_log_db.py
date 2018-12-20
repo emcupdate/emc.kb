@@ -65,7 +65,7 @@ class AdminLog(ORMBase):
             nullable=False,
         )
     ip = sqlalchemy.schema.Column(sqlalchemy.types.String(32),
-            nullable=False,
+            nullable=True,
         )
     type = sqlalchemy.schema.Column(sqlalchemy.types.SmallInteger,
             nullable=False,
@@ -74,7 +74,7 @@ class AdminLog(ORMBase):
             nullable=False,
         )
     description = sqlalchemy.schema.Column(sqlalchemy.types.String(128),
-            nullable=False,
+            nullable=True,
         )     
     result = sqlalchemy.schema.Column(sqlalchemy.types.SmallInteger,
             nullable=False,
