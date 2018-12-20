@@ -41,11 +41,17 @@ class TestLogDatabase(unittest.TestCase):
 
     def test_db_mapping_adminlog(self):
         from emc.kb.mapping_log_db import  AdminLog
+        from emc.kb.mapping_log_db import UserLog
         from emc.kb import log_session as Session
         from emc.kb import ora_engine as engine
         import os
         os.environ['NLS_LANG'] = '.AL32UTF8'
-        Base = declarative_base()
+        import pdb
+        pdb.set_trace()        
+#         AdminLog.__table__.drop(engine)
+#         UserLog.__table__.drop(engine)
+        
+#         AdminLog.__table__.create(engine) 
         import pdb
         pdb.set_trace()
 
@@ -106,7 +112,8 @@ class TestLogDatabase(unittest.TestCase):
         import pdb
         pdb.set_trace()
 
-        UserLog.create(engine)
+#         UserLog.__table__.drop(engine)
+#         UserLog.__table__.create(engine)
         userlog = UserLog()       
         userlog.userid = u"user1"
         userlog.datetime = datetime.datetime.now().strftime(fmt)
