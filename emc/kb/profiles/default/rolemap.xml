@@ -26,15 +26,7 @@
     </permission>
 	<permission name="emc.kb:View db" acquire="True">
 		<role name="Member"/>	
-    </permission>    
-	<permission name="emc.kb:Input db" acquire="True">
-		<role name="Manager"/>	
-		<role name="SysAdmin"/>	
-    </permission>
-	<permission name="emc.kb:Update db" acquire="True">
-		<role name="Manager"/>	
-		<role name="SysAdmin"/>	
-    </permission>    
+    </permission>       
 	<permission name="emc.kb:View log" acquire="True">
 		<role name="Manager"/>	
 		<role name="SecAuditor"/>			
