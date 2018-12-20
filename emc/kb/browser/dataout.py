@@ -113,6 +113,7 @@ class AdminLogDataOut (grok.View):
     def _createCSV(self, lines):
         """Write header and lines within the CSV file."""
         datafile = StringIO()
+        datafile.write(u'\ufeff'.encode('utf-8'))
         writor = csv.writer(datafile)
         writor.writerow(data_VALUES)
         map(writor.writerow, lines)
