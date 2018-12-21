@@ -93,7 +93,7 @@ class AdminLogDataOut (grok.View):
         """Export Data within CSV file."""
 
         datafile = self._createCSV(self._getDataInfos(recorders))
-        return self._createRequest(datafile.getvalue(), "admin_log_export.csv")
+        return self._createRequest(datafile.getvalue(), "admin_log_export.log")
        
     
     def _getDataInfos(self,recorders):
@@ -156,7 +156,7 @@ class UserLogDataOut (AdminLogDataOut):
         """Export Data within CSV file."""
 
         datafile = self._createCSV(self._getDataInfos(recorders))
-        return self._createRequest(datafile.getvalue(), "user_log_export.csv")
+        return self._createRequest(datafile.getvalue(), "user_log_export.log")
     
     def _getDataInfos(self,recorders):
         """Generator filled with the recorders."""
