@@ -9,6 +9,10 @@ from zope.interface import Interface
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
+import datetime
+from plone import api
+from emc.policy.events import AddloginEvent,NormalUserloginEvent
+from emc.policy import get_ip,fmt,list2str,getfullname_orid
 from emc.kb import _
 
 # todo code cp932
@@ -82,19 +86,39 @@ class AdminLogDataOut (grok.View):
         resultDicLists = searchview.search_multicondition(origquery)
         del origquery
         del totalquery
-#call output function
-# resultDicLists like this:[(u'C7', u'\u4ed6\u7684\u624b\u673a')]
-
-        return self.exportData(resultDicLists)
-        
-
+        if totalnum == 0: return
+#fire a log event
+        user = api.user.get_current()
+        ip = get_ip(self.request)
+        if user is None:
+            return
+        des = "从用户日志表导出了%s条日志" % totalnum
+        loginEvent = NormalUserloginEvent(userid = getfullname_orid(user),
+                                     datetime = datetime.datetime.now().strftime(fmt),
+                                     ip = ip,
+                                     type = 0,
+                                     description = des,
+                                     result = 1)
+        if loginEvent.available():
+            if loginEvent.is_normal_user():
+                event.notify(loginEvent)
+            else:
+                des = "从管理员日志表导出了%s条日志" % totalnum
+                loginEvent = AddloginEvent(adminid = getfullname_orid(user),
+                                     userid = "",
+                                     datetime = datetime.datetime.now().strftime(fmt),
+                                     ip = ip,
+                                     type = 0,
+                                     description = des,
+                                     result = 1)                
+                event.notify(loginEvent)
+        return self.exportData(resultDicLists)       
 
     def exportData(self,recorders):
         """Export Data within CSV file."""
 
         datafile = self._createCSV(self._getDataInfos(recorders))
-        return self._createRequest(datafile.getvalue(), "admin_log_export.log")
-       
+        return self._createRequest(datafile.getvalue(), "admin_log_export.log")       
     
     def _getDataInfos(self,recorders):
         """Generator filled with the recorders."""
@@ -108,7 +132,6 @@ class AdminLogDataOut (grok.View):
             i[5] = log_level[i[5]]
             i[7] = log_result[i[7]]                   
             yield i
-
 
     def _createCSV(self, lines):
         """Write header and lines within the CSV file."""
