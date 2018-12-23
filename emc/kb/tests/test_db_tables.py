@@ -24,8 +24,6 @@ class TestDatabase(unittest.TestCase):
 
     def drop_tables(self,tbls=None):
         """create all db tables
-        employees.drop(engine)
-        employees.create(engine)
         """
 
         if tbls == None:
@@ -35,16 +33,23 @@ class TestDatabase(unittest.TestCase):
         for tb in tbls:
             import_str = "from %(p)s import %(t)s as tablecls" % dict(p='emc.kb.mapping_db',t=tb) 
             exec import_str
-            import pdb
-            pdb.set_trace()
             tablecls.__table__.drop(engine)                    
+
+    def delete_tables(self,tbls=None):
+        """delete all db tables
+        """
+        if tbls == None:
+            tbls = ['Model','Fashej','Jieshouj','Fashetx','Jieshoutx','Lvboq','Dianxingtxzyzk',
+                'Tianxianzk','Jieshoujzk','Fashejzk','Ceshishysh',
+                'Ceshiry','Ceshiff','Ceshibg','Ceshixm']
+        for tb in tbls:
+            import_str = "from %(p)s import %(t)s as tablecls" % dict(p='emc.kb.mapping_db',t=tb) 
+            exec import_str
+            tablecls.__table__.drop(engine)
 
     def create_tables(self,tbls=None):
         """create all db tables
-        employees.drop(engine)
-        employees.create(engine)
         """
-
         if tbls == None:
             tbls = ['Model','Fashej','Jieshouj','Fashetx','Jieshoutx','Lvboq','Dianxingtxzyzk',
                 'Tianxianzk','Jieshoujzk','Fashejzk','Ceshishysh',
