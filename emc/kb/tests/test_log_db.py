@@ -77,7 +77,7 @@ class TestLogDatabase(unittest.TestCase):
 
  
     def test_adminlog_locator(self):
-        from emc.kb.mapping_db import  AdminLog
+        from emc.kb.mapping_log_db import  AdminLog
         from emc.kb.interfaces import IAdminLogLocator
         from zope.component import getUtility
 #         from emc.kb import log_session as Session
