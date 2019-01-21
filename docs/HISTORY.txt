@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5  (Oracle db can been applyed)
+---------------------------------
+
+dev1.2 (Mysql db lasted release)
+--------------------------------
+
 1.0dev (unreleased)
 -------------------
 
