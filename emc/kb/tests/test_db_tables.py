@@ -21,7 +21,8 @@ from emc.kb import ora_engine as engine
 class TestDatabase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
-
+    
+    # 为防止误操作将测试方法的test_前缀去掉，使用时需要手动加入
     def drop_tables(self,tbls=None):
         """create all db tables
         """
